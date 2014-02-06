@@ -5,7 +5,14 @@
 # Uses mapq (https://pypi.python.org/pypi/mapq) to access Mapquest API
 # More info on Mapquest API: http://open.mapquestapi.com/geocoding/
 
-# Todo, ignore first row, which contains headers
+# @param string file_out
+# The name of the output file
+#
+# @param string file_in
+# The csv file containing the data
+#
+# @param string api_key
+# The MapQuest API key
 
 import csv
 import sys
@@ -13,9 +20,10 @@ import mapq
 
 file_out = sys.argv[1] 
 file_in = sys.argv[2]
+api_key = sys.argv[3]
 
 # Mapquest API key
-mapq.key('Fmjtd%7Cluur290y2h%2Cr5%3Do5-90zl54')
+mapq.key(api_key)
 
 # This function loops over all the rows in the file and fetches the coordinates
 # for the specified address from Mapquest.

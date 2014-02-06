@@ -1,21 +1,21 @@
 #!/bin/bash --posix
 
-# Script to process Common Cents data
+# Script to process Penny Harvest data
 
 # INSTRUCTIONS
 # $ bash process_ph-processor.sh -i [file-name]
 # Example: bash ph-processor.sh -i Map_data.xls
 
 # OUTPUT
-# A de-normalized CSV file with totals of the indicator per administrative
-# area.
+# ...
 
 # TODO
 # review //TEMP
 # Add check for XLS or XLSX
-# Line-breaks and _x000D_ should be cleaned up
+# Line-breaks and _x000D_ should be cleaned up on long texts.
 # Check format of date last updated
 # Check if geocode.py is available
+# Check not to overwrite existing files
 
 set -u
 
@@ -62,26 +62,26 @@ done
 # The folder should not contain the final file already
 #[[ ! -f $var_output ]] || error "It seems you already have a $var_output in this folder. Remove it and run this script again."
 
-#The sheets in the Excel that need to be processed
+# The sheets in the Excel that need to be processed
 typeset -r sheets=(SCHOOLS GRANTS ORGS)
 
-#The years the data is about
+# The years the data is about
 typeset -r years=(5yrs 2013 2012 2011 2010 2009)
 
-#The MapQuest API key
+# The MapQuest API key
 typeset -r mq_api=Fmjtd%7Cluur290y2h%2Cr5%3Do5-90zl54
 
-#Change Internal Field Separator to new line. Otherwise, it will think spaces in filenames are field separators
+# Change Internal Field Separator to new line. Otherwise, it will think spaces in filenames are field separators
 typeset -r IFS=$'\n'
 
-#Checking if the dependencies are met.
+# Checking if the dependencies are met.
 
 # check that geocode.py is available
 typeset -r cmd_geocode="geocode.py"
 [[ -f $cmd_geocode ]] || error "This script needs $cmd_geocode"
 
-#Some of the tools used are part of csvkit, like in2csv, csvjoin, csvstack, etc
-#Based on: http://www.snabelb.net/content/bash_support_function_check_dependencies
+# Some of the tools used are part of csvkit, like in2csv, csvjoin, csvstack, etc
+# Based on: http://www.snabelb.net/content/bash_support_function_check_dependencies
 # for portability and just in case which is not available
 typeset -r cmd_which="/usr/bin/which"
 [[ -x $cmd_which ]] || error "$cmd_which command not found"
@@ -110,9 +110,13 @@ done
 # Check if the input file is actually present
 [[ -f $var_input ]] || error "It seems the input file is not present."
 
-#Convert each relevant sheet in the Excel file to its own CSV file + some other
-#cleaning up.
+
+##############################################################################
+# Convert each relevant sheet in the Excel file to its own CSV file + some
+# other cleaning up.
+#
 # //TEMP add multiprocessing 
+
 for sheet in ${sheets[*]}
 do
 	echo "Start processing data on $sheet"
@@ -124,13 +128,12 @@ do
 	echo "$elapsed_time seconds. done"
 done
 
+# Clean up the school sheet
 
-#Clean up the school sheet
-
-#First line doesn't contain the actual headers
+# First line doesn't contain the actual headers
 $cmd_sed -i -e "1D" SCHOOLS.csv
 
-#Clean up the column headers of the schools and add an indication of the year.
+# Clean up the column headers of the schools and add an indication of the year.
 for year in ${years[*]}
 do
 	$cmd_sed -i "0,/# of Grants/{s/# of Grants/number_grants_$year/}" SCHOOLS.csv
@@ -140,10 +143,10 @@ do
 	$cmd_sed -i "0,/RT (Held Roundtable)/{s/RT (Held Roundtable)/rt_held_roundtable_$year/}" SCHOOLS.csv
 done
 
-#Clean up of the Grant sheet
+# Clean up of the Grant sheet
 
-#Remove all the organization related information that is available on the other
-#sheets as well.
+# Remove all the organization related information that is available on the other
+# sheets as well.
 $cmd_csvcut -C 12,13,14,15,16,17,18,19 GRANTS.csv > GRANTS-tmp.csv
 rm GRANTS.csv
 mv GRANTS-tmp.csv GRANTS.csv
@@ -151,26 +154,57 @@ mv GRANTS-tmp.csv GRANTS.csv
 elapsed_time=$(($SECONDS - $start_time))
 echo "$elapsed_time seconds. Initial conversion and some housekeeping taken care of."
 
-#Geocode the organisations
-touch latlng_orgs.csv
-$cmd_python $cmd_geocode latlng_orgs.csv ORGS.csv
-#Merge the files
-$cmd_csvjoin ORGS.csv latlng_orgs.csv -c 1,1 > ORGS-tmp.csv
-rm ORGS.csv
-rm latlng_orgs.csv
-mv ORGS-tmp.csv ORGS.csv
 
-#Geocode the organisations
-touch latlng_schools.csv
-$cmd_python $cmd_geocode latlng_schools.csv SCHOOLS.csv
-$cmd_csvjoin SCHOOLS.csv latlng_schools.csv --left -c 2,1 > SCHOOLS-tmp.csv
-rm SCHOOLS.csv
-rm latlng_schools.csv
-mv SCHOOLS-tmp.csv SCHOOLS.csv
+##############################################################################
+# Geocode
+
+# @param string $1
+# Name of file to be geocoded (without extension)
+# @param string $2
+# Name of the column where the unique ID of the entity is stored
+function geocode {
+	touch latlng_$1.csv		
+	$cmd_python $cmd_geocode latlng_$1.csv $1.csv $mq_api
+	#Merge the files
+	$cmd_csvjoin $1.csv latlng_$1.csv -c $2,id > $1-tmp.csv
+	rm $1.csv
+	rm latlng_$1.csv
+	mv $1-tmp.csv $1.csv
+}
+
+geocode SCHOOLS 'School ID'
+geocode ORGS 'ORG ID'
 
 elapsed_time=$(($SECONDS - $start_time))
 echo "$elapsed_time seconds. Geocoding done."
 
-exit 0
 
+##############################################################################
+# Generate a Geojson using ogr2ogr
+
+# We don't need all the information in the geojson. Cut out obsolete info
+$cmd_csvcut -c 1,2,11,38,39 ORGS.csv > orgs-map.csv
+$cmd_csvcut -c 2,3,51,52 SCHOOLS.csv > schools-map.csv
+
+for entity in schools orgs
+do
+	# Remove existing geojson, otherwise ogr2ogr won't behave well
+	rm $entity-map.geojson
+
+	# We need to create a .VRT to let ogr2ogr know how it can extract the 
+	# spatial information
+	# http://gis-lab.info/docs/gdal/gdal_ogr_user_docs.html#csv
+	echo "<OGRVRTDataSource>
+		<OGRVRTLayer name=\"$entity-map\">
+			<SrcDataSource>$entity-map.csv</SrcDataSource>
+	    	<GeometryType>wkbPoint</GeometryType>
+	    	<LayerSRS>EPSG:4326</LayerSRS>
+	    	<GeometryField encoding=\"PointFromColumns\" x=\"lng\" y=\"lat\"/>
+		</OGRVRTLayer>
+	</OGRVRTDataSource>" > $entity-map.vrt
+
+	ogr2ogr -f GeoJSON -gt 65536 -nlt POINT $entity-map.geojson $entity-map.vrt
+done
+
+exit 0
 # EOF
