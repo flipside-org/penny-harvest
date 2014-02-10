@@ -1,0 +1,6 @@
+#System files
+.project
+.DS_Store
+.sass-cache
+node_modules
+src/bower_components

@@ -1,0 +1,6 @@
+{
+  "name": "Website",
+  "dependencies": {
+    "foundation": "~5.0.3"
+  }
+} 
