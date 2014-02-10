@@ -4,3 +4,4 @@
 .sass-cache
 node_modules
 src/bower_components
+_site

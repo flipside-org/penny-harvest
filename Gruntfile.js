@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     // https://github.com/gruntjs/grunt-contrib-clean
-    clean : ['public/css/*', 'public/scripts/*'],
+    clean : ['public/css/*', 'public/scripts/*', '_site/*'],
     
     // https://github.com/gruntjs/grunt-contrib-compass
     compass : {
@@ -80,6 +80,29 @@ module.exports = function(grunt) {
       src: {
         files: ['src/js/*.js', 'src/sass/*.scss'],
         tasks: ['default']
+      },
+      jekyll : {
+        files: ['public/**/*.html', 'public/**/*.json', '!_site/**/*', 'public/**/**/*.md'],
+        tasks: ['jekyll:generate']
+      }
+    },
+    
+    // https://github.com/dannygarcia/grunt-jekyll
+    jekyll : {
+      generate : {
+        options : {
+          config: '_config.yml',
+          src: 'public',
+          dest: './_site',
+        }
+      },
+      server : {
+        options : {
+          config: '_config.yml',
+          src: 'public',
+          dest: './_site',
+          serve: true
+        }
       }
     }
     
@@ -91,10 +114,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-jekyll');
   
   // Register tasks.
-  grunt.registerTask('default', ['compass:dev', 'jshint:dev', 'uglify']);
+  grunt.registerTask('default', ['compass:dev', 'jshint:dev', 'uglify', 'jekyll:generate']);
   
   grunt.registerTask('prod', ['clean', 'compass:prod', 'jshint:prod', 'uglify']);
+  
+  grunt.registerTask('jk', ['jekyll:server']);
 
 };
