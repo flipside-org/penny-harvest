@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     // https://github.com/gruntjs/grunt-contrib-clean
-    clean : ['public/css/*', 'public/scripts/*', '_site/*'],
+    clean : ['public/css/*', '!public/**/.gitkeep', 'public/scripts/*', '_site/*'],
     
     // https://github.com/gruntjs/grunt-contrib-compass
     compass : {
