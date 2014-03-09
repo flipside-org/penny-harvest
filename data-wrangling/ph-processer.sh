@@ -1,13 +1,11 @@
 #!/bin/bash --posix
 
-# Script to process Penny Harvest data
+# Script to process raw Penny Harvest data provided in XLSX format
+# The output is a series of normalized, cleaned up and geocoded CSV files
 
 # INSTRUCTIONS
-# $ bash process_ph-processor.sh -i [file-name]
+# $ bash ph-processor.sh -i [file-name]
 # Example: bash ph-processor.sh -i Map_data.xls
-
-# OUTPUT
-# ...
 
 # TODO
 # review //TEMP
@@ -38,7 +36,7 @@ usage()
 
 typeset var_input=""
 
-while getopts "i:o:h" option
+while getopts "i:h" option
 do
 	case $option in
 	i)
@@ -71,7 +69,8 @@ typeset -r years=(5yrs 2013 2012 2011 2010 2009)
 # The MapQuest API key
 typeset -r mq_api=Fmjtd%7Cluur290y2h%2Cr5%3Do5-90zl54
 
-# Change Internal Field Separator to new line. Otherwise, it will think spaces in filenames are field separators
+# Change Internal Field Separator to new line. Otherwise, it will think spaces 
+# in filenames are field separators
 typeset -r IFS=$'\n'
 
 # Checking if the dependencies are met.
@@ -114,8 +113,6 @@ done
 ##############################################################################
 # Convert each relevant sheet in the Excel file to its own CSV file + some
 # other cleaning up.
-#
-# //TEMP add multiprocessing 
 
 for sheet in ${sheets[*]}
 do
@@ -161,7 +158,7 @@ echo "$elapsed_time seconds. Initial conversion and some housekeeping taken care
 # @param string $1
 # Name of file to be geocoded (without extension)
 # @param string $2
-# Name of the column where the unique ID of the entity is stored
+# Name of the column where the unique ID is stored
 function geocode {
 	touch latlng_$1.csv		
 	$cmd_python $cmd_geocode latlng_$1.csv $1.csv $mq_api
@@ -177,34 +174,6 @@ geocode ORGS 'ORG ID'
 
 elapsed_time=$(($SECONDS - $start_time))
 echo "$elapsed_time seconds. Geocoding done."
-
-
-##############################################################################
-# Generate a Geojson using ogr2ogr
-
-# We don't need all the information in the geojson. Cut out obsolete info
-$cmd_csvcut -c 1,2,11,38,39 ORGS.csv > orgs-map.csv
-$cmd_csvcut -c 2,3,51,52 SCHOOLS.csv > schools-map.csv
-
-for entity in schools orgs
-do
-	# Remove existing geojson, otherwise ogr2ogr won't behave well
-	rm $entity-map.geojson
-
-	# We need to create a .VRT to let ogr2ogr know how it can extract the 
-	# spatial information
-	# http://gis-lab.info/docs/gdal/gdal_ogr_user_docs.html#csv
-	echo "<OGRVRTDataSource>
-		<OGRVRTLayer name=\"$entity-map\">
-			<SrcDataSource>$entity-map.csv</SrcDataSource>
-	    	<GeometryType>wkbPoint</GeometryType>
-	    	<LayerSRS>EPSG:4326</LayerSRS>
-	    	<GeometryField encoding=\"PointFromColumns\" x=\"lng\" y=\"lat\"/>
-		</OGRVRTLayer>
-	</OGRVRTDataSource>" > $entity-map.vrt
-
-	ogr2ogr -f GeoJSON -gt 65536 -nlt POINT $entity-map.geojson $entity-map.vrt
-done
 
 exit 0
 # EOF
