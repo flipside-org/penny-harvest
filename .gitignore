@@ -1,3 +1,8 @@
+GRANTS.csv
+ORGS.csv
+SCHOOLS.csv
+data-wrangling/tmp
+
 #System files
 .project
 .DS_Store
