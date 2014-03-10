@@ -2,6 +2,9 @@ GRANTS.csv
 ORGS.csv
 SCHOOLS.csv
 data-wrangling/tmp
+data-wrangling/*.csv
+data-wrangling/*.vrt
+data-wrangling/*json
 
 #System files
 .project

@@ -1,1 +1,7 @@
-exclude:    	['node_modules', 'src', 'Gruntfile.js', 'package.json', 'Readme.md', 'bower.json']
+safe:           false
+domain:	        http://flipside.org
+permalink:			none
+paginate: 			20
+name:           Penny Harvest Organization Finder
+description:    The New York edition of the Penny Harvest Organization Finder
+exclude:    		['node_modules', 'src', 'Gruntfile.js', 'package.json', 'Readme.md', 'bower.json']

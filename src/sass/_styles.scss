@@ -1,0 +1,20 @@
+#site-hdr,
+.content,
+#site-ftr {
+	@include grid-column(12);
+}
+
+#site-hdr,
+#site-ftr {
+	background-color: $primary-color;
+	color: #fff;
+}
+
+article {
+	.content {
+		@include grid-column(8);
+	}
+	aside {
+		@include grid-column(4);
+	}
+}
