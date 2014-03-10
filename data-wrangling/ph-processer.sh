@@ -119,8 +119,6 @@ do
 	echo "Start processing data on $sheet"
 	#Xls -> csv on the sheet that matters
 	$cmd_in2csv --sheet $sheet $var_input > $sheet.csv
-	#Remove line breaks
-	$cmd_sed -i -e "s/_x000D_/ /" $sheet.csv
 	elapsed_time=$(($SECONDS - $start_time))
 	echo "$elapsed_time seconds. done"
 done
