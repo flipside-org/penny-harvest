@@ -28,6 +28,8 @@ def indent(n = 1):
 	base_indentation = '  '
 	return base_indentation * n
 
+md_linebreak = '  '
+
 
 with open(file_in, 'rb') as ifile:
 
@@ -87,7 +89,7 @@ with open(file_in, 'rb') as ifile:
 		#f.write('mission: |\n')
 		#f.write(indent() + row[fields['miss']] + '\n')
 		f.write('address: |\n')
-		f.write(indent() + row[fields['add']] + '\n')
+		f.write(indent() + row[fields['add']] + md_linebreak )
 		f.write(indent() + row[fields['cit']] + ' ' + row[fields['st']] + ' ' + row[fields['zip']]+ '\n')
 		f.write('---\n')
 		f.write('Organization\'s overview\n')

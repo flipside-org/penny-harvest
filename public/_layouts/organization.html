@@ -16,7 +16,7 @@ layout: base
       <dl>
         <dt>Address</dt>
         {% if page.address %}
-          <dd>{{ page.address }}</dd>
+          <dd>{{ page.address | markdownify }}</dd>
         {% else %}
           <dd>-</dd>
         {% endif %}
