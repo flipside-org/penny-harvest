@@ -28,6 +28,10 @@ def indent(n = 1):
 	base_indentation = '  '
 	return base_indentation * n
 
+def sanitize_br(text):
+	"Replace the _x000D_ for proper line-breaks and returns. First we remove the line-breaks, any remaining _x000D_ is assumed to be an actual return."
+	return text.replace(' _x000D_\n', ' ').replace('_x000D_','\n')
+
 md_linebreak = '  '
 
 
@@ -67,9 +71,6 @@ with open(file_in, 'rb') as ifile:
 		# Replace any colon in the title for a hyphen
 		row[fields['name']] = row[fields['name']].replace(':', '-')
 
-		# Replace any carriage return (_x000D_) with a newline (\n)
-		row[fields['descr']] = row[fields['descr']].replace('_x000D_', '\n')
-
 		# To be able to include the mission as a YAML variable, we need to indent all the paragraphs of the mission statement.
 
 		# Create file with proper file-name. Jekyll requires every file to start
@@ -89,11 +90,14 @@ with open(file_in, 'rb') as ifile:
 		#f.write('mission: |\n')
 		#f.write(indent() + row[fields['miss']] + '\n')
 		f.write('address: |\n')
-		f.write(indent() + row[fields['add']] + md_linebreak )
-		f.write(indent() + row[fields['cit']] + ' ' + row[fields['st']] + ' ' + row[fields['zip']]+ '\n')
+		f.write(indent() + row[fields['add']] + md_linebreak  + '\n')
+		f.write(indent() + row[fields['cit']] + ' ' + row[fields['st']] + ' ' + row[fields['zip']] + '\n')
 		f.write('---\n')
 		f.write('Organization\'s overview\n')
-		f.write(row[fields['descr']])
+		f.write(sanitize_br(row[fields['descr']]))
+		f.write('\n')
+		f.write('Contact person intro (TEMP)\n')
+		f.write(sanitize_br(row[fields['intro']]))
 		
 		# Done. Close the file.
 		f.close()
