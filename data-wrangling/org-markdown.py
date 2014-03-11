@@ -30,10 +30,11 @@ def indent(n = 1):
 
 def sanitize_br(text):
 	"Replace the _x000D_ for proper line-breaks and returns. First we remove the line-breaks, any remaining _x000D_ is assumed to be an actual return."
-	return text.replace(' _x000D_\n', ' ').replace('_x000D_\n','\n\n')
+	return text.replace(' _x000D_\n', ' ').replace('_x000D_\n','\n\n').replace('_x000D_','')
 
 def sanitize_br_indent(text):
-	"Replace the _x000D_ for proper line-breaks and returns and indent first paragraph. This is mostly used when the string needs to be printed as a YAML variable. 1. replace line-breaks, 2. replace return + indent paragraph, 3. clean up remaining -_x000D_."
+	"Replace the _x000D_ for proper line-breaks and returns and indent first paragraph. This is mostly used when the string needs to be printed as a YAML variable. 1. replace line-breaks, 2. replace return + indent paragraph, 3. clean up remaining -_x000D_."	
+	text = indent() + text
 	return text.replace(' _x000D_\n', ' ').replace('_x000D_\n','\n\n' + indent()).replace('_x000D_','')
 
 md_linebreak = '  '
@@ -97,19 +98,48 @@ with open(file_in, 'rb') as ifile:
 		f.write('title: ' + row[fields['name']] + '\n')
 		f.write('impact_area: ' + row[fields['imp']] + '\n')
 		f.write('keywords: ' + row[fields['keyw']] + '\n')
-		f.write('coordinates: ' + row[fields['lat']] + ',' + row[fields['lng']] + '\n')
-		f.write('preferred_contact: ' + str(sane_method) + '\n')
+		f.write('location_services: ' + row[fields['locs']] + '\n')
+		f.write('location_offices: ' + row[fields['loco']] + '\n')
+		f.write('website: ' + row[fields['web']] + '\n')
+		f.write('\n')
 		f.write('mission: |\n')
-		f.write(indent() + sanitize_br_indent(row[fields['miss']]) + '\n')
+		f.write(sanitize_br_indent(row[fields['miss']]) + '\n')
+		f.write('\n')
+		f.write('cash_grants: ' + row[fields['cash']] + '\n')
+		f.write('descr_grants1: |\n')
+		f.write(sanitize_br_indent(row[fields['cash1']] + '\n'))
+		f.write('descr_grants2: |\n')
+		f.write(sanitize_br_indent(row[fields['cash2']] + '\n'))
+		f.write('service_opp: ' + row[fields['serv']] + '\n')
+		f.write('descr_serv1: |\n')
+		f.write(sanitize_br_indent(row[fields['serv1']] + '\n'))
+		f.write('descr_serv2: |\n')
+		f.write(sanitize_br_indent(row[fields['serv2']] + '\n'))
+		f.write('\n')
+		f.write('learn: |\n')
+		f.write(sanitize_br_indent(row[fields['learn']] + '\n'))
+		f.write('cont_relationship: |\n')
+		f.write(sanitize_br_indent(row[fields['cont']] + '\n'))
+		f.write('\n')
+		f.write('salutation: ' + row[fields['sal']] + '\n')
+		f.write('first_name: ' + row[fields['first']] + '\n')
+		f.write('last_name: ' + row[fields['last']] + '\n')
+		f.write('title: ' + row[fields['title']] + '\n')
+		f.write('\n')
 		f.write('address: |\n')
 		f.write(indent() + row[fields['add']] + md_linebreak  + '\n')
 		f.write(indent() + row[fields['cit']] + ' ' + row[fields['st']] + ' ' + row[fields['zip']] + '\n')
+		f.write('coordinates: ' + row[fields['lat']] + ',' + row[fields['lng']] + '\n')
+		f.write('phone: ' + row[fields['ph']] + '\n')
+		f.write('ext: ' + row[fields['ext']] + '\n')
+		f.write('fax: ' + row[fields['fax']] + '\n')
+		f.write('email: ' + row[fields['email']] + '\n')		
+		f.write('preferred_contact: ' + str(sane_method) + '\n')
+		f.write('contact_person_intro: |\n')
+		f.write(sanitize_br_indent(row[fields['intro']]) + '\n')
 		f.write('---\n')
 		f.write('Organization\'s overview\n')
 		f.write(sanitize_br(row[fields['descr']]))
-		f.write('\n')
-		f.write('Contact person intro (TEMP)\n')
-		f.write(sanitize_br(row[fields['intro']]))
 		
 		# Done. Close the file.
 		f.close()
