@@ -30,7 +30,11 @@ def indent(n = 1):
 
 def sanitize_br(text):
 	"Replace the _x000D_ for proper line-breaks and returns. First we remove the line-breaks, any remaining _x000D_ is assumed to be an actual return."
-	return text.replace(' _x000D_\n', ' ').replace('_x000D_','\n')
+	return text.replace(' _x000D_\n', ' ').replace('_x000D_\n','\n\n')
+
+def sanitize_br_indent(text):
+	"Replace the _x000D_ for proper line-breaks and returns and indent first paragraph. This is mostly used when the string needs to be printed as a YAML variable. 1. replace line-breaks, 2. replace return + indent paragraph, 3. clean up remaining -_x000D_."
+	return text.replace(' _x000D_\n', ' ').replace('_x000D_\n','\n\n' + indent()).replace('_x000D_','')
 
 md_linebreak = '  '
 
@@ -87,8 +91,8 @@ with open(file_in, 'rb') as ifile:
 		f.write('impact_area: ' + row[fields['imp']] + '\n')
 		f.write('keywords: ' + row[fields['keyw']] + '\n')
 		f.write('coordinates: ' + row[fields['lat']] + ',' + row[fields['lng']] + '\n')
-		#f.write('mission: |\n')
-		#f.write(indent() + row[fields['miss']] + '\n')
+		f.write('mission: |\n')
+		f.write(indent() + sanitize_br_indent(row[fields['miss']]) + '\n')
 		f.write('address: |\n')
 		f.write(indent() + row[fields['add']] + md_linebreak  + '\n')
 		f.write(indent() + row[fields['cit']] + ' ' + row[fields['st']] + ' ' + row[fields['zip']] + '\n')
