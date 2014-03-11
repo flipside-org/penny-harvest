@@ -35,9 +35,8 @@ def sanitize_br(text):
 def yaml_multiline_string(text):
 	"Turns a string into a properly formatted multiline string to be used as a YAML variable."
 	if text.strip(' \n'):
-		# Add pipe and indent first paragraph as well
-		# Replace the _x000D_ for proper line-breaks and returns and indent first 
-		# paragraph. 1. replace line-breaks, 2. replace return + indent paragraph, 
+		# Add pipe and indent first paragraph
+		# 1. replace line-breaks, 2. replace return + indent paragraph, 
 		# 3. clean up remaining -_x000D_."	
 		text = '|\n' + indent() + text.replace(' _x000D_\n', ' ').replace('_x000D_\n','\n\n' + indent()).replace('_x000D_','')
 		return text
