@@ -75,7 +75,14 @@ with open(file_in, 'rb') as ifile:
 		# Replace any colon in the title for a hyphen
 		row[fields['name']] = row[fields['name']].replace(':', '-')
 
-		# To be able to include the mission as a YAML variable, we need to indent all the paragraphs of the mission statement.
+		# Sanitize the prefered contact method
+		dirty_method = row[fields['meth']]
+		sane_method = [ ]
+		if dirty_method.find('mail') != -1 or dirty_method.find('@') != -1:
+			sane_method.append('email')
+		if dirty_method.find('phone') != -1:
+			sane_method.append('phone')
+		sane_method = ",".join(sane_method)
 
 		# Create file with proper file-name. Jekyll requires every file to start
 		# with a date
@@ -91,6 +98,7 @@ with open(file_in, 'rb') as ifile:
 		f.write('impact_area: ' + row[fields['imp']] + '\n')
 		f.write('keywords: ' + row[fields['keyw']] + '\n')
 		f.write('coordinates: ' + row[fields['lat']] + ',' + row[fields['lng']] + '\n')
+		f.write('preferred_contact: ' + str(sane_method) + '\n')
 		f.write('mission: |\n')
 		f.write(indent() + sanitize_br_indent(row[fields['miss']]) + '\n')
 		f.write('address: |\n')
