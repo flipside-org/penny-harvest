@@ -124,7 +124,7 @@ with open(file_in, 'rb') as ifile:
 		f.write('salutation: ' + row[fields['sal']] + '\n')
 		f.write('first_name: ' + row[fields['first']] + '\n')
 		f.write('last_name: ' + row[fields['last']] + '\n')
-		f.write('title: ' + row[fields['title']] + '\n')
+		f.write('title_contact_person: ' + row[fields['title']] + '\n')
 		f.write('\n')
 		f.write('address: |\n')
 		f.write(indent() + row[fields['add']] + md_linebreak  + '\n')
@@ -138,7 +138,6 @@ with open(file_in, 'rb') as ifile:
 		f.write('contact_person_intro: |\n')
 		f.write(sanitize_br_indent(row[fields['intro']]) + '\n')
 		f.write('---\n')
-		f.write('Organization\'s overview\n')
 		f.write(sanitize_br(row[fields['descr']]))
 		
 		# Done. Close the file.
