@@ -5,6 +5,8 @@ data-wrangling/tmp
 data-wrangling/*.csv
 data-wrangling/*.vrt
 data-wrangling/*json
+data-wrangling/markdown
+sample-content.sh
 
 #System files
 .project

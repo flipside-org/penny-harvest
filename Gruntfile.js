@@ -54,7 +54,7 @@ module.exports = function(grunt) {
           ],
           
           'public/scripts/foundation.min.js': [
-            'src/bower_components/jquery/jquery.js',
+            'src/bower_components/foundation/js/vendor/jquery.js',
             
             'src/bower_components/foundation/js/foundation/foundation.js',
             //'src/bower_components/foundation/js/foundation/foundation.abide.js',
