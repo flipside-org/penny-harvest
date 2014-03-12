@@ -1,0 +1,20 @@
+---
+permalink: json/organizations.geojson
+---
+{ "type": "FeatureCollection",
+  "features": [
+    {% for org in site.categories.organization %}
+    { "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [{{ org.lng }}, {{ org.lat }}]
+      },
+      "properties": {
+        "title": "{{ org.title }}",
+        "url": "{{ org.url }}",
+        "impact_area": "{{ org.impact_area }}"
+      }
+    }{% unless forloop.last %}, {% endunless %}
+    {% endfor %}
+  ]
+}
