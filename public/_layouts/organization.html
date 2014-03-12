@@ -28,6 +28,12 @@ layout: base
         {% endif %}
         <dt>Impact Area</dt>
         <dd>{{ page.impact_area }}</dd>
+        {% if page.descr_serv1 %}
+          <dt>Description of services</dt>
+          <dd>{{ page.descr_serv1 }}</dd>
+        {% else %}
+          <dd>I AM EMPTY!!!</dd>
+        {% endif %}
       </dl>
     </section>
   </aside>
