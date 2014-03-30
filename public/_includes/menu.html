@@ -1,0 +1,33 @@
+<nav id="primary" role="navigation">
+	<a href="#nav-links" class="toggle"><span class="visually-hidden">Menu</span></a>
+	<ul class="links" id="nav-links">
+    {% if page.active_menu == 'home' %}
+    <li class="active">
+    {% else %}
+    <li>
+    {% endif %}
+			<a href="/">Home</a>
+		</li>
+		{% if page.active_menu == 'local' %}
+    <li class="active">
+    {% else %}
+    <li>
+    {% endif %}
+			<a href="/">Local</a>
+		</li>
+		{% if page.active_menu == 'national' %}
+		<li class="active">
+		{% else %}
+		<li>
+		{% endif %}
+			<a href="/">National</a>
+		</li>
+		{% if page.active_menu == 'about' %}
+    <li class="active">
+    {% else %}
+    <li>
+    {% endif %}
+			<a href="/about/">About</a>
+		</li>
+	</ul>
+</nav>
