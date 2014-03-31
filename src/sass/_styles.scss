@@ -64,24 +64,24 @@ a:active {
 	}
 }
 
-#site-title {
-	@include grid-column(12);
+article {
+	.title-bar {
+		@include grid-column(12);
+	}
+	.column {
+		@include grid-column(12);
+	}
+	section {
+		@include border-radius(5);
+		background-color: #fff;
+	}
+	@media #{$small-up} {	
+		.column {
+			@include grid-column(6);
+		}
+	}
 }
 
-nav#primary {
-}
-
-.content,
 #site-ftr {
 	@include grid-column(12);
-}
-
-
-article {
-	.content {
-		@include grid-column(8);
-	}
-	aside {
-		@include grid-column(4);
-	}
 }

@@ -1,40 +1,61 @@
 ---
 layout: base
 ---
-<article>
-
+<article class="organization">
   <header class="banner">
-    <h1 class="title">{{ page.title }}</h1>
+    <div class="row">
+      <div class="title-bar">
+        <h1 class="title">{{ page.title }}</h1>
+      </div>
+    </div>
   </header>
 
-  <div class="content">  
-    {{ content }}
+  <div class="content row">
+    <div class="column">
+      <section class="about-us">
+        <h1>About us</h1>
+        {{ page.impact_area }}
+        {{ content }}
+        <h2>We help</h2>
+        {{ page.keywords }}
+      </section>
+      <section class="wish-list">
+        <h1>Our wish list</h1>
+        <h2>Community grants</h2>
+        <ul>
+          <li>{{ page.descr_grants1 }}</li>
+          <li>{{ page.descr_grants2 }}</li>
+        </ul>
+        <h2>Service projects</h2>
+        <ul>
+          <li>{{ page.descr_serv1 }}</li>
+          <li>{{ page.descr_serv2 }}</li>
+        </ul>
+      </section>
+      <section class="what-can-we-do">
+        <h1>What can we do</h1>
+        <h2>How can we help you learn more about us</h2>
+        <p>{{ page.learn }}</p>
+        <h2>How we'd like to keep up the relationship with your school</h2>
+        <p>{{ page.cont_relationship }}</p>
+      </section>
+    </div>
+    <div class="column">
+      <section class="stats">
+        <h1>Some stats</h1>
+      </section>
+      <section class="contact">
+        <h1>Who to contact</h1>
+        <ul>
+        <li>
+          {{ page.first_name }} {{ page.last_name }}<br/>
+          {{ page.title_contact_person }}
+        </li>
+        <li>{{ page.contact_person_intro }}</li>
+        <li>{{ page.address | markdownify }}</li>
+        <li>{{ page.phone }}</li>
+        </ul>
+      </section>
+    </div>
   </div>
-  <aside role="complementary">
-    <section class="details">
-      <h1>Details</h1>
-      <dl>
-        <dt>Address</dt>
-        {% if page.address %}
-          <dd>{{ page.address | markdownify }}</dd>
-        {% else %}
-          <dd>-</dd>
-        {% endif %}
-        <dt>Keywords</dt>
-        {% if page.keywords %}
-          <dd>{{ page.keywords }}</dd>
-        {% else %}
-          <dd>-</dd>
-        {% endif %}
-        <dt>Impact Area</dt>
-        <dd>{{ page.impact_area }}</dd>
-        {% if page.descr_serv1 %}
-          <dt>Description of services</dt>
-          <dd>{{ page.descr_serv1 }}</dd>
-        {% else %}
-          <dd>I AM EMPTY!!!</dd>
-        {% endif %}
-      </dl>
-    </section>
-  </aside>
 </article>
