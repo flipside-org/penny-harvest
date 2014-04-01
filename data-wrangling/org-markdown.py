@@ -54,10 +54,8 @@ def yaml_multiline_string(text, is_array = False):
 		# The syntax for multiline string array, is slightly different and requires
 		# a hyphen before the pipe and extra indentation
 		if is_array:
-			prepend = '\n' + indent(indentation) + '-'
+			prepend = '\n' + indent(indentation) + '- '
 			indentation = 2
-			# Tmp. Replace ':' for ';' until finding out how to properly escape mapping values in multiline arrays 
-			text = text.replace(':',';')
 		text = prepend + '|\n' + indent(indentation) + text.replace(' _x000D_\n', ' ').replace('_x000D_\n','\n\n' + indent(indentation)).replace('_x000D_','')
 		return text
 	else:
