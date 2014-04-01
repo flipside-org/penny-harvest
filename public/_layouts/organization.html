@@ -23,19 +23,7 @@ layout: base
         {% endfor %}
         </ul>
       </section>
-      <section class="wish-list">
-        <h1>Our wish list</h1>
-        <h2>Community grants</h2>
-        <ul>
-          <li>{{ page.descr_grants1 }}</li>
-          <li>{{ page.descr_grants2 }}</li>
-        </ul>
-        <h2>Service projects</h2>
-        <ul>
-          <li>{{ page.descr_serv1 }}</li>
-          <li>{{ page.descr_serv2 }}</li>
-        </ul>
-      </section>
+      {% include org-wish-section.html %}
       {% include org-what-section.html %}
     </div>
     <div class="column">
