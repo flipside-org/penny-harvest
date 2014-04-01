@@ -32,8 +32,19 @@ def sanitize_br(text):
 	"Replace the _x000D_ for proper line-breaks and returns. First we remove the line-breaks, any remaining _x000D_ is assumed to be an actual return."
 	return text.replace(' _x000D_\n', ' ').replace('_x000D_\n','\n\n').replace('_x000D_','')
 
+def yaml_array(text, separator = ','):
+	"Splits a string by a separator and stores the result as a YAML array"
+	if text.strip(' \n'):
+		array = ''
+		for keyword in text.split(separator):
+			array += '\n' + indent() + '- ' + keyword
+		return array
+	else:
+		# If empty, we return nothing
+		return ''
+
 def yaml_multiline_string(text, is_array = False):
-	"Turns a string into a properly formatted multiline string to be used as a YAML variable."
+	"Turns a string into a properly formatted multiline string to be used as a YAML variable. If is_array is set to true, the multiline string will be formatted as a YAML array"
 	if text.strip(' \n'):
 		# Add pipe and indent first paragraph
 		# 1. replace line-breaks, 2. replace return + indent paragraph, 
@@ -45,6 +56,8 @@ def yaml_multiline_string(text, is_array = False):
 		if is_array:
 			prepend = '\n' + indent(indentation) + '-'
 			indentation = 2
+			# Tmp. Replace ':' for ';' until finding out how to properly escape mapping values in multiline arrays 
+			text = text.replace(':',';')
 		text = prepend + '|\n' + indent(indentation) + text.replace(' _x000D_\n', ' ').replace('_x000D_\n','\n\n' + indent(indentation)).replace('_x000D_','')
 		return text
 	else:
@@ -111,7 +124,7 @@ with open(file_in, 'rb') as ifile:
 		f.write('\n')
 		f.write('title: ' + row[fields['name']] + '\n')
 		f.write('impact_area: ' + row[fields['imp']] + '\n')
-		f.write('keywords: ' + row[fields['keyw']] + '\n')
+		f.write('keywords: ' + yaml_array(row[fields['keyw']]) + '\n')
 		f.write('location_services: ' + row[fields['locs']] + '\n')
 		f.write('location_offices: ' + row[fields['loco']] + '\n')
 		f.write('website: ' + row[fields['web']] + '\n')
