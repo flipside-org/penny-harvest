@@ -1,0 +1,16 @@
+{% capture what_section %}
+  {% if page.learn %}
+    <h2>How can we help you learn more about us</h2>
+    <p>{{ page.learn }}</p>
+  {% endif %}
+  {% if page.cont_relationship %}
+    <h2>How we'd like to keep up the relationship with your school</h2>
+    <p>{{ page.cont_relationship }}</p>
+  {% endif %}
+{% endcapture %}
+{% if what_section %}
+  <section class="what-can-we-do">
+    <h1>What can we do</h1>
+    {{ what_section }}
+  </section>
+{% endif %}

@@ -17,7 +17,11 @@ layout: base
         {{ page.impact_area }}
         {{ content }}
         <h2>We help</h2>
-        {{ page.keywords }}
+        <ul>
+        {% for keyword in page.keywords %}  
+          <li>{{ keyword }}</li>
+        {% endfor %}
+        </ul>
       </section>
       <section class="wish-list">
         <h1>Our wish list</h1>
@@ -32,30 +36,13 @@ layout: base
           <li>{{ page.descr_serv2 }}</li>
         </ul>
       </section>
-      <section class="what-can-we-do">
-        <h1>What can we do</h1>
-        <h2>How can we help you learn more about us</h2>
-        <p>{{ page.learn }}</p>
-        <h2>How we'd like to keep up the relationship with your school</h2>
-        <p>{{ page.cont_relationship }}</p>
-      </section>
+      {% include org-what-section.html %}
     </div>
     <div class="column">
       <section class="stats">
         <h1>Some stats</h1>
       </section>
-      <section class="contact">
-        <h1>Who to contact</h1>
-        <ul>
-        <li>
-          {{ page.first_name }} {{ page.last_name }}<br/>
-          {{ page.title_contact_person }}
-        </li>
-        <li>{{ page.contact_person_intro }}</li>
-        <li>{{ page.address | markdownify }}</li>
-        <li>{{ page.phone }}</li>
-        </ul>
-      </section>
+      {% include org-contact-section.html %}
     </div>
   </div>
 </article>
