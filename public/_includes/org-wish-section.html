@@ -1,23 +1,27 @@
-{% capture grants_section %}
-  {% if page.grants %}
+{% assign grants_section == '' %}
+{% assign services_section == '' %}
+
+{% if page.grants %}
+  {% capture grants_section %}
     <h2>Community grants</h2>
     <ul class="grants">
       {% for grant in page.grants %}
         <li>{{ grant }}</li>
       {% endfor %}
     </ul>
-  {% endif %}
-{% endcapture %}
-{% capture services_section %}
-  {% if page.services %}
+  {% endcapture %}
+{% endif %}
+{% if page.services %}
+  {% capture services_section %}
     <h2>Service project</h2>
     <ul class="services">
       {% for service in page.services %}
         <li>{{ service }}</li>
       {% endfor %}
     </ul>
-  {% endif %}
-{% endcapture %}
+  {% endcapture %}
+{% endif %}
+
 {% if grants_section or services_section %}
   <section class="wish-list">
     <h1>Our wish list</h1>

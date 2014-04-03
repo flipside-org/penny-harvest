@@ -1,0 +1,24 @@
+{% assign about_section == '' %}
+
+{% if content %}
+  {% capture about_section %}
+    <h1>About us</h1>
+    <p>{{ content }}</p>
+  {% endcapture %}
+{% endif %}
+{% if page.keywords %}
+  {% capture about_section %}{{ about_section }}
+    <h2>We help</h2>
+    <ul>
+    {% for keyword in page.keywords %}  
+      <li>{{ keyword }}</li>
+    {% endfor %}
+    </ul>
+  {% endcapture %}
+{% endif %}
+
+{% if about_section %}
+  <section class="about-us">
+    {{ about_section }}
+  </section>
+{% endif %}

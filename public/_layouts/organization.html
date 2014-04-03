@@ -12,17 +12,7 @@ layout: base
 
   <div class="content row">
     <div class="column">
-      <section class="about-us">
-        <h1>About us</h1>
-        {{ page.impact_area }}
-        {{ content }}
-        <h2>We help</h2>
-        <ul>
-        {% for keyword in page.keywords %}  
-          <li>{{ keyword }}</li>
-        {% endfor %}
-        </ul>
-      </section>
+      {% include org-about-section.html %}
       {% include org-wish-section.html %}
       {% include org-what-section.html %}
     </div>

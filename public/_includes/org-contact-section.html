@@ -1,23 +1,34 @@
-{% capture contact_section %}
-  {% if page.first_name or page.last_name or page.title_contact_person %}
+{% assign contact_section == '' %}
+
+{% if page.first_name or page.last_name or page.title_contact_person %}
+  {% capture contact_section %}
     <li class="contact_person">
       {{ page.first_name }} {{ page.last_name }}<br/>
       {{ page.title_contact_person }}
     </li>
-  {% endif %}
-  {% if page.contact_person_intro %}
+  {% endcapture %}
+{% endif %}
+{% if page.contact_person_intro %}
+  {% capture contact_section %}{{ contact_section }}
     <li class="bio">{{ page.contact_person_intro }}</li>
-  {% endif %}
-  {% if page.address %}
+  {% endcapture %}
+{% endif %}
+{% if page.address %}
+  {% capture contact_section %}{{ contact_section }}
     <li class="address">{{ page.address | markdownify }}</li>
-  {% endif %}
-  {% if page.phone %}
+  {% endcapture %}
+{% endif %}
+{% if page.phone %}
+  {% capture contact_section %}{{ contact_section }}
     <li class="phone">{{ page.phone }}</li>
-  {% endif %}
-  {% if page.website %}
+  {% endcapture %}
+{% endif %}
+{% if page.website %}
+  {% capture contact_section %}{{ contact_section }}
     <li class="site"><a href="{{ page.website }}" title="Website {{ page.title }}">{{ page.website }}</a></li>
-  {% endif %}
-{% endcapture %}
+  {% endcapture %}
+{% endif %}
+
 {% if contact_section %}
   <section class="contact">
     <h1>Who to contact</h1>
