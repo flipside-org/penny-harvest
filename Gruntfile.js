@@ -1,14 +1,14 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     // https://github.com/gruntjs/grunt-contrib-clean
-    clean : ['public/css/*', '!public/**/.gitkeep', 'public/scripts/*', '_site/*'],
+    clean : ['public/styles/*', '!public/**/.gitkeep', 'public/scripts/*', '_site/*'],
     
     // https://github.com/gruntjs/grunt-contrib-compass
     compass : {
       // Default options.
       options : {
-          sassDir : 'src/sass',
-          cssDir : 'public/css',
+          sassDir : 'src/styles',
+          cssDir : 'public/styles',
           raw : 'add_import_path "src/bower_components/foundation/scss"'
       },
       
@@ -38,17 +38,17 @@ module.exports = function(grunt) {
         options : {
           force : true
         },
-        src : ['src/js/*.js']
+        src : ['src/scripts/**.js']
       },
       
-      prod: ['src/js/*.js']
+      prod: ['src/scripts/**.js']
     },
     
     // https://github.com/gruntjs/grunt-contrib-uglify
     uglify: {
       prod: {
         files: {
-          'public/scripts/website.min.js': ['src/js/*.js'],
+          'public/scripts/website.min.js': ['src/scripts/*.js'],
           'public/scripts/media.min.js': [
             'src/bower_components/modernizr/modernizr.js',
           ],
@@ -78,8 +78,8 @@ module.exports = function(grunt) {
     // https://npmjs.org/package/grunt-contrib-watch
     watch : {
       src: {
-        files: ['src/js/*.js', 'src/sass/*.scss'],
-        tasks: ['default']
+        files: ['src/scripts/**.js', 'src/styles/**.scss'],
+        tasks: ['build']
       },
       jekyll : {
         files: ['public/**/*.html', 'public/**/*.json', '!_site/**/*', 'public/**/**/*.md'],
@@ -117,7 +117,9 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-jekyll');
   
   // Register tasks.
-  grunt.registerTask('default', ['compass:dev', 'jshint:dev', 'uglify', 'jekyll:generate']);
+  grunt.registerTask('build', ['compass:dev', 'jshint:dev', 'uglify', 'jekyll:generate']);
+
+  grunt.registerTask('default', ['build', 'watch']);
   
   grunt.registerTask('prod', ['clean', 'compass:prod', 'jshint:prod', 'uglify']);
   
