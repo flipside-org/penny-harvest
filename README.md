@@ -28,13 +28,13 @@ You might have to run these as sudo.
 To set up your development environment, you'll have to run the following two commands in seperate terminals.
 
 ```
-$ grunt watch
+$ grunt
 ```
 Compiles the compass files, javascripts and generates the website.
 The system will watch files and execute tasks whenever one of them changes.
 
 ```
-$ grunt jekyll:server
+$ grunt jk
 ```
 Spans a jekyll server, the website will be accesible on localhost:4000.
 
@@ -44,9 +44,9 @@ Clean the compiled sass, javascript, and _/site:
 $ grunt clean
 ```
 
-Compile the compass files, javascripts and generate the website. Use this instead of ```grunt watch``` if you just want to render it once:
+Compile the compass files, javascripts and generate the website. Use this instead of ```grunt``` if you just want to render it once:
 ```
-$ grunt
+$ grunt build
 ```
 
 Compile the compass files and javascripts prepared for production (minified, uglyfied). Every time changes will be pushed to production, this command needs to be run:
