@@ -1,40 +1,26 @@
 ---
 layout: base
 ---
-<article>
-
+<article class="organization">
   <header class="banner">
-    <h1 class="title">{{ page.title }}</h1>
+    <div class="row">
+      <div class="title-bar">
+        <h1 class="title">{{ page.title }}</h1>
+      </div>
+    </div>
   </header>
 
-  <div class="content">  
-    {{ content }}
+  <div class="content row">
+    <div class="column">
+      {% include org-about-section.html %}
+      {% include org-wish-section.html %}
+      {% include org-what-section.html %}
+    </div>
+    <div class="column">
+      <section class="stats">
+        <h1>Some stats</h1>
+      </section>
+      {% include org-contact-section.html %}
+    </div>
   </div>
-  <aside role="complementary">
-    <section class="details">
-      <h1>Details</h1>
-      <dl>
-        <dt>Address</dt>
-        {% if page.address %}
-          <dd>{{ page.address | markdownify }}</dd>
-        {% else %}
-          <dd>-</dd>
-        {% endif %}
-        <dt>Keywords</dt>
-        {% if page.keywords %}
-          <dd>{{ page.keywords }}</dd>
-        {% else %}
-          <dd>-</dd>
-        {% endif %}
-        <dt>Impact Area</dt>
-        <dd>{{ page.impact_area }}</dd>
-        {% if page.descr_serv1 %}
-          <dt>Description of services</dt>
-          <dd>{{ page.descr_serv1 }}</dd>
-        {% else %}
-          <dd>I AM EMPTY!!!</dd>
-        {% endif %}
-      </dl>
-    </section>
-  </aside>
 </article>

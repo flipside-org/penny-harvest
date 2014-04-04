@@ -6,6 +6,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>{{ site.name }}</title>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="/css/app.css">
   <script src="/scripts/media.min.js"></script>
   <script src="/scripts/foundation.min.js"></script>  
@@ -15,27 +16,26 @@
 <body>
   
   <div id="site-canvas">
-    <div class="row">
-      <header id="site-hdr" role="banner">
+    <header id="site-hdr" role="banner">
+      <div class="row">
         <h1 id="site-title">
-          <a href="{{ site.domain }}" title="Go home"><img src="/images/flipside-logo.svg" alt="Flipside logo" title="Flipside" /><span class="visually-hidden">Flipside</span></a>
+          <a href="{{ site.domain }}" title="Go home">Organization Finder</a>
         </h1>
-      </header>
-    </div>
+        {% include menu.html %}
+      </div>
+    </header>
 
-    <div class="row">
-      <main id="site-body" role="main">
-        {{ content }}
-      </main>
-    </div>
+    <main id="site-body" role="main">
+      {{ content }}
+    </main>
     
-    <div class="row">
-      <footer id="site-ftr" role="contentinfo">
+    <footer id="site-ftr" role="contentinfo">
+      <div class="row">
         <p class="built-by">
           Flipside - 2014
         </p>
-      </footer>
-    </div>
+      </div>
+    </footer>
   </div>
   
   <script src="/scripts/website.min.js"></script>

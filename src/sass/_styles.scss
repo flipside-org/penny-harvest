@@ -1,20 +1,87 @@
-#site-hdr,
-.content,
-#site-ftr {
-	@include grid-column(12);
+/* ==========================================================================
+   Styles - contains the global styles of the site
+   ========================================================================== */
+
+
+/* Generic styles */
+
+a:link,
+a:visited {
+  @include transform(translate3d(0, 0, 0));
+  @include transition-property(opacity, top, left, right);
+  @include transition-duration(0.2s, 0.1s, 0.2s, 0.2s);
+  @include transition-timing-function(ease, ease, ease, ease);
+  @include transition-delay(0, 0, 0, 0);
+  cursor: pointer;
 }
 
-#site-hdr,
-#site-ftr {
+a:hover,
+a:focus {
+  outline: none;
+  opacity: 0.7;
+}
+
+a:active {
+  position: relative;
+  top: 2px;
+}
+
+
+
+#site-hdr {
 	background-color: $primary-color;
-	color: #fff;
+	margin: 0;
+	a {
+		color: #fff;
+	}
+	#site-title {
+		@include grid-column(10);
+		font-weight: 700;
+	}
+	#primary {
+		@include grid-column(2);
+		ul {
+			margin: 0;
+			li {
+				list-style: none;
+			}
+		}
+	}
+	@media #{$small-up} {
+		#site-title {
+			@include grid-column(3);
+		}
+		#primary {
+			@include grid-column(9);
+			text-align: right;
+			ul {
+				display: inline-block;
+			}
+			li {
+				float: left;
+			}
+		}
+	}
 }
 
 article {
-	.content {
-		@include grid-column(8);
+	.title-bar {
+		@include grid-column(12);
 	}
-	aside {
-		@include grid-column(4);
+	.column {
+		@include grid-column(12);
 	}
+	section {
+		@include border-radius(5);
+		background-color: #fff;
+	}
+	@media #{$small-up} {	
+		.column {
+			@include grid-column(6);
+		}
+	}
+}
+
+#site-ftr {
+	@include grid-column(12);
 }
