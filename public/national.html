@@ -1,0 +1,19 @@
+---
+layout: base
+permalink: national/index.html
+active_menu : national
+title : National organizations
+---
+<ul class="national cards row">
+  {% for org in site.categories.organization %}{% if org.national %}
+  <li>
+    <header>
+      <a href="{{ org.url }}" title="Read more about organization"><h2>{{ org.title }}</h2></a>
+    </header>
+    <p class="introduction">{{ org.content | truncate }}</p>
+    <footer>
+      <a href="{{ org.url }}" title="Read more about organization">Learn more about us</a>
+    </footer>
+  </li>
+  {% endif %}{% endfor %}
+</ul>
