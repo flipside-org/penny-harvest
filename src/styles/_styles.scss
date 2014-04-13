@@ -82,6 +82,31 @@ article {
 	}
 }
 
+.cards {
+	ul {
+		margin: 0;
+	}
+	li {
+		@include grid-column(12);
+		list-style: none;
+		@media #{$small-up} {
+			@include grid-column(6);
+			&:nth-child(2n+1) {
+				clear: left;
+			}
+		}
+		@media #{$medium-up} {
+			@include grid-column(4);
+			&:nth-child(2n+1) {
+				clear: none;
+			}
+			&:nth-child(3n+1) {
+				clear: left;
+			}
+		}
+	}
+}
+
 #site-ftr {
 	@include grid-column(12);
 }
