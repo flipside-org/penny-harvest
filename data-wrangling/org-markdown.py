@@ -14,7 +14,6 @@
 # TODO
 # Checks on the output folder  // If not empty, ask user if we should continue anyway
 # Replace spaces for hyphens in the title (just in case)
-# Indent all paragraphs of the mission statement
 
 import csv
 import sys
@@ -55,7 +54,7 @@ with open(file_in, 'rb') as ifile:
 	header = reader.next()
 
 	# Dict with the variable names (key) and the relevant column names (value)
-	cols = { 'oid' : 'ORG ID', 'name' : 'Organization_name', 'add' : 'Address', 'cit' : 'City', 'st' : 'State', 'zip' : 'Zip', 'locs' : 'Location_of_services', 'loco' : 'Location_of_offices', 'web': 'Website', 'keyw' : 'Keywords', 'imp' : 'Impact Area', 'miss' : 'Org Mission', 'descr' : 'Organization_overview', 'cash' : 'Cash_grants', 'cash1' : 'Description_of_cash_grants_1', 'cash2' : 'Description_of_cash_grants_2', 'serv' : 'Service_opportunities', 'serv1' : 'Description_of_service_opportunity_1', 'serv2' : 'Description_of_service_opportunity_2', 'learn' : 'How_can_you_help_students_learn_more_about_you', 'cont' : 'How_can_you_continue_the_relationship_afterwards', 'sal' : 'Salutation', 'first' : 'First_Name', 'last' : 'Last_Name', 'title' : 'Title', 'intro' : 'Introduction', 'ph' : 'Phone', 'ext' : 'Extension', 'fax' : 'Fax', 'email' : 'Email', 'meth' : 'Preferred_Method_of_Contact', 'time' : 'Best_Time_to_Contact', 'lat' : 'lat', 'lng' : 'lng' }
+	cols = { 'oid' : 'ORG ID', 'name' : 'Organization_name', 'add' : 'Address', 'cit' : 'City', 'st' : 'State', 'zip' : 'Zip', 'nat' : 'National', 'locs' : 'Location_of_services', 'loco' : 'Location_of_offices', 'web': 'Website', 'keyw' : 'Keywords', 'imp' : 'Impact Area', 'miss' : 'Org Mission', 'descr' : 'Organization_overview', 'cash' : 'Cash_grants', 'cash1' : 'Description_of_cash_grants_1', 'cash2' : 'Description_of_cash_grants_2', 'serv' : 'Service_opportunities', 'serv1' : 'Description_of_service_opportunity_1', 'serv2' : 'Description_of_service_opportunity_2', 'learn' : 'How_can_you_help_students_learn_more_about_you', 'cont' : 'How_can_you_continue_the_relationship_afterwards', 'sal' : 'Salutation', 'first' : 'First_Name', 'last' : 'Last_Name', 'title' : 'Title', 'intro' : 'Introduction', 'ph' : 'Phone', 'ext' : 'Extension', 'fax' : 'Fax', 'email' : 'Email', 'meth' : 'Preferred_Method_of_Contact', 'time' : 'Best_Time_to_Contact', 'lat' : 'lat', 'lng' : 'lng' }
 	fields = { }
 	error = False
 
@@ -129,6 +128,7 @@ with open(file_in, 'rb') as ifile:
 		f.write('address: |\n')
 		f.write(indent() + row[fields['add']] + md_linebreak  + '\n')
 		f.write(indent() + row[fields['cit']] + ' ' + row[fields['st']] + ' ' + row[fields['zip']] + '\n')
+		f.write('national: ' + row[fields['nat']] + '\n')
 		f.write('lat: ' + row[fields['lat']] + '\n')
 		f.write('lng: ' + row[fields['lng']] + '\n')
 		f.write('phone: ' + row[fields['ph']] + '\n')

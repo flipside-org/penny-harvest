@@ -1,0 +1,9 @@
+---
+permalink: json/national-orgs.json
+---
+{% for org in site.categories.organization %}{% if org.national %}
+{ 
+  "title": "{{ org.title }}",
+  "url": "{{ org.url }}",
+  "impact_area": "{{ org.impact_area }}"
+}{% unless forloop.last %}, {% endunless %}{% endif %}{% endfor %}
