@@ -32,13 +32,31 @@ def sanitize_br(text):
 	"Replace the _x000D_ for proper line-breaks and returns. First we remove the line-breaks, any remaining _x000D_ is assumed to be an actual return."
 	return text.replace(' _x000D_\n', ' ').replace('_x000D_\n','\n\n').replace('_x000D_','')
 
-def yaml_multiline_string(text):
-	"Turns a string into a properly formatted multiline string to be used as a YAML variable."
+def yaml_array(text, separator = ','):
+	"Splits a string by a separator and stores the result as a YAML array"
+	if text.strip(' \n'):
+		array = ''
+		for keyword in text.split(separator):
+			array += '\n' + indent() + '- ' + keyword
+		return array
+	else:
+		# If empty, we return nothing
+		return ''
+
+def yaml_multiline_string(text, is_array = False):
+	"Turns a string into a properly formatted multiline string to be used as a YAML variable. If is_array is set to true, the multiline string will be formatted as a YAML array"
 	if text.strip(' \n'):
 		# Add pipe and indent first paragraph
 		# 1. replace line-breaks, 2. replace return + indent paragraph, 
 		# 3. clean up remaining -_x000D_."	
-		text = '|\n' + indent() + text.replace(' _x000D_\n', ' ').replace('_x000D_\n','\n\n' + indent()).replace('_x000D_','')
+		prepend = ''
+		indentation = 1
+		# The syntax for multiline string array, is slightly different and requires
+		# a hyphen before the pipe and extra indentation
+		if is_array:
+			prepend = '\n' + indent(indentation) + '- '
+			indentation = 2
+		text = prepend + '|\n' + indent(indentation) + text.replace(' _x000D_\n', ' ').replace('_x000D_\n','\n\n' + indent(indentation)).replace('_x000D_','')
 		return text
 	else:
 		# If empty, we return nothing
@@ -104,7 +122,7 @@ with open(file_in, 'rb') as ifile:
 		f.write('\n')
 		f.write('title: ' + row[fields['name']] + '\n')
 		f.write('impact_area: ' + row[fields['imp']] + '\n')
-		f.write('keywords: ' + row[fields['keyw']] + '\n')
+		f.write('keywords: ' + yaml_array(row[fields['keyw']]) + '\n')
 		f.write('location_services: ' + row[fields['locs']] + '\n')
 		f.write('location_offices: ' + row[fields['loco']] + '\n')
 		f.write('website: ' + row[fields['web']] + '\n')
@@ -112,11 +130,9 @@ with open(file_in, 'rb') as ifile:
 		f.write('mission: ' + yaml_multiline_string(row[fields['miss']]) + '\n')
 		f.write('\n')
 		f.write('cash_grants: ' + row[fields['cash']] + '\n')
-		f.write('descr_grants1: ' + yaml_multiline_string(row[fields['cash1']]) + '\n')
-		f.write('descr_grants2: ' + yaml_multiline_string(row[fields['cash2']]) + '\n')
+		f.write('grants: ' + yaml_multiline_string(row[fields['cash1']], True) + yaml_multiline_string(row[fields['cash2']], True) + '\n')
 		f.write('service_opp: ' + row[fields['serv']] + '\n')
-		f.write('descr_serv1: ' + yaml_multiline_string(row[fields['serv1']]) + '\n')
-		f.write('descr_serv2: ' + yaml_multiline_string(row[fields['serv2']]) + '\n')
+		f.write('services: ' + yaml_multiline_string(row[fields['serv1']], True) + yaml_multiline_string(row[fields['serv2']], True) + '\n')
 		f.write('\n')
 		f.write('learn: ' + yaml_multiline_string(row[fields['learn']]) + '\n')
 		f.write('cont_relationship: ' + yaml_multiline_string(row[fields['cont']]) + '\n')
