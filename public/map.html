@@ -10,7 +10,7 @@ title : Home
 <div id='map'></div>
 <script>
 
-$.get('/json/organizations.geojson', function(geoJson){
+$.get('/json/local-orgs.geojson', function(geoJson){
 	var map = L.mapbox.map('map', 'flipside.hgeapagi')
 	    .setView([40.75, -73.9], 11);
 	
