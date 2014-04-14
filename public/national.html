@@ -5,7 +5,7 @@ active_menu : national
 title : National organizations
 ---
 <ul class="national cards row">
-  {% for org in site.categories.organization %}{% if org.national %}
+  {% for org in site.categories.national_org %}
   <li>
     <header>
       <a href="{{ org.url }}" title="Read more about organization"><h2>{{ org.title }}</h2></a>
@@ -15,5 +15,5 @@ title : National organizations
       <a href="{{ org.url }}" title="Read more about organization">Learn more about us</a>
     </footer>
   </li>
-  {% endif %}{% endfor %}
+  {% endfor %}
 </ul>

@@ -82,7 +82,14 @@ with open(file_in, 'rb') as ifile:
 		# Replace any colon in the title for a hyphen
 		row[fields['name']] = row[fields['name']].replace(':', '-')
 
-		# Sanitize the prefered contact method
+		# Define the note category
+		if row[fields['nat']]:
+			category = "national_org"
+		else:
+			category = "local_org"
+
+		# Sanitize the prefered contact method. We have to account for multiple
+		# contact methods.
 		dirty_method = row[fields['meth']]
 		sane_method = [ ]
 		if dirty_method.find('mail') != -1 or dirty_method.find('@') != -1:
@@ -99,7 +106,7 @@ with open(file_in, 'rb') as ifile:
 
 		f.write('---\n')
 		f.write('layout: organization\n')
-		f.write('category: organization\n')
+		f.write('category: ' + category + '\n')
 		f.write('\n')
 		f.write('title: ' + row[fields['name']] + '\n')
 		f.write('impact_area: ' + row[fields['imp']] + '\n')
@@ -128,7 +135,6 @@ with open(file_in, 'rb') as ifile:
 		f.write('address: |\n')
 		f.write(indent() + row[fields['add']] + md_linebreak  + '\n')
 		f.write(indent() + row[fields['cit']] + ' ' + row[fields['st']] + ' ' + row[fields['zip']] + '\n')
-		f.write('national: ' + row[fields['nat']] + '\n')
 		f.write('lat: ' + row[fields['lat']] + '\n')
 		f.write('lng: ' + row[fields['lng']] + '\n')
 		f.write('phone: ' + row[fields['ph']] + '\n')

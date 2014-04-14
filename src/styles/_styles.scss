@@ -26,87 +26,85 @@ a:active {
   top: 2px;
 }
 
-
-
 #site-hdr {
-	background-color: $primary-color;
-	margin: 0;
+  background-color: $primary-color;
+  margin: 0;
 	a {
-		color: #fff;
+    color: #fff;
 	}
 	#site-title {
-		@include grid-column(10);
-		font-weight: 700;
-	}
-	#primary {
-		@include grid-column(2);
-		ul {
-			margin: 0;
-			li {
-				list-style: none;
-			}
-		}
-	}
-	@media #{$small-up} {
-		#site-title {
-			@include grid-column(3);
-		}
-		#primary {
-			@include grid-column(9);
-			text-align: right;
-			ul {
-				display: inline-block;
-			}
-			li {
-				float: left;
-			}
-		}
-	}
+    @include grid-column(10);
+    font-weight: 700;
+  }
+  #primary {
+    @include grid-column(2);
+    ul {
+      margin: 0;
+      li {
+        list-style: none;
+      }
+    }
+  }
+  @media #{$small-up} {
+    #site-title {
+      @include grid-column(3);
+    }
+    #primary {
+      @include grid-column(9);
+      text-align: right;
+      ul {
+        display: inline-block;
+      }
+      li {
+        float: left;
+      }
+    }
+  }
 }
 
 article {
-	.title-bar {
-		@include grid-column(12);
-	}
-	.column {
-		@include grid-column(12);
-	}
-	section {
-		@include border-radius(5);
-		background-color: #fff;
-	}
-	@media #{$small-up} {	
-		.column {
-			@include grid-column(6);
-		}
-	}
+  .title-bar {
+    @include grid-column(12);
+  }
+  .column {
+    @include grid-column(12);
+  }
+  section {
+    @include border-radius(5);
+    background-color: #fff;
+  }
+  @media #{$small-up} {	
+    .column {
+      @include grid-column(6);
+    }
+  }
 }
 
 .cards {
-	ul {
-		margin: 0;
-	}
-	li {
-		@include grid-column(12);
-		list-style: none;
-		@media #{$small-up} {
-			@include grid-column(6);
-			&:nth-child(2n+1) {
-				clear: left;
-			}
-		}
-		@media #{$medium-up} {
-			@include grid-column(4);
-			&:nth-child(2n+1) {
-				clear: none;
-			}
-			&:nth-child(3n+1) {
-				clear: left;
-			}
-		}
-	}
+  ul {
+    margin: 0;
+  }
+  li {
+    @include grid-column(12);
+    list-style: none;
+    @media #{$small-up} {
+      @include grid-column(6);
+      &:nth-child(2n+1) {
+        clear: left;
+      }
+    }
+    @media #{$medium-up} {
+      @include grid-column(4);
+      &:nth-child(2n+1) {
+        clear: none;
+      }
+      &:nth-child(3n+1) {
+        clear: left;
+      }
+    }
+  }
 }
 
 #site-ftr {
-	@include grid-column(12);
+  @include grid-column(12);
 }
