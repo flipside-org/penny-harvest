@@ -1,11 +1,3 @@
-GRANTS.csv
-ORGS.csv
-SCHOOLS.csv
-data-wrangling/tmp
-data-wrangling/*.csv
-data-wrangling/*.vrt
-data-wrangling/*json
-data-wrangling/markdown
 sample-content.sh
 
 #System files
@@ -21,4 +13,3 @@ public/styles/*
 !public/styles/.gitkeep
 public/scripts/*
 !public/scripts/.gitkeep
-
