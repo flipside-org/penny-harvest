@@ -2,6 +2,9 @@
 @charset "UTF-8";
 @import "compass";
 
+// Colors are needed in the settings so must be loaded before.
+@import "colors";
+
 // Custom settings
 @import "settings";
 
