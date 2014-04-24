@@ -9,7 +9,7 @@ src/bower_components
 _site
 
 #Styles and Scrips
-public/styles/*
-!public/styles/.gitkeep
-public/scripts/*
-!public/scripts/.gitkeep
+public/assets/styles/*
+!public/assets/styles/.gitkeep
+public/assets/scripts/*
+!public/assets/scripts/.gitkeep
