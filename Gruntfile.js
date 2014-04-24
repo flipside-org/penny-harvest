@@ -1,14 +1,14 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     // https://github.com/gruntjs/grunt-contrib-clean
-    clean : ['public/styles/*', '!public/**/.gitkeep', 'public/scripts/*', '_site/*'],
+    clean : ['public/assets/styles/*', '!public/assets/**/.gitkeep', 'public/assets/scripts/*', '_site/*'],
     
     // https://github.com/gruntjs/grunt-contrib-compass
     compass : {
       // Default options.
       options : {
           sassDir : 'src/styles',
-          cssDir : 'public/styles',
+          cssDir : 'public/assets/styles',
           raw : 'add_import_path "src/bower_components/foundation/scss"'
       },
       
@@ -48,20 +48,20 @@ module.exports = function(grunt) {
     uglify: {
       prod: {
         files: {
-          'public/scripts/website.min.js': ['src/scripts/*.js'],
-          'public/scripts/media.min.js': [
+          'public/assets/scripts/website.min.js': ['src/scripts/*.js'],
+          'public/assets/scripts/media.min.js': [
             'src/bower_components/modernizr/modernizr.js',
           ],
           
-          'public/scripts/foundation.min.js': [
+          'public/assets/scripts/foundation.min.js': [
             'src/bower_components/foundation/js/vendor/jquery.js',
             
             'src/bower_components/foundation/js/foundation/foundation.js',
             //'src/bower_components/foundation/js/foundation/foundation.abide.js',
             //'src/bower_components/foundation/js/foundation/foundation.accordion.js',
-            'src/bower_components/foundation/js/foundation/foundation.clearing.js',
-            'src/bower_components/foundation/js/foundation/foundation.dropdown.js',
-            'src/bower_components/foundation/js/foundation/foundation.interchange.js',
+            //'src/bower_components/foundation/js/foundation/foundation.clearing.js',
+            //'src/bower_components/foundation/js/foundation/foundation.dropdown.js',
+            //'src/bower_components/foundation/js/foundation/foundation.interchange.js',
             //'src/bower_components/foundation/js/foundation/foundation.joyride.js',
             //'src/bower_components/foundation/js/foundation/foundation.magellan.js',
             //'src/bower_components/foundation/js/foundation/foundation.offcanvas.js',
