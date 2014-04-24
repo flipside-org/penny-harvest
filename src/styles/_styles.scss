@@ -26,7 +26,7 @@ a:active {
   top: 2px;
 }
 
-#site-hdr {
+#site-head {
   background-color: $primary-color;
   margin: 0;
 	a {
@@ -105,6 +105,6 @@ article {
   }
 }
 
-#site-ftr {
+#site-foot {
   @include grid-column(12);
 }
