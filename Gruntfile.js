@@ -82,7 +82,7 @@ module.exports = function(grunt) {
         tasks: ['build']
       },
       jekyll : {
-        files: ['public/**/*.html', 'public/**/*.json', '!_site/**/*', 'public/**/**/*.md'],
+        files: ['public/**/*.html', 'public/**/*.json', 'public/**/*.geojson', 'public/**/*.yml', '!_site/**/*', 'public/**/**/*.md'],
         tasks: ['jekyll:generate']
       }
     },
