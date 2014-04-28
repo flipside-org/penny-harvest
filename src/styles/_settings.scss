@@ -29,40 +29,37 @@ $base-line-height: 150%;
 
 // $include-html-grid-classes: $include-html-classes;
 
-$row-width: rem-calc(1180);
+$row-width: rem-calc(1152);
 $column-gutter: rem-calc(32);
 $total-columns: 12;
 
 // We use these to control various global styles
-$body-bg: #ecedee;
-$body-font-color: #464e54;
+$body-bg: palette(grey, ultra-light);
+$body-font-color: palette(grey);
 $body-font-family: 'Open Sans', sans-serif;
-// $body-font-weight: normal;
-// $body-font-style: normal;
-
+$body-font-weight: normal;
+$body-font-style: normal;
 $body-font-bold: 700;
 
 // We use this to control font-smoothing
-// $font-smoothing: antialiased;
+$font-smoothing: antialiased;
 
 // We use these to control text direction settings
 // $text-direction: ltr;
 // $opposite-direction: right;
 // $default-float: left;
 
-// link color: 0aa45e
-
 // We use these as default colors throughout
-$primary-color: #0ba25f;
-// $secondary-color: #e7e7e7;
-// $alert-color: #f04124;
-// $success-color: #43AC6A;
-// $warning-color: #f08a24;
-// $info-color: #a0d3e8;
+$primary-color: palette(grey);
+$secondary-color: palette(grey);
+$alert-color: palette(red);
+$success-color: palette(green);
+$warning-color: palette(yellow);
+$info-color: palette(blue);
 
 // We use these to make sure border radius matches unless we want it different.
-// $global-radius: 3px;
-// $global-rounded: 1000px;
+$global-radius: 0.25rem;
+$global-rounded: 1000px;
 
 // We use these to control inset shadow shiny edges and depressions.
 // $shiny-edge-size: 0 1px 0;
