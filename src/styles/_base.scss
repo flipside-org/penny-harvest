@@ -35,9 +35,24 @@ a:active {
 	a {
     color: #fff;
 	}
-  #primary {
+ #prime-nav {
     @include grid-column(2);
+    .menu-wrapper {
+      float: right;
+    }
+    .menu-title {
+      span {
+        @extend .visually-hidden;
+      }
+    }
+    .menu-subtitle {
+      float: left;
+      color: inherit;
+      font-size: 1rem;
+      font-weight: normal;
+    }
     ul {
+      float: left;
       margin: 0;
       li {
         list-style: none;
@@ -49,7 +64,7 @@ a:active {
     padding-bottom: 1.25rem;
   }
   @media #{$small-up} {
-    #primary {
+    #prime-nav {
       @include grid-column(8);
       text-align: right;
       ul {

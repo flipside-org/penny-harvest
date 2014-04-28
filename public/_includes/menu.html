@@ -1,33 +1,39 @@
-<nav id="primary" role="navigation">
-  <a href="#nav-links" class="toggle"><span class="visually-hidden">Menu</span></a>
-  <ul class="links" id="nav-links">
-    {% if page.active_menu == 'home' %}
-    <li class="active">
-    {% else %}
-    <li>
-    {% endif %}
-      <a href="/">Home</a>
-    </li>
-    {% if page.active_menu == 'local' %}
-    <li class="active">
-    {% else %}
-    <li>
-    {% endif %}
-      <a href="/">Local</a>
-    </li>
-    {% if page.active_menu == 'national' %}
-    <li class="active">
-    {% else %}
-    <li>
-    {% endif %}
-      <a href="/national/">National</a>
-    </li>
-    {% if page.active_menu == 'about' %}
-    <li class="active">
-    {% else %}
-    <li>
-    {% endif %}
-      <a href="/about/">About</a>
-    </li>
-  </ul>
+<nav id="prime-nav" role="navigation">
+  <h1 class="menu-title"><a href="#nav-links" class="toggle"><span>Menu</span></a></h1>
+  <div class="menu-wrapper">
+    <h2 class="menu-subtitle">Explore:</h2>
+    <ul class="global-menu">
+      {% if page.active_menu == 'local' %}
+      <li class="active">
+      {% else %}
+      <li>
+      {% endif %}
+        <a href="/">Local</a>
+      </li>
+      {% if page.active_menu == 'national' %}
+      <li class="active">
+      {% else %}
+      <li>
+      {% endif %}
+        <a href="/national/">National</a>
+      </li>
+    </ul>
+    <h2 class="menu-subtitle">More:</h2>
+    <ul class="meta-menu">
+      {% if page.active_menu == 'about' %}
+      <li class="about active">
+      {% else %}
+      <li class="about">
+      {% endif %}
+        <a href="#about">About</a>
+      </li>
+      {% if page.active_menu == 'info' %}
+      <li class="info active">
+      {% else %}
+      <li class="info">
+      {% endif %}
+        <a href="#info"><span>Info</span></a>
+      </li>
+    </ul>
+  </div>
 </nav>
