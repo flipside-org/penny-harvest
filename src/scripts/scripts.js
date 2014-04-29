@@ -134,7 +134,7 @@ $.get('/json/national-orgs.json', function(national_orgs){
     $(".national > li.hide").slice(0, page_size).removeClass('hide');
      
     // Enable/Disable show list button based on cards.
-    if ($(".national > li.hide").length == 0) {
+    if ($(".national > li.hide").length === 0) {
       // Nothing else to show. Disable button.
       $('#trigger-show').attr('disabled', '');
     }
