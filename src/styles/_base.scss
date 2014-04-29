@@ -67,9 +67,8 @@ a:active {
   }
   .menu {
     float: left;
-    margin: 0;
+    margin: 0 0 0 0.5rem;
     li {
-      margin-left: 1rem;
       list-style: none;
     }
   }
@@ -79,9 +78,9 @@ a:active {
       font-weight: $body-font-bold;
       font-size: 1.25rem;
       line-height: 2rem;
+      padding: 0 0.5rem;
     }
     &.active a {
-      padding: 0 0.5rem;
       background-color: palette(green, semi-dark);
       box-shadow: inset 0 1px 0 0 palette(green, mid-dark), inset 0 -1px 0 0 palette(green, mid-light);
       border-radius: $global-radius;
