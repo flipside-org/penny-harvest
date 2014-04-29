@@ -4,16 +4,63 @@ permalink: national/index.html
 active_menu : national
 title : National organizations
 ---
+{% raw %}
+<script id="national-entry" type="text/x-handlebars-template">
+  
 <ul class="national cards row">
-  {% for org in site.categories.national_org %}
+  {{#each orgs}}
   <li>
     <header>
-      <a href="{{ org.url }}" title="Read more about organization"><h2>{{ org.title }}</h2></a>
+      <a href="{{ url }}" title="Read more about organization"><h2>{{ title }}</h2></a>
     </header>
-    <p class="introduction">{{ org.content | truncate }}</p>
+    <p class="introduction">{{{ content }}}</p>
     <footer>
-      <a href="{{ org.url }}" title="Read more about organization">Learn more about us</a>
+      <a href="{{ url }}" title="Read more about organization">Learn more about us</a>
     </footer>
   </li>
-  {% endfor %}
+  {{/each}}
 </ul>
+
+</script>
+{% endraw %}
+
+<button id="trigger-show">Make my list bigger!</button>
+<div id="national-orgs"></div>
+
+
+
+
+
+<style>
+  #filters {
+    position: absolute; bottom: 0; left:0; right: 0; height:200px; background: rgba(0, 0, 0, .40); z-index: 1;
+  }
+  #filters a {
+    display:block;
+    color: white;
+    padding: 5px;
+  }
+  #filters a.on {
+    color: red;
+  }
+  .national > li.hide {
+    display: none;
+  }
+  
+  #trigger-show:disabled {
+    background: red;
+  }
+  
+</style>
+<div id="filters">
+  <div style="float:left; width:30%;">
+    {% for imp in site.data.impact_areas %}
+    <a href="#" data-filter-id="{{ imp[1].id }}" data-filter-type="impact_area">{{ imp[0] }}</a>
+    {% endfor %}
+  </div>
+  <div style="float:left; width:30%;">
+    {% for key in site.data.keywords %}
+    <a href="#" data-filter-id="{{ key[1].id }}" data-filter-type="keyword">{{ key[0] }}</a>
+    {% endfor %}
+  </div>
+</div>
