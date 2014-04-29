@@ -2,6 +2,10 @@
    Helpers - extends + custom vars
    ========================================================================== */
 
+%global-text-shadow {
+  text-shadow: 0 1px 0 rgba(palette(grey, dark), 0.3);
+}
+
 .visually-hidden {
   border: 0 none;
   clip: rect(0px, 0px, 0px, 0px);

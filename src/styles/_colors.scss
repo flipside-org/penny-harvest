@@ -1,43 +1,74 @@
 /* ==========================================================================
    Colors
    ========================================================================== */
-/**
- *    base:       #454D53
- *    primary:    #047998
- *    info:       lighten 20% primary
- *    success:    #40B19B
- *    warning:    #FFBB00
- *    danger:     #DA454A
- */
+
+/*
+
+u = ultra
+x = extra
+dark/light
+m = mid
+s = semi
+
+*/
+
+
+$grey-base: #454D53;
+$blue-base: #499DD2;
+$green-base: #0AA15E;
+$yellow-base: #F4A432;
+$red-base: #D85D3F;
+$brown-base: #98785B;
+$violet-base: #A979CA;
+
 $palettes: (
   grey: (
-    xx-light:  tint(#454D53, 95%),
-    x-light:  tint(#454D53, 90%),
-    light:    tint(#454D53, 80%),
-    base:     tint(#454D53, 40%),
-    mid-dark: tint(#454D53, 10%),
-    dark:     #454D53,
-    x-dark:   shade(#454D53, 5%),
-    xx-dark:   shade(#454D53, 10%),
+    ultra-light:   tint($grey-base, 95%),
+    xxx-light:    tint($grey-base, 90%),
+    xx-light:     tint($grey-base, 80%),
+    x-light:      tint($grey-base, 60%),
+    light:        tint($grey-base, 40%),
+    base:         $grey-base,
+    dark:         shade($grey-base, 10%),
+    x-dark:       shade($grey-base, 15%),
+    xx-dark:      shade($grey-base, 20%),
+    xxx-dark:     shade($grey-base, 25%),
   ),
   blue: (
-    x-light:    tint(#047998, 90%),
-    light:      tint(#047998, 80%),
-    mid-light:  tint(#047998, 20%),
-    base:       #047998
+    x-light:    tint($blue-base, 90%),
+    light:      tint($blue-base, 80%),
+    mid-light:  tint($blue-base, 20%),
+    base:       $blue-base,
   ),
   green: (
-    x-light:    tint(#DA454A, 90%),
-    base:   #40B19B
+    ultra-light:        tint($green-base, 90%),
+    extra-light:        tint($green-base, 80%),
+    light:          tint($green-base, 50%),
+    mid-light:          tint($green-base, 30%),
+    semi-light:          tint($green-base, 20%),
+    base:             $green-base,
+    semi-dark:        shade($green-base, 10%),
+    mid-dark:        shade($green-base, 30%),
+    dark:             shade($green-base, 50%),
   ),
   yellow: (
-    x-light:    tint(#DA454A, 90%),
-    base:   #FFBB00
+    x-light:    tint($yellow-base, 90%),
+    base:       $yellow-base,
   ),
   red: (
-    x-light:  tint(#DA454A, 90%),
-    light:    tint(#DA454A, 80%),
-    base:   #DA454A
+    x-light:    tint($red-base, 90%),
+    light:      tint($red-base, 80%),
+    base:       $red-base,
+  ),
+  brown: (
+    x-light:    tint($brown-base, 90%),
+    light:      tint($brown-base, 80%),
+    base:       $brown-base,
+  ),
+  violet: (
+    x-light:    tint($violet-base, 90%),
+    light:      tint($violet-base, 80%),
+    base:       $violet-base,
   ),
 );
 
