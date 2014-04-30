@@ -33,9 +33,24 @@ $row-width: rem-calc(1152);
 $column-gutter: rem-calc(32);
 $total-columns: 12;
 
+// We use these as default colors throughout
+$primary-color: #454D53;                            // grey
+$secondary-color: #0AA15E;                          // green
+$alert-color: #D85D3F;                              // red
+$success-color: #0AA15E;                            // green (same as $secondary-color)
+$warning-color: #F4A432;                            // yellow
+$info-color: #499DD2;                               // blue
+
+$human-rights-color: #499DD2;                       // blue (same as $info-color)
+$environment-color: tint(#0AA15E, 20%);             // green (same as $primary-color, but 20% lighter)
+$children-color: #F4A432;                           // yellow (same as $warning-color)
+$health-color: #D85D3F;                             // red (same as $alert-color)
+$elderly-color: #98785B;                            // brown
+$disaster-relief-color: #A979CA;                    // violet
+
 // We use these to control various global styles
-$body-bg: palette(grey, ultra-light);
-$body-font-color: palette(grey);
+$body-bg: tint($primary-color, 90%);
+$body-font-color: $primary-color;
 $body-font-family: 'Open Sans', sans-serif;
 $body-font-weight: normal;
 $body-font-style: normal;
@@ -49,17 +64,9 @@ $font-smoothing: antialiased;
 // $opposite-direction: right;
 // $default-float: left;
 
-// We use these as default colors throughout
-$primary-color: palette(grey);
-$secondary-color: palette(grey);
-$alert-color: palette(red);
-$success-color: palette(green);
-$warning-color: palette(yellow);
-$info-color: palette(blue);
-
 // We use these to make sure border radius matches unless we want it different.
 $global-radius: 0.25rem;
-$global-rounded: 1000px;
+$global-rounded: 60rem;
 
 // We use these to control inset shadow shiny edges and depressions.
 // $shiny-edge-size: 0 1px 0;
@@ -1123,8 +1130,8 @@ $header-font-color: $body-font-color;
 // We use these to style paragraphs
 // $paragraph-font-family: inherit;
 // $paragraph-font-weight: normal;
-// $paragraph-font-size: 1rem;
-// $paragraph-line-height: 1.6;
+$paragraph-font-size: inherit;
+$paragraph-line-height: 1.4;
 // $paragraph-margin-bottom: rem-calc(20);
 // $paragraph-aside-font-size: rem-calc(14);
 // $paragraph-aside-line-height: 1.35;
