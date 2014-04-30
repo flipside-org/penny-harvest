@@ -4,26 +4,33 @@ permalink: national/index.html
 active_menu: national
 title: National organizations
 ---
-<ul class="national cards row">
-  {% for org in site.categories.national_org %}
-  <li class="card-wrapper">
-    <article class="contained card">
-      <header class="contained-head">
-        <h1 class="prime-title"><a href="{{ org.url }}" title="Read more about organization">{{ org.title }}</a></h1>
-        <dl class="meta">
-          <dt>Location:<dt>
-          <dd class="location">{{ org.city }}, {{ org.state }}</dd>
-          <dt>Impact area:<dt>
-          <dd class="impact-area children"><span>{{ org.impact_area }}</span></dd>
-        </dl>
-      </header>
-      <div class="contained-body">
-        <p>{{ org.content | truncate }}</p>
-      </div>
-      <footer class="contained-foot">
-        <a href="{{ org.url }}" title="Read more about organization" class="go-link">Learn more about us</a>
-      </footer>
-    </article>
-  </li>
-  {% endfor %}
-</ul>
+<section class="national hub">
+  <header class="banner visually-hidden">
+    <h1 class="prime-title">National Organizations</h1>
+  </header>
+  <div class="content">
+    <ul class="national cards row">
+      {% for org in site.categories.national_org %}
+      <li class="card-wrapper">
+        <article class="contained card">
+          <header class="contained-head">
+            <h1 class="prime-title"><a href="{{ org.url }}" title="Read more about organization">{{ org.title }}</a></h1>
+            <dl class="meta">
+              <dt>Location:<dt>
+              <dd class="location">{{ org.city }}, {{ org.state }}</dd>
+              <dt>Impact area:<dt>
+              <dd class="impact-area children"><span>{{ org.impact_area }}</span></dd>
+            </dl>
+          </header>
+          <div class="contained-body">
+            <p>{{ org.content | truncate }}</p>
+          </div>
+          <footer class="contained-foot">
+            <a href="{{ org.url }}" title="Read more about organization" class="go-link">Learn more about us</a>
+          </footer>
+        </article>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+<section>
