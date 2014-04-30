@@ -1,8 +1,12 @@
-#Website
+#PH Organization Finder
 ========
-Website for penny harvest
+The Organization Finder allows kids that participate in the [Penny Harvest](http://www.commoncents.org/go/penny-harvest) to find organizations in their neighbourhood. The first prototype focuses on the New York area and is built using [Jekyll](http://jekyllrb.com/), [Foundation](http://foundation.zurb.com/) and [Leaflet](http://leafletjs.com/).
 
-## Installation
+The data for the Organization Finder is wrangled in: https://github.com/flipside-org/ph-data/
+
+__Current status:__ this prototype is a work in progress and has not been officially launched yet.
+
+## Development environment
 To set up the development environment for this website, you'll need to install the following on your system:
 
 - Npm
@@ -24,7 +28,7 @@ Bower will create a vendor directory in the src with all the sass and js needed 
 
 You might have to run these as sudo.
 
-## Getting started
+### Getting started
 To set up your development environment, you'll have to run the following two commands in seperate terminals.
 
 ```
@@ -53,3 +57,9 @@ Compile the compass files and javascripts prepared for production (minified, ugl
 ```
 $ grunt prod
 ```
+
+## Team
+
+Daniel da Silva - [Github](https://github.com/danielfdsilva)  
+Ricardo Mestre - [Github](https://github.com/ricardomestre)  
+Olaf Veerman - [Github](https://github.com/olafveerman)
