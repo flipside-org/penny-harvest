@@ -326,7 +326,7 @@
    Headings
    ========================================================================== */
 .hd-xl {
-  $ft-size: 28;
+  $ft-size: 32;
   font-size: rem-calc($ft-size);
   line-height: ($ft-size + 8) / $ft-size;
   font-weight: $body-font-bold;

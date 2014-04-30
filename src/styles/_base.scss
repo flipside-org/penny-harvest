@@ -161,6 +161,12 @@ article {
   }
 }
 
+.single {
+  .prime-title {
+    @extend .hd-xl;
+  }
+}
+
 #site-foot {
   display: none;
   @include grid-column(12);
