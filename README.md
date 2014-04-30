@@ -60,6 +60,6 @@ $ grunt prod
 
 ## Team
 
-Daniel da Silva - [Github](https://github.com/danielfdsilva)
-Ricardo Mestre - [Github](https://github.com/ricardomestre)
+Daniel da Silva - [Github](https://github.com/danielfdsilva)  
+Ricardo Mestre - [Github](https://github.com/ricardomestre)  
 Olaf Veerman - [Github](https://github.com/olafveerman)
