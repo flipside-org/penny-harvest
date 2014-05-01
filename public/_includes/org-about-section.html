@@ -1,9 +1,9 @@
 {% assign about_section == '' %}
 
-{% if content %}
+{% if page.description %}
   {% capture about_section %}
     <h1>About us</h1>
-    <p>{{ content }}</p>
+    <p>{{ page.description }}</p>
   {% endcapture %}
 {% endif %}
 {% if page.keywords %}
