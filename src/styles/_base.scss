@@ -161,7 +161,9 @@ article {
   }
 }
 
-.single {
+.hub, .single {
+  margin: 2rem 0;
+  
   .prime-title {
     @extend .hd-xl;
   }
