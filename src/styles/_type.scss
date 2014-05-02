@@ -326,7 +326,7 @@
    Headings
    ========================================================================== */
 .hd-xl {
-  $ft-size: 32;
+  $ft-size: 24;
   font-size: rem-calc($ft-size);
   line-height: ($ft-size + 8) / $ft-size;
   font-weight: $body-font-bold;
@@ -334,8 +334,10 @@
   margin: rem-calc(0 0 16 0);
   padding: 0;
   
-  #page-head & {
-    margin-bottom: 0;
+  @media #{$small-up} {
+    $ft-size: 32;
+    font-size: rem-calc($ft-size);
+    line-height: ($ft-size + 8) / $ft-size;
   }
 }
 .hd-l {
