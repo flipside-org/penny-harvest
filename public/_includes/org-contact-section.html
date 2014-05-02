@@ -2,38 +2,45 @@
 
 {% if page.first_name or page.last_name or page.title_contact_person %}
   {% capture contact_section %}
-    <li class="contact_person">
-      {{ page.first_name }} {{ page.last_name }}<br/>
-      {{ page.title_contact_person }}
-    </li>
+    <dt>Name</dt>
+    <dd class="person">
+      {{ page.first_name }} {{ page.last_name }} <small class="role">{{ page.title_contact_person }}</small>
+    </dd>
   {% endcapture %}
 {% endif %}
 {% if page.contact_person_intro %}
   {% capture contact_section %}{{ contact_section }}
-    <li class="bio">{{ page.contact_person_intro }}</li>
+    <dt>Description</dt>
+    <dd class="bio">{{ page.contact_person_intro }}</dd>
   {% endcapture %}
 {% endif %}
 {% if page.address %}
   {% capture contact_section %}{{ contact_section }}
-    <li class="address">{{ page.address | markdownify }}</li>
+    <dt>Address</dt>
+    <dd class="address">{{ page.address | markdownify }}</dd>
   {% endcapture %}
 {% endif %}
 {% if page.phone %}
   {% capture contact_section %}{{ contact_section }}
-    <li class="phone">{{ page.phone }}</li>
+    <dt>Phone</dt>
+    <dd class="phone">{{ page.phone }}</dd>
   {% endcapture %}
 {% endif %}
 {% if page.website %}
   {% capture contact_section %}{{ contact_section }}
-    <li class="site"><a href="{{ page.website }}" title="Website {{ page.title }}">{{ page.website }}</a></li>
+    <dt>Website</dt>
+    <dd class="site"><a href="{{ page.website }}" title="Website {{ page.title }}">{{ page.website }}</a></dd>
   {% endcapture %}
 {% endif %}
 
 {% if contact_section %}
-  <section class="contact">
-    <h1>Who to contact</h1>
-    <ul>
+  <section class="contact contained block">
+    <header class="contained-head">
+      <h1 class="prime-title">Who to contact</h1>
+    </header>
+    <div class="contained-body">
+    <dl class="contact-list">
     {{ contact_section }}
-    </ul>
+    </dl>
   </section>
 {% endif %}

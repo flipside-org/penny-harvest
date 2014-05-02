@@ -34,9 +34,93 @@
     margin-bottom: 0;
   }
   
-  .prime-title {
-    @extend .hd-s;
-    margin: 0;
+  .contained-row {
+    border-bottom: 1px solid tint($primary-color, 85%);
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    
+    &>*:last-child {
+      margin-bottom: 0;
+    }
+    
+    &:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+  }
+  
+  h2 {
+    @extend .hd-xs;
+    margin-top: 0;
+  }
+  
+  &.card {
+    .prime-title {
+      @extend .hd-xs;
+      margin: 0;
+    }
+  }
+  
+  &.block {
+    .prime-title {
+      @extend .hd-m;
+      margin: 0;
+    }
+    margin-bottom: 2rem;
+  }
+  
+  .tick-list,
+  .contact-list {
+    padding: 0;
+    margin-left: 0;
+    list-style: none;
+    dt {
+      @extend .visually-hidden;
+    }
+    dd {
+      @extend .contained-row;
+      &.person:before { @extend .icon-user; }
+      &.phone:before { @extend .icon-phone; }
+      &.email:before { @extend .icon-email; }
+      &.bio:before { @extend .icon-description; }
+      &.address:before { @extend .icon-map-marker; }
+      &.site:before { @extend .icon-globe; }
+    }
+    li {
+      margin-bottom: 0.5rem;
+      &:before { @extend .icon-s-tick; }
+    }
+    dd, li {
+      position: relative;
+      padding-left: 1.5rem;
+      &:before {
+        color: tint($primary-color, 60%);
+        position: absolute;
+        top: 0;
+        left: 0;
+        font-size: 1rem;
+      }
+    }
+    .role {
+      display: block;
+      font-size: inherit;
+      color: tint($primary-color, 40%);
+    }
+  }
+  
+  .tag-list {
+    margin-left: 0;
+    padding: 0;
+    list-style: none;
+    overflow: hidden;
+    li {
+      float: left;
+      margin-right: 0.25rem;
+      padding: 0.25rem 0.75rem;
+      background: tint($primary-color, 90%);
+      border-radius: $global-rounded;
+    }  
   }
   
   .meta {
@@ -153,7 +237,7 @@
     margin: -1rem;
     padding: 1rem;
     
-    p {
+    p, ul, ol, dl {
       font-size: 0.875rem;
       line-height: 1.25rem;
       margin-bottom: 1rem;
