@@ -66,7 +66,7 @@
       @extend .hd-m;
       margin: 0;
     }
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
   }
   
   .tick-list,
@@ -241,17 +241,23 @@
     }
   }
   
+  @media #{$small-up} {
+    &.block {
+      margin-bottom: 2rem;
+    }
+  }
+  
   @media #{$large-up} {
     &.block {
       .contained-head {
-        padding: 1rem 4rem 1rem 2rem;
+        padding: 1.5rem 4rem 1.5rem 1.5rem;
       }
       .contained-body {
-        padding: 2rem;
+        padding: 1.5rem;
       }
       .contained-foot {
         .go-link {
-          padding: 0.5rem 2rem;
+          padding: 0.5rem 1.5rem;
         }
       }
     }
