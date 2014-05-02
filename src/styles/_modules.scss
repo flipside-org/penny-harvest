@@ -5,13 +5,13 @@
     @include grid-column(12);
     margin: $column-gutter/2 0;
     
-    @media #{$small-up} {
+    @media #{$medium-up} {
       @include grid-column(6);
       &:nth-child(2n+1) {
         clear: left;
       }
     }
-    @media #{$medium-up} {
+    @media #{$large-up} {
       @include grid-column(4);
       &:nth-child(2n+1) {
         clear: none;
