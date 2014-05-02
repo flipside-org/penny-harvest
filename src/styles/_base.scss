@@ -40,6 +40,18 @@ a:active {
     padding-top: 1.25rem;
     padding-bottom: 1.25rem;
   }
+  .heading {
+    @include grid-column(10);
+    @media #{$small-up} {
+      @include grid-column(4);
+    }
+    a {
+      float: left;
+      position: relative;
+      padding-top: 1.25rem;
+      color: #FFF;
+    }
+  }
 }
 
 #prime-nav {
@@ -101,19 +113,6 @@ a:active {
   }
 }
 
-.site-title-group {
-  @include grid-column(10);
-  @media #{$small-up} {
-    @include grid-column(4);
-  }
-  a {
-    float: left;
-    position: relative;
-    padding-top: 1.25rem;
-    color: #FFF;
-  }
-}
-
 #site-title {
   font-size: 1.5rem;
   line-height: 1;
@@ -144,9 +143,6 @@ a:active {
 }
 
 article {
-  .title-bar {
-    @include grid-column(12);
-  }
   .column {
     @include grid-column(12);
   }
@@ -163,6 +159,14 @@ article {
 
 .hub, .single {
   margin: 2rem 0;
+  
+  .banner {
+    padding-bottom: 1rem;
+  }
+  
+  .heading {
+    @include grid-column(8);
+  }
   
   .prime-title {
     @extend .hd-xl;
