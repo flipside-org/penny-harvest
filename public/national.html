@@ -23,7 +23,15 @@ title: National organizations
             </dl>
           </header>
           <div class="contained-body">
-            <p>{{ org.content | truncate }}</p>
+            <p>
+            {% if org.description %}
+              {{ org.description | truncate }}
+            {% elsif org.mission %}
+              {{ org.mission | truncate }}
+            {% else %}
+              <em>No description</em>
+            {% endif %}
+            </p>
           </div>
           <footer class="contained-foot">
             <a href="{{ org.url }}" title="Read more about organization" class="go-link">Learn more about us</a>
