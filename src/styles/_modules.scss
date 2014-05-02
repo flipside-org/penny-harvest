@@ -1,0 +1,168 @@
+.cards {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  list-style: none;
+  
+  .card-wrapper {
+    @include grid-column(12);
+    margin: $column-gutter/2 0;
+    
+    @media #{$small-up} {
+      @include grid-column(6);
+      &:nth-child(2n+1) {
+        clear: left;
+      }
+    }
+    @media #{$medium-up} {
+      @include grid-column(4);
+      &:nth-child(2n+1) {
+        clear: none;
+      }
+      &:nth-child(3n+1) {
+        clear: left;
+      }
+    }
+  }
+}
+
+.contained {
+  background-color: #FFF;
+  padding: 1rem;
+  box-shadow: 0 2px 0 0 rgba($primary-color, 0.1);
+  border-radius: $global-radius;
+  border: 1px solid tint($primary-color, 75%);
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+  
+  .prime-title {
+    @extend .hd-s;
+    margin: 0;
+  }
+  
+  .meta {
+    margin: 0;
+    padding: 0;
+    dt {
+      @extend .visually-hidden;
+    }
+    dd {
+      margin: 0;
+    }
+    .location {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      &:before { 
+        @extend .icon-map-marker;
+        vertical-align: bottom;
+        opacity: 0.5;
+        margin-right: 0.25rem;
+        font-size: 1rem;
+      }
+    }
+    .impact-area {
+      position: absolute;
+      right: 1rem;
+      top: -0.25rem;
+      z-index: 1;
+      display: block;
+      width: 32px;
+      height: 44px;
+      border-radius: $global-radius/2 $global-radius/2 $global-radius $global-radius;
+      box-shadow: -2px 4px 0 0 rgba($primary-color, 0.1);
+      span {
+        @extend .visually-hidden;
+      }
+      &:before {
+        display: block;
+        text-align: center;
+        height: 44px;
+        line-height: 44px;
+        
+        color: #FFF;
+        font-size: 1rem;
+        @extend %global-text-shadow;
+      }      
+      
+      &.human-rights {
+        background: $human-rights-color;
+        &:before { @extend .icon-human-rights; }
+      }
+      &.environment {
+        background: $environment-color;
+        &:before { @extend .icon-leaf; }
+      }
+      &.children {
+        background: $children-color;
+        &:before { @extend .icon-children; }
+      }
+      &.health {
+        background: $health-color;
+        &:before { @extend .icon-aid; }
+      }
+      &.elderly {
+        background: $elderly-color;
+        &:before { @extend .icon-elderly; }
+      }
+      &.disaster-relief {
+        background: $disaster-relief-color;
+        &:before { @extend .icon-warning; }
+      }
+    }
+  }
+  
+  .contained-head {
+    position: relative;
+    background: tint($primary-color, 95%);
+    margin: -1rem;
+    padding: 1rem 4rem 1rem 1rem;
+    border-radius: $global-radius $global-radius 0 0;
+    border-bottom: 1px solid tint($primary-color, 85%);
+    
+    &>*:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .contained-foot {
+    margin: 1rem -1rem -1rem -1rem;
+    padding: 1rem;
+    border-radius: 0 0 $global-radius $global-radius;
+    .go-link {
+      display: block;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      font-weight: $body-font-bold;
+      margin: -1rem;
+      padding: 0.5rem 1rem;
+      background: tint($secondary-color, 90%);
+      border-top: 1px solid tint($secondary-color, 80%);
+      border-radius: 0 0 $global-radius $global-radius;
+      color: $secondary-color;
+      &:after {
+        font-size: 1rem;
+        @extend .icon-s-arr-right;
+        vertical-align: bottom;
+        opacity: 0.5;
+        margin-left: 0.125rem;
+      }
+    }
+  }
+  
+  .contained-body {
+    margin: -1rem;
+    padding: 1rem;
+    
+    p {
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    &>*:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+}

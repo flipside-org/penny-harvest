@@ -3,7 +3,7 @@
    ========================================================================== */
 
 %global-text-shadow {
-  text-shadow: 0 1px 0 rgba(palette(grey, dark), 0.3);
+  text-shadow: 0 1px 0 rgba($primary-color, 0.4);
 }
 
 .visually-hidden {
@@ -15,4 +15,17 @@
   padding: 0;
   position: absolute;
   width: 1px;
+}
+
+@mixin reset-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+%truncated {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

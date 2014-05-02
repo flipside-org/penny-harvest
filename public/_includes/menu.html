@@ -3,14 +3,14 @@
   <div class="menu-wrapper">
     <h2 class="menu-subtitle">Explore:</h2>
     <ul class="menu global-menu">
-      {% if page.active_menu == 'local' %}
+      {% if page.active_menu == 'local' or page.category == 'local_org' %}
       <li class="active">
       {% else %}
       <li>
       {% endif %}
         <a href="/">Local</a>
       </li>
-      {% if page.active_menu == 'national' %}
+      {% if page.active_menu == 'national' or page.category == 'national_org' %}
       <li class="active">
       {% else %}
       <li>
