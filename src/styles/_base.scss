@@ -5,6 +5,14 @@
 
 /* Generic styles */
 
+.row {
+
+  @media #{$small-up} {	
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+}
+
 a:link,
 a:visited {
   @include transform(translate3d(0, 0, 0));
@@ -142,21 +150,6 @@ a:active {
   }
 }
 
-article {
-  .column {
-    @include grid-column(12);
-  }
-  section {
-    @include border-radius(5);
-    background-color: #fff;
-  }
-  @media #{$small-up} {	
-    .column {
-      @include grid-column(6);
-    }
-  }
-}
-
 .hub, .single {
   margin: 2rem 0;
   
@@ -204,7 +197,16 @@ article {
       display: none;
     }
   }
-  
+  .column {
+    @include grid-column(12);
+    
+    
+  }
+  @media #{$medium-up} {	
+    .column {
+      @include grid-column(6);
+    }
+  }
 }
 
 #site-foot {
