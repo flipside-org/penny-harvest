@@ -54,6 +54,10 @@
     margin-top: 0;
   }
   
+  .prime-title a {
+    color: inherit;
+  }
+  
   &.card {
     .prime-title {
       @extend .hd-xs;

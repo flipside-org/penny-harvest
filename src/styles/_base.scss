@@ -182,15 +182,22 @@ a:active {
     }
     .tab {
       a {
+        position: relative;
         display: block;
-        line-height: 2rem;
+        line-height: 2.5rem;
         font-size: 1.25rem;
         font-weight: $body-font-bold;
         padding-top: 4px;
-        border-bottom: 4px solid transparent;
+        color: inherit;
       }
-      &.current a {
-        border-bottom-color: $secondary-color;
+      &.current a:after {
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        content: '';
+        height: 4px;
+        width: 100%;
+        background: $secondary-color;
       }
     }
     .menu-share {
@@ -199,8 +206,6 @@ a:active {
   }
   .column {
     @include grid-column(12);
-    
-    
   }
   @media #{$medium-up} {	
     .column {

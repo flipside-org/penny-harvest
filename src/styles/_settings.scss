@@ -1144,9 +1144,9 @@ $paragraph-line-height: 1.4;
 // $code-font-weight: bold;
 
 // We use these to style anchors
-// $anchor-text-decoration: none;
-// $anchor-font-color: $primary-color;
-// $anchor-font-color-hover: scale-color($primary-color, $lightness: -14%);
+$anchor-text-decoration: none;
+$anchor-font-color: $secondary-color;
+$anchor-font-color-hover: $secondary-color;
 
 // We use these to style the <hr> element
 // $hr-border-width: 1px;
