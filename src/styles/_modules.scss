@@ -25,7 +25,6 @@
 
 .contained {
   background-color: #FFF;
-  padding: 1rem;
   box-shadow: 0 2px 0 0 rgba($primary-color, 0.1);
   border-radius: $global-radius;
   border: 1px solid tint($primary-color, 75%);
@@ -116,7 +115,7 @@
     overflow: hidden;
     li {
       float: left;
-      margin-right: 0.25rem;
+      margin: 0 0.5rem 0.5rem 0;
       padding: 0.25rem 0.75rem;
       background: tint($primary-color, 90%);
       border-radius: $global-rounded;
@@ -198,7 +197,6 @@
   .contained-head {
     position: relative;
     background: tint($primary-color, 95%);
-    margin: -1rem;
     padding: 1rem 4rem 1rem 1rem;
     border-radius: $global-radius $global-radius 0 0;
     border-bottom: 1px solid tint($primary-color, 85%);
@@ -209,15 +207,12 @@
   }
 
   .contained-foot {
-    margin: 1rem -1rem -1rem -1rem;
-    padding: 1rem;
     border-radius: 0 0 $global-radius $global-radius;
     .go-link {
       display: block;
       font-size: 0.875rem;
       line-height: 1.25rem;
       font-weight: $body-font-bold;
-      margin: -1rem;
       padding: 0.5rem 1rem;
       background: tint($secondary-color, 90%);
       border-top: 1px solid tint($secondary-color, 80%);
@@ -234,7 +229,6 @@
   }
   
   .contained-body {
-    margin: -1rem;
     padding: 1rem;
     
     p, ul, ol, dl {
@@ -244,6 +238,22 @@
     }
     &>*:last-child {
       margin-bottom: 0;
+    }
+  }
+  
+  @media #{$large-up} {
+    &.block {
+      .contained-head {
+        padding: 1rem 4rem 1rem 2rem;
+      }
+      .contained-body {
+        padding: 2rem;
+      }
+      .contained-foot {
+        .go-link {
+          padding: 0.5rem 2rem;
+        }
+      }
     }
   }
 
