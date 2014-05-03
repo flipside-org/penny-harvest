@@ -6,7 +6,6 @@
 /* Generic styles */
 
 .row {
-
   @media #{$small-up} {	
     padding-left: 3rem;
     padding-right: 3rem;
@@ -150,6 +149,30 @@ a:active {
   }
 }
 
+.cards {
+  list-style: none;
+
+  .card-wrapper {
+    @include grid-column(12);
+
+    @media #{$medium-up} {
+      @include grid-column(6);
+      &:nth-child(2n+1) {
+        clear: left;
+      }
+    }
+    @media #{$large-up} {
+      @include grid-column(4);
+      &:nth-child(2n+1) {
+        clear: none;
+      }
+      &:nth-child(3n+1) {
+        clear: left;
+      }
+    }
+  }
+}
+
 .hub, .single {
   margin: 2rem 0;
   
@@ -158,7 +181,7 @@ a:active {
   }
   
   .heading {
-    @include grid-column(8);
+    @include grid-column(12);
   }
   
   .prime-title {
@@ -166,12 +189,13 @@ a:active {
   }
   
   #sec-nav {
-    @include grid-column(4);
+    @include grid-column(12);
     ul {
       @include reset-list();
     }
     .menu {
-      float: right;
+      float: left;
+      margin-bottom: 1rem;
       > li {
         float: left;
         margin-left: 1.25rem;
@@ -207,7 +231,21 @@ a:active {
   .column {
     @include grid-column(12);
   }
-  @media #{$medium-up} {	
+  @media #{$medium-up} {
+    .column {
+      @include grid-column(6);
+    }
+  }
+  @media #{$large-up} {	
+    .heading {
+      @include grid-column(7);
+    }
+    #sec-nav {
+      @include grid-column(5);
+      .menu {
+        float: right;
+      }
+    }
     .column {
       @include grid-column(6);
     }
