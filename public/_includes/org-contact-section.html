@@ -14,22 +14,22 @@
     <dd class="bio">{{ page.contact_person_intro }}</dd>
   {% endcapture %}
 {% endif %}
-{% if page.address %}
+{% if page.website %}
   {% capture contact_section %}{{ contact_section }}
-    <dt>Address</dt>
-    <dd class="address">{{ page.address | markdownify }}</dd>
+    <dt>Website</dt>
+    <dd class="site"><a href="http://{{ page.website }}" title="Visit website">{{ page.website }}</a></dd>
   {% endcapture %}
 {% endif %}
 {% if page.phone %}
   {% capture contact_section %}{{ contact_section }}
     <dt>Phone</dt>
-    <dd class="phone">{{ page.phone }}</dd>
+    <dd class="phone"><a href="tel:{{ page.phone }}" title="Phone">{{ page.phone }}</a></dd>
   {% endcapture %}
 {% endif %}
-{% if page.website %}
+{% if page.address %}
   {% capture contact_section %}{{ contact_section }}
-    <dt>Website</dt>
-    <dd class="site"><a href="{{ page.website }}" title="Website {{ page.title }}">{{ page.website }}</a></dd>
+    <dt>Address</dt>
+    <dd class="address">{{ page.address | markdownify }}</dd>
   {% endcapture %}
 {% endif %}
 
