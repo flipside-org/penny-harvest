@@ -25,8 +25,16 @@
     opacity: 1;
   }
   &:before, &:after {
+    font-weight: normal;
     font-size: rem-calc(16);
     vertical-align: bottom !important;
+  }
+  &:before {
+    margin-right: 0.375rem;
+  }
+  &.share:before {
+    @extend .icon-share-reg;
+    color: $secondary-color;
   }
 }
 
