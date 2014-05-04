@@ -11,7 +11,7 @@
 {% if page.contact_person_intro %}
   {% capture contact_section %}{{ contact_section }}
     <dt>Description</dt>
-    <dd class="bio">{{ page.contact_person_intro }}</dd>
+    <dd class="bio">{{ page.contact_person_intro | markdownify }}</dd>
   {% endcapture %}
 {% endif %}
 {% if page.website %}

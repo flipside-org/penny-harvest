@@ -10,7 +10,7 @@
     {% if page.description %}
     <div class="contained-row">
       <h2>Description</h2>
-      <p>{{ page.description }}</p>
+      <p>{{ page.description | markdownify }}</p>
     </div>
     {% endif %}
     {% if page.keywords %}

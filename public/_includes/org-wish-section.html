@@ -7,7 +7,7 @@
       <h2>Community grants</h2>
       <ul class="grants tick-list">
         {% for grant in page.grants %}
-          <li>{{ grant }}</li>
+          <li>{{ grant | markdownify }}</li>
         {% endfor %}
       </ul>
     </div>
@@ -19,7 +19,7 @@
       <h2>Service projects</h2>
       <ul class="services tick-list">
         {% for service in page.services %}
-          <li>{{ service }}</li>
+          <li>{{ service | markdownify }}</li>
         {% endfor %}
       </ul>
     </div>
