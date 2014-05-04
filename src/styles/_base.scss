@@ -194,8 +194,8 @@ a:active {
       @include reset-list();
     }
     .menu {
-      float: left;
-      margin-bottom: 1rem;
+      @extend .clearfix;
+      margin: 0.5rem 0 1rem 0;
       > li {
         float: left;
         margin-left: 1.25rem;
@@ -211,7 +211,6 @@ a:active {
         line-height: 2.5rem;
         font-size: 1.25rem;
         font-weight: $body-font-bold;
-        padding-top: 4px;
         color: inherit;
       }
       &.current a:after {
@@ -222,6 +221,27 @@ a:active {
         height: 4px;
         width: 100%;
         background: $secondary-color;
+      }
+    }
+    #go-social {
+      float: right;
+      @media #{$xsmall-only} {
+        .share {
+          &:before {
+            margin-right: 0;
+            font-size: 1.25rem;
+          }
+          span {
+            border: 0 none;
+            clip: rect(0px, 0px, 0px, 0px);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+          }
+        }
       }
     }
     .menu-share {
@@ -243,6 +263,7 @@ a:active {
     #sec-nav {
       @include grid-column(5);
       .menu {
+        margin: 0 0 1rem 0;
         float: right;
       }
     }
