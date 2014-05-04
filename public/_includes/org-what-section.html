@@ -4,7 +4,11 @@
   {% capture what_section %}
     <div class="contained-row">
       <h2>How can we help you learn more about us</h2>
-      <p>{{ page.learn }}</p>
+      <ul class="tick-list">
+      {% for learn in page.learn %}
+        <li>{{ learn }}</li>
+      {% endfor %}
+      </ul>
     </div>
   {% endcapture %}
 {% endif %}
@@ -12,7 +16,11 @@
   {% capture what_section %}{{ what_section }}
     <div class="contained-row">
       <h2>How we'd like to keep up the relationship with your school</h2>
-      <p>{{ page.cont_relationship }}</p>
+      <ul class="tick-list">
+      {% for continue in page.cont_relationship %}
+        <li>{{ continue }}</li>
+      {% endfor %}
+      </ul>
     </div>
   {% endcapture %}
 {% endif %}
