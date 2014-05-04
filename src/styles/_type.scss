@@ -376,6 +376,7 @@ h4, .hd-s {
   font-weight: $body-font-bold;
   margin: 0 0 1rem 0;
   padding: 0;
+  letter-spacing: normal;
 }
 h5, h6, .hd-xs {
   $ft-size: 16;
@@ -384,6 +385,7 @@ h5, h6, .hd-xs {
   font-weight: $body-font-bold;
   margin: 0 0 1rem 0;
   padding: 0;
+  letter-spacing: normal;
 }
 
 [class*=' hd-'], [class^='hd-'] {
