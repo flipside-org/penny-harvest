@@ -1,0 +1,51 @@
+/* Base button style */
+.bttn {
+  display: inline-block;
+  padding: 0 0.75rem;
+  border-radius: $global-radius;
+  font-size: 1rem;
+  font-weight: $body-font-bold;
+  text-align: center;
+  @include user-select(none);
+  cursor: pointer;
+  border: 1px solid tint($primary-color, 75%);
+  white-space: nowrap;
+  background: #FFF;
+  line-height: rem-calc(30);
+  box-shadow: 0 2px 0 0 rgba($primary-color, 0.1);
+  
+  &:link,
+  &:active,
+  &:visited {
+    position: static;
+    top: 0;
+    color: $primary-color;
+  }
+  &:active {
+    opacity: 1;
+  }
+  &:before, &:after {
+    font-size: rem-calc(16);
+    vertical-align: bottom !important;
+  }
+}
+
+.bttn-dropdown {
+  &:after {
+    @extend .icon-s-arr-down;
+    margin-left: rem-calc(4);
+    opacity: 0.6;
+  }
+}
+
+/* Button sizes */
+.bttn-small {
+  line-height: rem-calc(32);
+  height: rem-calc(32);
+  font-size: rem-calc(14);
+}
+.bttn-medium {
+  line-height: rem-calc(40);
+  height: rem-calc(40);
+  font-size: 1.25rem;
+}
