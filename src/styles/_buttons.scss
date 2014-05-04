@@ -62,45 +62,37 @@
 
 /* Button colors */
 
-@mixin button-skin($bgcolor, $status: 'normal', $tint_prc: 25%, $shade_prc: 25%, $bg_prc: 10%) {
-  $tint-color: tint($bgcolor, $tint_prc);
-  $shade-color: shade($bgcolor, $shade_prc);
-  @if $status == 'active' {
-    background-color: shade($bgcolor, $bg_prc);
-    box-shadow:inset 0 2px 0 0 $shade-color, inset 0 -2px 0 0 $tint-color;
-  }
-  @else {
-    background-color: $bgcolor;
-    box-shadow:inset 0 2px 0 0 $tint-color, inset 0 -2px 0 0 $shade-color;
-  }
-}
-
 // White
 .bttn-default {
   color: $primary-color;
+  background: #FFF;
+  border-color: tint($primary-color, 75%);
   &:before {
     color: $secondary-color;
   }
   &:hover, &:focus {
+    color: $primary-color;
   }
-
   &:active, &.current {
+    color: $primary-color;
+    box-shadow: inset 0 2px 0 0 rgba($primary-color, 0.1);
   }
 }
 
-// Dark gray
+// Dark grey
 .bttn-primary {
-  @include button-skin($primary-color);  
   color: #FFF;
+  background: $primary-color;
+  border-color: shade($primary-color, 15%);
   @extend .antialiased;
   @extend %global-text-shadow;
   &:hover, &:focus {
-    @include button-skin($primary-color);
     color: #FFF;
   }
-  
   &:active, &.current {
-    @include button-skin($primary-color, 'active');
+    border-color: shade($primary-color, 25%);
+    background: shade($primary-color, 10%);
+    box-shadow: inset 0 2px 0 0 shade($primary-color, 20%);
     color: #FFF;
   }
 }
