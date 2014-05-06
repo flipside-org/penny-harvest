@@ -82,7 +82,10 @@
       &.phone:before { @extend .icon-phone; }
       &.email:before { @extend .icon-email; }
       &.bio:before { @extend .icon-description; }
-      &.address:before { @extend .icon-map-marker; }
+      &.address {
+        border-bottom: none;
+        &:before { @extend .icon-map-marker; }
+      }
       &.site:before { @extend .icon-globe; }
     }
     li {

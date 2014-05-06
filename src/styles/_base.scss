@@ -230,17 +230,18 @@ a:active {
         color: tint($primary-color, 20%);
       }
       .impact-area {
-        position: absolute;
-        top: 50%;
-        left: $column-gutter/2;
-        z-index: 1;
         @extend %impact-area-badge;
         &:before {
+          position: absolute;
+          // top: 50%;
+          top: 0;
+          left: $column-gutter/2;
+          z-index: 1;
           font-size: 2rem;
           width: 4rem;
           height: 4rem;
           line-height: 2;
-          margin-top: -2rem;
+          // margin-top: -2rem;
         }
       }
     }
