@@ -173,19 +173,87 @@ a:active {
   }
 }
 
+%impact-area-badge {
+  &:before {
+    display: block;
+    text-align: center;
+    vertical-align: middle;
+    color: #FFF;
+    @extend %global-text-shadow;
+    border-radius: $global-rounded;
+  }
+  
+  &.human-rights:before {
+    background: $human-rights-color;
+    @extend .icon-human-rights;
+  }
+  &.environment:before {
+    background: $environment-color;
+    @extend .icon-leaf;
+  }
+  &.children:before {
+    background: $children-color;
+    @extend .icon-children;
+  }
+  &.health:before {
+    background: $health-color;
+    @extend .icon-aid;
+  }
+  &.elderly:before {
+    background: $elderly-color;
+    @extend .icon-elderly;
+  }
+  &.disaster-relief:before {
+    background: $disaster-relief-color;
+    @extend .icon-warning;
+  }
+}
+
 .hub, .single {
   margin: 2rem 0;
   
   .banner {
-    padding-bottom: 1rem;
+    padding-bottom: 2rem;
   }
-  
+ 
   .heading {
     @include grid-column(12);
+    .meta {
+      margin: 0;
+      dt, span {
+        @extend .visually-hidden;
+      }
+      dd {
+        margin: 0;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        color: tint($primary-color, 20%);
+      }
+      .impact-area {
+        position: absolute;
+        top: 50%;
+        left: $column-gutter/2;
+        z-index: 1;
+        @extend %impact-area-badge;
+        &:before {
+          font-size: 2rem;
+          width: 4rem;
+          height: 4rem;
+          line-height: 2;
+          margin-top: -2rem;
+        }
+      }
+    }
+  }
+  
+  &.organization .heading {
+    position: relative;
+    padding-left: 6rem;
   }
   
   .prime-title {
     @extend .hd-xl;
+    margin-bottom: 0;
   }
   
   #sec-nav {

@@ -5,6 +5,12 @@ layout: base
   <header class="banner row">
     <div class="heading">
       <h1 class="prime-title">{{ page.title }}</h1>
+      <dl class="meta">
+        <dt>Type:<dt>
+        <dd class="type">Local organization</dd>
+        <dt>Impact area:<dt>
+        <dd class="impact-area {{ site.data.impact_areas[page.impact_area].class }}"><span>{{ page.impact_area }}</span></dd>
+      </dl>
     </div>
     <nav id="sec-nav">
       <ul class="menu">
