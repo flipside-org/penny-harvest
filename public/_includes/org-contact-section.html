@@ -30,6 +30,9 @@
   {% capture contact_section %}{{ contact_section }}
     <dt>Address</dt>
     <dd class="address">{{ page.address | markdownify }}</dd>
+    <dd class="map">
+      <div id="map-container" data-lat="{{page.lat}}" data-lng="{{page.lng}}"><!-- map --></div>
+    </dd>
   {% endcapture %}
 {% endif %}
 
