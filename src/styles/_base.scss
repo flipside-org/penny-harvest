@@ -309,6 +309,7 @@ a:active {
     }
     #go-social {
       float: right;
+      position: relative;
       @media #{$xsmall-only} {
         .share {
           &:before {
@@ -329,7 +330,10 @@ a:active {
       }
     }
     .menu-share {
-      display: none;
+      .facebook a:before { @extend .icon-facebook; }
+      .twitter a:before { @extend .icon-twitter; }
+      .google-plus a:before { @extend .icon-google-plus; }
+      .email a:before { @extend .icon-email; }
     }
   }
   .column {
