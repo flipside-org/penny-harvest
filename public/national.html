@@ -4,6 +4,49 @@ permalink: national/index.html
 current_menu: national
 title: National organizations
 ---
+<!-- Temporary include -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
+
+
+{% raw %}
+<script id="national-hub-template" type="text/x-handlebars-template">
+  
+<ul class="national cards row">
+  {{#each orgs}}
+  <li class="card-wrapper">
+    <article class="contained card">
+      <header class="contained-head">
+        <h1 class="prime-title"><a href="{{ org.url }}" title="Read more about organization">{{ org.title }}</a></h1>
+        <dl class="meta">
+          <dt>Location:<dt>
+          <dd class="location">{{ org.city }}, {{ org.state }}</dd>
+          <dt>Impact area:<dt>
+          <dd class="impact-area children" title="{{ org.impact_area }}"><span>{{ org.impact_area }}</span></dd>
+        </dl>
+      </header>
+      <div class="contained-body">
+        <p>
+        {% if org.description %}
+          {{ org.description | truncate }}
+        {% elsif org.mission %}
+          {{ org.mission | truncate }}
+        {% else %}
+          <em>No description</em>
+        {% endif %}
+        </p>
+      </div>
+      <footer class="contained-foot">
+        <a href="{{ org.url }}" title="Read more about organization" class="go-link">Learn more about us</a>
+      </footer>
+    </article>
+  </li>
+  {{/each}}
+</ul>
+
+</script>
+{% endraw %}
+
+
 <section class="hub national">
   <header class="banner">
     <h1 class="prime-title">National Organizations</h1>
@@ -14,62 +57,24 @@ title: National organizations
         <div class="impact-areas">
           <h2 class="hd-xs">Impact areas</h2>
           <ul>
-            <li><button class="filter children on">Human Rights</button></li>
-            <li><button class="filter health">Environment</button></li>
-            <li><button class="filter children on">Human Rights</button></li>
-            <li><button class="filter health">Environment</button></li>
-            <li><button class="filter children on">Human Rights</button></li>
+            {% for imp in site.data.impact_areas %}
+            <li><button class="filter {{ imp[1].class }}" data-filter-id="{{ imp[1].id }}" data-filter-type="impact_area">{{ imp[0] }}</button></li>
+            {% endfor %}
           </ul>
         </div>
         <div class="keywords">
           <h2 class="hd-xs">Issues/Keywords</h2>
           <ul>
-            <li><button class="filter on">Human Rights</button></li>
-            <li><button class="filter">Environment</button></li>
-            <li><button class="filter on">Human Rights</button></li>
-            <li><button class="filter">Environment</button></li>
-            <li><button class="filter on">Human Rights</button></li>
-            <li><button class="filter">Environment</button></li>
-            <li><button class="filter on">Human Rights</button></li>
+            {% for key in site.data.keywords %}
+            <li><button class="filter" data-filter-id="{{ key[1].id }}" data-filter-type="keyword">{{ key[0] }}</button></li>
+            {% endfor %}
           </ul>
         </div>
       </div>
     </div>
     
   </header>
-  <div class="content">
-    <ul class="national cards row">
-      {% for org in site.categories.national_org %}
-      <li class="card-wrapper">
-        <article class="contained card">
-          <header class="contained-head">
-            <h1 class="prime-title"><a href="{{ org.url }}" title="Read more about organization">{{ org.title }}</a></h1>
-            <dl class="meta">
-              <dt>Location:<dt>
-              <dd class="location">{{ org.city }}, {{ org.state }}</dd>
-              <dt>Impact area:<dt>
-              <dd class="impact-area children" title="{{ org.impact_area }}"><span>{{ org.impact_area }}</span></dd>
-            </dl>
-          </header>
-          <div class="contained-body">
-            <p>
-            {% if org.description %}
-              {{ org.description | truncate }}
-            {% elsif org.mission %}
-              {{ org.mission | truncate }}
-            {% else %}
-              <em>No description</em>
-            {% endif %}
-            </p>
-          </div>
-          <footer class="contained-foot">
-            <a href="{{ org.url }}" title="Read more about organization" class="go-link">Learn more about us</a>
-          </footer>
-        </article>
-      </li>
-      {% endfor %}
-    </ul>
-  </div>
+  <div class="content" id="national-orgs"><!-- National organization included with javascript --></div>
   <footer class="row foot">
     <div class="inner">
       <button class="bttn bttn-l bttn-primary"><span>Load more</span></button>
