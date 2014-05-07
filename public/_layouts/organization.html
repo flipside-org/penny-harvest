@@ -8,9 +8,15 @@ include_map : true
       <h1 class="prime-title">{{ page.title }}</h1>
       <dl class="meta">
         <dt>Type:<dt>
-        <dd class="type">Local organization</dd>
+        <dd class="category">
+          {% if page.category == 'local_org' %}
+            Local organization
+          {% elsif page.category == 'national_org' %}
+            National organization
+          {% endif %}
+        </dd>
         <dt>Impact area:<dt>
-        <dd class="impact-area {{ site.data.impact_areas[page.impact_area].class }}"><span>{{ page.impact_area }}</span></dd>
+        <dd class="impact-area {{ site.data.impact_areas[page.impact_area].class }}" title="{{ page.impact_area }}"><span>{{ page.impact_area }}</span></dd>
       </dl>
     </div>
     <nav id="sec-nav">
