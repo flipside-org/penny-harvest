@@ -209,13 +209,21 @@ a:active {
   }
 }
 
-.hub, .single {
-  margin: 2rem 0;
-  
+.single {
   .banner {
     padding-bottom: 2rem;
   }
- 
+}
+
+.hub {
+  .prime-title {
+    @extend .visually-hidden;
+  }
+}
+
+.hub, .single {
+  margin: 2rem 0;
+
   .heading {
     @include grid-column(12);
     .meta {
@@ -255,6 +263,9 @@ a:active {
   .prime-title {
     @extend .hd-xl;
     margin-bottom: 0;
+    .hub & {
+      @extend .visually-hidden;
+    }
   }
   
   #sec-nav {
