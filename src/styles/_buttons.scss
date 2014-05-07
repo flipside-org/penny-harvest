@@ -120,7 +120,7 @@
   border-radius: $global-radius;
   @include reset-list;
   box-shadow: -0.25rem 0.25rem 0 0 rgba($primary-color, 0.1);
-  background: rgba(#FFF, 0.8);
+  background: rgba(#FFF, 0.9);
   border: 1px solid tint($primary-color, 75%);
   font-weight: $body-font-bold;
 
@@ -138,7 +138,7 @@
     z-index: 15;
     top: -11px;
     left: 1rem;
-    color: rgba(#FFF, 0.9);
+    color: rgba(#FFF, 0.95);
     font-size: 1rem;
     text-shadow: 0 -1px tint($primary-color, 75%);
     line-height: 1;
@@ -171,10 +171,16 @@
       display: block;
       padding: 0.5rem 1rem;
       color: $primary-color;
+      background-color: transparent;
+      
+      @include transition-property(background-color, top, left, right);
+      @include transition-duration(0.2s, 0.1s, 0.2s, 0.2s);
+      @include transition-timing-function(ease, ease, ease, ease);
+      @include transition-delay(0, 0, 0, 0);
 
       &:hover {
         opacity: 1;
-        background: tint($secondary-color, 90%);
+        background-color: rgba(tint($secondary-color, 50%), 0.2);
       }
       
       &:before {
