@@ -242,15 +242,20 @@ a:active {
         @extend %impact-area-badge;
         &:before {
           position: absolute;
-          // top: 50%;
           top: 0;
-          left: $column-gutter/2;
+          right: $column-gutter/2;
           z-index: 1;
           font-size: 2rem;
           width: 4rem;
           height: 4rem;
           line-height: 2;
-          // margin-top: -2rem;
+          @media #{$medium-up} {
+            top: rem-calc(2);
+          }
+          @media #{$large-up} {
+            right: auto;
+            left: $column-gutter/2;
+          }
         }
       }
     }
@@ -258,7 +263,13 @@ a:active {
   
   &.organization .heading {
     position: relative;
-    padding-left: 6rem;
+    padding-right: 6rem;
+    margin-bottom: 1rem;
+    @media #{$large-up} {
+      padding-right: 1rem;
+      padding-left: 6rem;
+      margin-bottom: 0;
+    }
   }
   
   #sec-nav {
