@@ -209,15 +209,16 @@ a:active {
   }
 }
 
-.single {
-  .banner {
+.banner {
+  .prime-title {
+    @extend .hd-xl;
+    margin-bottom: 0;
+  }
+  .single & {
     padding-bottom: 2rem;
   }
-}
-
-.hub {
-  .prime-title {
-    @extend .visually-hidden;
+  .hub & {
+    .prime-title { @extend .visually-hidden; }
   }
 }
 
@@ -258,14 +259,6 @@ a:active {
   &.organization .heading {
     position: relative;
     padding-left: 6rem;
-  }
-  
-  .prime-title {
-    @extend .hd-xl;
-    margin-bottom: 0;
-    .hub & {
-      @extend .visually-hidden;
-    }
   }
   
   #sec-nav {
