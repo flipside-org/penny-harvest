@@ -222,6 +222,11 @@ a:active {
   }
 }
 
+.foot .inner {
+  text-align: center;
+  @include grid-column(12);
+}
+
 .hub, .single {
   margin: 2rem 0;
 
