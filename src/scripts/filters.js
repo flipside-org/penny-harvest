@@ -56,7 +56,7 @@ if ($('#national-orgs').length) {
     var source = $("#national-hub-template").html();
     var template = Handlebars.compile(source);
     
-    var page_size = 2;
+    var page_size = 20;
     
     // Render function for handlebars template. 
     var render = function(orgs) {
@@ -66,26 +66,33 @@ if ($('#national-orgs').length) {
       // SHow list button.
       var $cards = $(".national > li");
       if ($cards.length > page_size) {
-        $('#trigger-show').removeAttr('disabled');
+        $('#show-more-trigger').removeClass('disabled');
       }
       else {
-        $('#trigger-show').attr('disabled', '');
+        $('#show-more-trigger').addClass('disabled');
       }
       // Hide cards.
       $(".national > li").slice(page_size).addClass('hide');
     };
     
-    $('#trigger-show').click(function() {
-      $(".national > li.hide").slice(0, page_size).removeClass('hide');
-       
-      // Enable/Disable show list button based on cards.
-      if ($(".national > li.hide").length === 0) {
-        // Nothing else to show. Disable button.
-        $('#trigger-show').attr('disabled', '');
+    $('#show-more-trigger').click(function(e) {
+      e.preventDefault();
+      var $self = $(this);
+      
+      if (!$self.hasClass('disabled')) {
+        // Show more elements.
+        $(".national > li.hide").slice(0, page_size).removeClass('hide');
+         
+        // Enable/Disable show list button based on cards.
+        if ($(".national > li.hide").length === 0) {
+          // Nothing else to show. Disable button.
+          $self.addClass('disabled');
+        }
+        else {
+          $self.removeClass('disabled');
+        }
       }
-      else {
-        $('#trigger-show').removeAttr('disabled');
-      }
+      
     });
     
     
@@ -97,7 +104,7 @@ if ($('#national-orgs').length) {
         
         if (selected_impact_areas.length) {
           var filtered = $.grep(national_orgs, function(v) {
-            return $.inArray(v.impact_area, selected_impact_areas) >= 0;
+            return $.inArray(v.impact_area.id, selected_impact_areas) >= 0;
           });
           render(filtered);
         }
@@ -114,7 +121,7 @@ if ($('#national-orgs').length) {
           var filtered = $.grep(national_orgs, function(v) {
             // Keywords are exclusive, meaning that all of them must be present.
             for (var i in selected_keywords) {
-              if ($.inArray(selected_keywords[i], v.keywords) == -1) {
+              if ($.inArray(selected_keywords[i].id, v.keywords) == -1) {
                 return false;
               }
             }
@@ -127,7 +134,7 @@ if ($('#national-orgs').length) {
         }
         
       },
-      // Callback after initialization.
+      // Callback after initialisation.
       cb_initialize : function() {
         var selected_keywords = PH_filters.get_active('keywords');
         var selected_impact_areas = PH_filters.get_active('impact_areas');
@@ -139,7 +146,7 @@ if ($('#national-orgs').length) {
         // Priority to the impact areas. 
         else if (selected_impact_areas.length) {
           var filtered = $.grep(national_orgs, function(v) {
-            return $.inArray(v.impact_area, selected_impact_areas) >= 0;
+            return $.inArray(v.impact_area.id, selected_impact_areas) >= 0;
           });
           render(filtered);
         }
@@ -148,7 +155,7 @@ if ($('#national-orgs').length) {
           var filtered = $.grep(national_orgs, function(v) {
             // Keywords are exclusive, meaning that all of them must be present.
             for (var i in selected_keywords) {
-              if ($.inArray(selected_keywords[i], v.keywords) == -1) {
+              if ($.inArray(selected_keywords[i].id, v.keywords) == -1) {
                 return false;
               }
             }
