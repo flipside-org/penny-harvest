@@ -1,0 +1,135 @@
+.filters {
+  position: fixed;
+  z-index: 10;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  color: #FFF;
+  background: rgba(shade($primary-color, 10%), 0.9);
+  
+  .filters-toggle {
+    display: inline-block;
+    background: rgba(shade($primary-color, 10%), 0.9);
+    padding: 0.75rem;
+    border-radius: $global-radius $global-radius 0 0;
+    float: right;
+    margin: -2.625rem $column-gutter 0 0;
+    color: #FFF;
+    font-weight: $body-font-bold;
+    
+    &:focus,
+    &:hover {
+      opacity: 1;
+    }
+    
+    &:active,
+    &:visited {
+      top: 0;
+      opacity: 1;
+    }
+    
+    &:after {
+      @extend .icon-s-arr-up;
+      margin-left: 0.5rem;
+      opacity: 0.4;
+    }
+    
+    &.on {
+      &:after {
+        @extend .icon-s-arr-down;
+      }
+    }
+  }
+  
+  ul {
+    margin: 0;
+    @extend .clearfix;
+    li {
+      @include reset-list();
+      float: left;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+  
+  .impact-areas, .keywords {
+    @include grid-column(12);
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+
+    .hd-xs {
+      color: inherit;
+    }
+  }
+  
+  .filter {
+    background: shade($primary-color, 10%);
+    color: #FFF;
+    border-radius: $global-rounded; 
+    border: none;
+    line-height: 2;
+    
+    &:after {
+      color: $primary-color;
+      opacity: 0.3;
+      font-size: 1rem;
+      margin-left: 0.725rem;
+      vertical-align: bottom !important;
+    }
+    
+    &.on {
+      background: #FFF;
+      color: $primary-color;
+      
+      &:after {
+        @extend .icon-s-cancel;
+      }
+    }
+  }
+  
+  .impact-areas {
+    position: relative;
+    
+    @media #{$large-up} {
+      @include grid-column(5);
+      border-right: 1px solid tint($primary-color, 30%);
+      
+      &:after {
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        right: -1rem;
+        margin-top: -1rem;
+        width: 2rem;
+        height: 2rem;
+        line-height: 2;
+        text-align: center;
+        background: $primary-color;
+        content: 'or';
+        text-transform: uppercase;
+      }
+    }
+    
+    .filter {
+      padding: 0.375rem 1rem 0.375rem 0.375rem;
+      @extend %impact-area-badge;
+      
+      &:before {
+        font-size: 1rem;
+        width: 2rem;
+        line-height: 2;
+        margin-right: 0.375rem;
+      }
+    }
+  }
+  
+  .keywords {
+    @media #{$large-up} {
+      @include grid-column($columns: 6, $offset: 1);
+    }
+    
+    .filter {
+      padding: 0 0.725rem;
+    }
+  }
+}

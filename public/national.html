@@ -7,6 +7,35 @@ title: National organizations
 <section class="hub national">
   <header class="banner">
     <h1 class="prime-title">National Organizations</h1>
+    
+    <div class="filters">
+      <div class="inner row">
+        <a href="#" class="filters-toggle on">Filters</a>
+        <div class="impact-areas">
+          <h2 class="hd-xs">Impact areas</h2>
+          <ul>
+            <li><button class="filter children on">Human Rights</button></li>
+            <li><button class="filter health">Environment</button></li>
+            <li><button class="filter children on">Human Rights</button></li>
+            <li><button class="filter health">Environment</button></li>
+            <li><button class="filter children on">Human Rights</button></li>
+          </ul>
+        </div>
+        <div class="keywords">
+          <h2 class="hd-xs">Issues/Keywords</h2>
+          <ul>
+            <li><button class="filter on">Human Rights</button></li>
+            <li><button class="filter">Environment</button></li>
+            <li><button class="filter on">Human Rights</button></li>
+            <li><button class="filter">Environment</button></li>
+            <li><button class="filter on">Human Rights</button></li>
+            <li><button class="filter">Environment</button></li>
+            <li><button class="filter on">Human Rights</button></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    
   </header>
   <div class="content">
     <ul class="national cards row">
@@ -19,7 +48,7 @@ title: National organizations
               <dt>Location:<dt>
               <dd class="location">{{ org.city }}, {{ org.state }}</dd>
               <dt>Impact area:<dt>
-              <dd class="impact-area children"><span>{{ org.impact_area }}</span></dd>
+              <dd class="impact-area children" title="{{ org.impact_area }}"><span>{{ org.impact_area }}</span></dd>
             </dl>
           </header>
           <div class="contained-body">
@@ -41,4 +70,4 @@ title: National organizations
       {% endfor %}
     </ul>
   </div>
-<section>
+</section>

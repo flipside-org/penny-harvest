@@ -175,9 +175,9 @@ a:active {
 
 %impact-area-badge {
   &:before {
-    display: block;
+    display: inline-block;
     text-align: center;
-    vertical-align: middle;
+    vertical-align: bottom;
     color: #FFF;
     @extend %global-text-shadow;
     border-radius: $global-rounded;
