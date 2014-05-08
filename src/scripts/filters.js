@@ -202,18 +202,44 @@ if ($('#national-orgs').length) {
 if ($('#map').length) {
   $.get('/json/local-orgs.geojson', function(geoJson){
     
-    var map = L.mapbox.map('map', 'flipside.hgeapagi', { zoomControl: false })
+    var map = L.mapbox.map('map', 'flipside.hgeapagi', { zoomControl: false, maxZoom : 18 })
         .setView([40.75, -73.9], 11);
     
-    map.featureLayer.setGeoJSON(geoJson);
-  
-    map.featureLayer.eachLayer(function(layer) {
-  
-      var content = '<h1>' + layer.feature.properties.title + '<\/h1>' +
-          '<h2>Impact area: ' + layer.feature.properties.impact_area + '<\/h2>' +
-          '<a href="' + layer.feature.properties.url + '">Read more<\/a>';
-      layer.bindPopup(content);
+    var markers = new L.MarkerClusterGroup({
+      showCoverageOnHover: false,
+      iconCreateFunction: function(cluster) {
+        return new L.DivIcon({
+          className : 'marker cluster',
+          iconSize: [],
+          html: cluster.getChildCount()
+        });
+      }
     });
+    
+    $.each(geoJson.features, function(i, feature) {
+      var props = feature.properties;
+      
+      // Create a divIcon for the marker.
+      var marker_icon_classes = 'marker impact-area ' + props.impact_area.class;
+      var marker_icon = L.divIcon({ className : marker_icon_classes });
+      
+      var marker = L.marker(feature.geometry.coordinates, {
+        title : props.title,
+        icon : marker_icon
+      });
+      
+      // Marker popup.
+      var popup = '<h1>' + props.title + '<\/h1>' +
+        '<h2>Impact area: ' + props.impact_area.name + '<\/h2>' +
+        '<a href="' + props.url + '">Read more<\/a>';
+      marker.bindPopup(popup);
+      
+      // Add to cluster.
+      markers.addLayer(marker);
+    });
+    
+    // Add cluster layer to map.    
+    map.addLayer(markers);
   
   // TODO: Come back to this.
   return;

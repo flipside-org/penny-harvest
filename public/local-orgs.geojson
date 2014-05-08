@@ -7,12 +7,16 @@ permalink: json/local-orgs.geojson
     { "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [{{ org.lng }}, {{ org.lat }}]
+        "coordinates": [{{ org.lat }}, {{ org.lng }}]
       },
       "properties": {
         "title": "{{ org.title }}",
         "url": "{{ org.url }}",
-        "impact_area": "{{ site.data.impact_areas[org.impact_area].id }}",
+        "impact_area": {
+          "name" : "{{ org.impact_area }}",
+          "id" : "{{ site.data.impact_areas[org.impact_area].id }}",
+          "class" : "{{ site.data.impact_areas[org.impact_area].class }}"
+        },
         "keywords" : []
       }
     }{% unless forloop.last %},{% endunless %}{% endfor %}
