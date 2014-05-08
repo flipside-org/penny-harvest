@@ -202,10 +202,7 @@ if ($('#national-orgs').length) {
 if ($('#map').length) {
   $.get('/json/local-orgs.geojson', function(geoJson){
     
-    // TODO: Come back to this.
-    return;
-    
-    var map = L.mapbox.map('map', 'flipside.hgeapagi')
+    var map = L.mapbox.map('map', 'flipside.hgeapagi', { zoomControl: false })
         .setView([40.75, -73.9], 11);
     
     map.featureLayer.setGeoJSON(geoJson);
@@ -218,8 +215,8 @@ if ($('#map').length) {
       layer.bindPopup(content);
     });
   
-  
-  
+  // TODO: Come back to this.
+  return;
   
   // Initialise.
   PH_filters.init({
