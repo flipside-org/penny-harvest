@@ -53,28 +53,62 @@ if ($filters.length) {
 if ($('#national-orgs').length) {
   $.get('/json/national-orgs.json', function(national_orgs){
     
-    var source = $("#national-hub-template").html();
-    var template = Handlebars.compile(source);
-    
-    var page_size = 2;
-    var current_page = 0;
-    var render_batch = null;
     // Render function for handlebars template. 
-    var render = function(orgs) {
-      if (orgs === null) {
-        orgs = render_batch;
-      }
-      else {
-        render_batch = orgs;
-      }
+    function renderer(orgs) {
       
-      var to_render = orgs.slice(page_size * current_page, page_size * current_page + page_size);
-      console.log(to_render);
+      this.page_size = 20;
+      this.current_page = 0;
+      this.render_batch = null;
       
-      var html = template({"orgs" : to_render});
-      $('#national-orgs .national').append(html);
+      var source = $("#national-hub-template").html();
+      this.template = Handlebars.compile(source);
       
+      this.content_holder = $('#national-orgs .national');
+      this.load_more_button = $('#show-more-trigger');
+      
+      this.render = function(orgs) {
+        // If orgs is null means that we are rendering a previous batch.
+        // This is used by the load more button.
+        if (orgs === null) {
+          orgs = render_batch;
+        }
+        else {
+          // When there are new orgs to render, reset everything.
+          this.reset();
+          render_batch = orgs;
+        }
+        
+        var start = this.page_size * this.current_page;
+        var end = start + this.page_size;
+        var to_render = orgs.slice(start, end);
+        
+        var html = this.template({"orgs" : to_render});
+        this.content_holder.append(html);
+        
+        // Check if next rendering would yield results.
+        // If not, disable the button.
+        var start = this.page_size * (this.current_page + 1);
+        var end = start + this.page_size;
+        var to_render = orgs.slice(start, end);
+        if (to_render.length == 0) {
+          this.load_more_button.addClass('disabled');
+        }
+        
+      };
+      
+      this.reset = function() {
+        this.current_page = 0;
+        this.load_more_button.removeClass('disabled');
+        this.content_holder.html('');
+      };
+     
+      this.render_next = function() {
+        this.current_page++;
+        this.render(null);
+      };
     };
+    
+    var renderer = new renderer();
     
     $('#show-more-trigger').click(function(e) {
       e.preventDefault();
@@ -82,9 +116,7 @@ if ($('#national-orgs').length) {
       
       if (!$self.hasClass('disabled')) {
         // Show more elements.
-        $(".national > li.hide").slice(0, page_size).removeClass('hide');
-        current_page++;
-        render(null);
+        renderer.render_next();
       }
       
     });
@@ -100,10 +132,10 @@ if ($('#national-orgs').length) {
           var filtered = $.grep(national_orgs, function(v) {
             return $.inArray(v.impact_area.id, selected_impact_areas) >= 0;
           });
-          render(filtered);
+          renderer.render(filtered);
         }
         else {
-          render(national_orgs);
+          renderer.render(national_orgs);
         }
         
       },
@@ -121,10 +153,10 @@ if ($('#national-orgs').length) {
             }
             return true;
           });
-          render(filtered);
+          renderer.render(filtered);
         }
         else {
-          render(national_orgs);
+          renderer.render(national_orgs);
         }
         
       },
@@ -135,14 +167,14 @@ if ($('#national-orgs').length) {
         
         // If nothing is active show all.
         if (!selected_keywords.length && !selected_impact_areas.length) {
-          render(national_orgs);
+          renderer.render(national_orgs);
         }
         // Priority to the impact areas. 
         else if (selected_impact_areas.length) {
           var filtered = $.grep(national_orgs, function(v) {
             return $.inArray(v.impact_area.id, selected_impact_areas) >= 0;
           });
-          render(filtered);
+          renderer.render(filtered);
         }
         // Keywords are last.
         else if (selected_keywords.length) {
@@ -155,7 +187,7 @@ if ($('#national-orgs').length) {
             }
             return true;
           });
-          render(filtered);
+          renderer.render(filtered);
         }
       },
     });
