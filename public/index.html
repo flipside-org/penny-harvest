@@ -4,6 +4,11 @@ title: Home
 current_menu: local
 include_map : true
 ---
+<style type="text/css" media="screen">
+	.marker {
+	  background-color: red;
+	}
+</style>
 <section class="hub map local">
   <header class="banner">
     <h1 class="prime-title">Local Organizations</h1>
@@ -32,6 +37,22 @@ include_map : true
 
   </header>
   <div class="content" id="local-orgs">
-    <div id='map'></div>
+    
+    <style type="text/css" media="screen">
+      .ph-geocoder {
+        position: relative;
+        z-index: 999999;
+      }
+    </style>
+    
+    <div class="ph-geocoder">
+      <form action="" method="post" accept-charset="utf-8" id="ph-geocoder">
+        <input type="text" name="location"/>
+        <input type="submit" name="locate" value="Search"/>
+      </form>
+    </div>
+    
+    
+    <div id='map'><!-- Mapbox map --></div>
   </div>
 </section>

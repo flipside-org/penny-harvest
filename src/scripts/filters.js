@@ -205,6 +205,7 @@ if ($('#map').length) {
     var map = L.mapbox.map('map', 'flipside.hgeapagi', { zoomControl: false, maxZoom : 18 })
         .setView([40.75, -73.9], 11);
     
+    // Customise marker cluster icons.
     var markers = new L.MarkerClusterGroup({
       showCoverageOnHover: false,
       iconCreateFunction: function(cluster) {
@@ -238,8 +239,27 @@ if ($('#map').length) {
       markers.addLayer(marker);
     });
     
-    // Add cluster layer to map.    
-    map.addLayer(markers);
+    // Add cluster layer to map.
+    map.addLayer(markers);    
+    
+    // Geocoding map control
+    var geocoder = L.mapbox.geocoder('flipside.hgeapagi');
+  
+  $('#ph-geocoder').submit(function(event) {
+    event.preventDefault();
+    
+    var queryString = $('input[type=text]', this).val();
+    
+    geocoder.query(queryString, function(err, resp) {      
+      if (err) {
+        return false;
+      }
+      
+      map.fitBounds(resp.lbounds);
+      
+    });
+  });
+  
   
   // TODO: Come back to this.
   return;
