@@ -2,20 +2,36 @@
 
 {% if page.learn %}
   {% capture what_section %}
-    <h2>How can we help you learn more about us</h2>
-    <p>{{ page.learn }}</p>
+    <div class="contained-row">
+      <h2>How can we help you learn more about us</h2>
+      <ul class="tick-list">
+      {% for learn in page.learn %}
+        <li>{{ learn }}</li>
+      {% endfor %}
+      </ul>
+    </div>
   {% endcapture %}
 {% endif %}
 {% if page.cont_relationship %}
   {% capture what_section %}{{ what_section }}
-    <h2>How we'd like to keep up the relationship with your school</h2>
-    <p>{{ page.cont_relationship }}</p>
+    <div class="contained-row">
+      <h2>How we'd like to keep up the relationship with your school</h2>
+      <ul class="tick-list">
+      {% for continue in page.cont_relationship %}
+        <li>{{ continue }}</li>
+      {% endfor %}
+      </ul>
+    </div>
   {% endcapture %}
 {% endif %}
 
 {% if what_section %}
-  <section class="what-can-we-do">
-    <h1>What can we do</h1>
+  <section class="what-can-we-do contained block">
+    <header class="contained-head">
+      <h1 class="prime-title">What can we do</h1>
+    </header>
+    <div class="contained-body">
     {{ what_section }}
+  </div>
   </section>
 {% endif %}

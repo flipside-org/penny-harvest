@@ -1,0 +1,17 @@
+<li id="go-social">
+  <a class="toggle share bttn bttn-default bttn-l" href="#share-links" data-dropdown="action-bttn"><span>Share</span></a>
+  <ul class="menu-share action-dropdown dropdown-right" id="share-links">
+    <li class="email">
+      <a href="mailto:?Subject=Penny%20Harvest%20-%20{{ page.title }}&Body=Hey!%0A%0AI%20wanted%20to%20share%20this%20organization%20from%20the%20Penny%20Harvest%20Organization%20Finder%20with%20you%3A%20{{ site.domain }}{{ page.url }}" title="Share this by Email">Email</a>
+    </li>
+    <li class="facebook">
+      <a href="https://www.facebook.com/sharer/sharer.php?u={{ site.domain }}{{ page.url }}" target="_blank" class="facebook" title="Share this on Facebook">Facebook</a>
+    </li>
+    <li class="twitter">
+      <a href="https://twitter.com/share?url={{ site.domain }}{{ page.url }}" target="_blank" class="twitter" title="Share this on Twitter">Twitter</a>
+    </li>
+    <li class="google-plus">
+      <a href="https://plus.google.com/share?url={{ site.domain }}{{ page.url }}" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600'); return false;" class="google-plus" title="Share this on Google+">Google+</a>
+    </li>
+  </ul>
+</li>

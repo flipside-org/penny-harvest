@@ -1,0 +1,23 @@
+"Disaster Relief":
+  id: "i1"
+  class: "disaster-relief"
+
+"Human Rights":
+  id: "i2"
+  class: "human-rights"
+
+"Environment":
+  id: "i3"
+  class: "environment"
+
+"Health":
+  id: "i4"
+  class: "health"
+
+"The Elderly":
+  id: "i5"
+  class: "elderly"
+
+"Children":
+  id: "i6"
+  class: "children"

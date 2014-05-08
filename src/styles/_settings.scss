@@ -29,7 +29,7 @@ $base-line-height: 150%;
 
 // $include-html-grid-classes: $include-html-classes;
 
-$row-width: rem-calc(1152);
+$row-width: rem-calc(1280);
 $column-gutter: rem-calc(32);
 $total-columns: 12;
 
@@ -1144,9 +1144,9 @@ $paragraph-line-height: 1.4;
 // $code-font-weight: bold;
 
 // We use these to style anchors
-// $anchor-text-decoration: none;
-// $anchor-font-color: $primary-color;
-// $anchor-font-color-hover: scale-color($primary-color, $lightness: -14%);
+$anchor-text-decoration: none;
+$anchor-font-color: $secondary-color;
+$anchor-font-color-hover: $secondary-color;
 
 // We use these to style the <hr> element
 // $hr-border-width: 1px;

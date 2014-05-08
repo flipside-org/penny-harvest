@@ -1,24 +1,23 @@
-{% assign about_section == '' %}
-
-{% if page.description %}
-  {% capture about_section %}
-    <h1>About us</h1>
-    <p>{{ page.description }}</p>
-  {% endcapture %}
-{% endif %}
-{% if page.keywords %}
-  {% capture about_section %}{{ about_section }}
-    <h2>We help</h2>
-    <ul>
-    {% for keyword in page.keywords %}  
-      <li>{{ keyword }}</li>
-    {% endfor %}
-    </ul>
-  {% endcapture %}
-{% endif %}
-
-{% if about_section %}
-  <section class="about-us">
-    {{ about_section }}
-  </section>
-{% endif %}
+<section class="about-us contained block">
+  <header class="contained-head">
+    <h1 class="prime-title">About us</h1>
+  </header>
+  <div class="contained-body">
+    {% if page.description %}
+    <div class="contained-row">
+      <h2>Description</h2>
+      <p>{{ page.description | markdownify }}</p>
+    </div>
+    {% endif %}
+    {% if page.keywords %}
+    <div class="contained-row">
+      <h2>We help</h2>
+      <ul class="tag-list">
+      {% for keyword in page.keywords %}  
+        <li>{{ keyword }}</li>
+      {% endfor %}
+      </ul>
+    </div>
+    {% endif %}
+  </div>
+</section>

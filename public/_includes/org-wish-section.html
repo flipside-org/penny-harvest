@@ -3,29 +3,37 @@
 
 {% if page.grants %}
   {% capture grants_section %}
-    <h2>Community grants</h2>
-    <ul class="grants">
-      {% for grant in page.grants %}
-        <li>{{ grant }}</li>
-      {% endfor %}
-    </ul>
+    <div class="contained-row">
+      <h2>Community grants</h2>
+      <ul class="grants tick-list">
+        {% for grant in page.grants %}
+          <li>{{ grant | markdownify }}</li>
+        {% endfor %}
+      </ul>
+    </div>
   {% endcapture %}
 {% endif %}
 {% if page.services %}
   {% capture services_section %}
-    <h2>Service project</h2>
-    <ul class="services">
-      {% for service in page.services %}
-        <li>{{ service }}</li>
-      {% endfor %}
-    </ul>
+    <div class="contained-row">
+      <h2>Service projects</h2>
+      <ul class="services tick-list">
+        {% for service in page.services %}
+          <li>{{ service | markdownify }}</li>
+        {% endfor %}
+      </ul>
+    </div>
   {% endcapture %}
 {% endif %}
 
 {% if grants_section or services_section %}
-  <section class="wish-list">
-    <h1>Our wish list</h1>
+  <section class="wish-list contained block">
+    <header class="contained-head">
+      <h1 class="prime-title">Our wish list</h1>
+    </header>
+    <div class="contained-body">
     {{ grants_section }}
     {{ services_section }}
+    </div>
   </section>
 {% endif %}

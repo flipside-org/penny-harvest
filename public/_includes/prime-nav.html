@@ -3,15 +3,15 @@
   <div class="menu-wrapper">
     <h2 class="menu-subtitle">Explore:</h2>
     <ul class="menu global-menu">
-      {% if page.active_menu == 'local' or page.category == 'local_org' %}
-      <li class="active">
+      {% if page.current_menu == 'local' or page.category == 'local_org' %}
+      <li class="current">
       {% else %}
       <li>
       {% endif %}
         <a href="/">Local</a>
       </li>
-      {% if page.active_menu == 'national' or page.category == 'national_org' %}
-      <li class="active">
+      {% if page.current_menu == 'national' or page.category == 'national_org' %}
+      <li class="current">
       {% else %}
       <li>
       {% endif %}
@@ -20,15 +20,15 @@
     </ul>
     <h2 class="menu-subtitle">More:</h2>
     <ul class="menu meta-menu">
-      {% if page.active_menu == 'info' %}
-      <li class="info active">
+      {% if page.current_menu == 'info' %}
+      <li class="info current">
       {% else %}
       <li class="info">
       {% endif %}
         <a href="#info"><span>How it works</span></a>
       </li>
-      {% if page.active_menu == 'about' %}
-      <li class="about active">
+      {% if page.current_menu == 'about' %}
+      <li class="about current">
       {% else %}
       <li class="about">
       {% endif %}

@@ -26,8 +26,9 @@
     <link type="text/plain" rel="author" href="{{ site.domain }}/humans.txt" />
     <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' />
     <link rel="stylesheet" href="/assets/styles/main.css" />
+    {% if page.include_map %}
     <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css" />
-  
+    {% endif %}
   </head>
   <body>
     
@@ -42,13 +43,13 @@
     <div id="site-canvas">
       <header id="site-head" role="banner">
         <div class="inner row">
-          <div class="site-title-group">
+          <div class="heading">
             <a href="{{ site.domain }}" title="Go home">
               <h1 id="site-title">Organization Finder</h1>
               <h2 id="site-subtitle">Penny Harvest <strong>NY</strong></h2>
             </a>
           </div>
-          {% include menu.html %}
+          {% include prime-nav.html %}
         </div>
       </header>
   
@@ -66,8 +67,10 @@
     </div>
     
     <script src="/assets/scripts/media.min.js"></script>
-    <script src="/assets/scripts/foundation.min.js"></script>  
+    <script src="/assets/scripts/foundation.min.js"></script>
+    {% if page.include_map %}
     <script src="https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js"></script>
+    {% endif %}
     <script src="/assets/scripts/website.min.js"></script>
     
   </body>

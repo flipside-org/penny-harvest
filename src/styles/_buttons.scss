@@ -1,0 +1,198 @@
+/* Base button style */
+.bttn {
+  display: inline-block;
+  padding: 0 0.75rem;
+  border-radius: $global-radius;
+  font-weight: $body-font-bold;
+  text-align: center;
+  @include user-select(none);
+  cursor: pointer;
+  border: 1px solid tint($primary-color, 75%);
+  white-space: nowrap;
+  background: #FFF;
+  box-shadow: 0 2px 0 0 rgba($primary-color, 0.1);
+  
+  &:link,
+  &:active,
+  &:visited {
+    position: static;
+    top: 0;
+  }
+  &:active {
+    opacity: 1;
+  }
+  &:before, &:after {
+    font-weight: normal;
+    font-size: rem-calc(16);
+    vertical-align: bottom !important;
+  }
+  &:before {
+    margin-right: 0.375rem;
+  }
+  &:after {
+    margin-left: 0.375rem;
+    opacity: 0.4;
+  }
+  &.share:before {
+    @extend .icon-share-reg;
+  }
+}
+
+.bttn-dropdown {
+  &:after {
+    @extend .icon-s-arr-down;
+    margin-left: rem-calc(4);
+    opacity: 0.6;
+  }
+}
+
+/* Button sizes */
+.bttn-s {
+  line-height: rem-calc(24);
+  font-size: 0.875rem;
+}
+.bttn-m {
+  line-height: rem-calc(30);
+  font-size: 1rem;
+}
+.bttn-l {
+  line-height: rem-calc(38);
+  font-size: 1.25rem;
+}
+
+/* Button colors */
+
+// White
+.bttn-default {
+  color: $primary-color;
+  background: #FFF;
+  border-color: tint($primary-color, 75%);
+  &:before {
+    color: $secondary-color;
+  }
+  &:hover, &:focus {
+    color: $primary-color;
+  }
+  &:active, &.current {
+    color: $primary-color;
+    box-shadow: 0 1px 0 0 rgba(#FFF, 0.5), inset 0 2px 0 0 rgba($primary-color, 0.1);
+  }
+}
+
+// Dark grey
+.bttn-primary {
+  color: #FFF;
+  background: $primary-color;
+  border-color: shade($primary-color, 15%);
+  @extend .antialiased;
+  @extend %global-text-shadow;
+  &:hover, &:focus {
+    color: #FFF;
+  }
+  &:active, &.current {
+    border-color: shade($primary-color, 25%);
+    background: shade($primary-color, 10%);
+    box-shadow: 0 1px 0 0 rgba(#FFF, 0.5), inset 0 2px 0 0 shade($primary-color, 20%);
+    color: #FFF;
+  }
+}
+
+.bttn, button {
+  &.disabled {
+    opacity: 0.4;
+    cursor: default;
+
+    &:active {
+      position: static;
+      top: 0;
+      opacity: 0.4;
+    }
+  }
+}
+
+/* Dropdown */
+.action-dropdown {
+  min-width: rem-calc(200);
+  position: absolute;
+  top: rem-calc(52);
+  left: 0;
+  z-index: 10;
+  border-radius: $global-radius;
+  @include reset-list;
+  box-shadow: -0.25rem 0.25rem 0 0 rgba($primary-color, 0.1);
+  background: rgba(#FFF, 0.9);
+  border: 1px solid tint($primary-color, 75%);
+  font-weight: $body-font-bold;
+
+  opacity: 0;
+  margin-top: rem-calc(-16);
+  visibility: hidden;
+  @include transition-property(opacity, margin, visibility);
+  @include transition-duration(0.1s, 0.1s, 0.1s);
+  @include transition-timing-function(ease, ease, linear);
+  @include transition-delay(0, 0, 0);
+
+  &:before {
+    @extend .icon-triangle-up;
+    position: absolute;
+    z-index: 15;
+    top: -11px;
+    left: 1rem;
+    color: rgba(#FFF, 0.95);
+    font-size: 1rem;
+    text-shadow: 0 -1px tint($primary-color, 75%);
+    line-height: 1;
+    height: 1rem;
+    width: 1rem;
+  }
+    
+  &.dropdown-right {
+    left: auto;
+    right: 0;
+    &:before {
+      left: auto;
+      right: 1rem;
+    }
+  }
+
+  &.revealed {
+    opacity: 1;
+    margin-top: 0;
+    visibility: visible;
+  }
+
+  li {
+    position: relative;
+    z-index: 20;
+    padding: rem-calc(4 0);
+    border-bottom: 1px solid tint($primary-color, 85%);
+
+    a {
+      display: block;
+      padding: 0.5rem 1rem;
+      color: $primary-color;
+      background-color: transparent;
+      
+      @include transition-property(background-color, top, left, right);
+      @include transition-duration(0.2s, 0.1s, 0.2s, 0.2s);
+      @include transition-timing-function(ease, ease, ease, ease);
+      @include transition-delay(0, 0, 0, 0);
+
+      &:hover {
+        opacity: 1;
+        background-color: rgba(tint($secondary-color, 50%), 0.2);
+      }
+      
+      &:before {
+        vertical-align: bottom !important;
+        font-weight: normal;
+        color: $secondary-color;
+        margin-right: 0.5rem;
+      }
+    }
+
+    &:last-child {
+      border: none;
+    }
+  }
+}
