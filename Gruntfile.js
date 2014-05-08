@@ -9,7 +9,7 @@ module.exports = function(grunt) {
       options : {
           sassDir : 'src/styles',
           cssDir : 'public/assets/styles',
-          raw : 'add_import_path "src/bower_components/foundation/scss"'
+          raw : 'add_import_path "src/bower_components/foundation/scss"; require "sassy-strings";'
       },
       
       dev : {
