@@ -56,23 +56,24 @@ if ($('#national-orgs').length) {
     var source = $("#national-hub-template").html();
     var template = Handlebars.compile(source);
     
-    var page_size = 20;
-    
+    var page_size = 2;
+    var current_page = 0;
+    var render_batch = null;
     // Render function for handlebars template. 
     var render = function(orgs) {
-      var html = template({"orgs" : orgs});
-      $('#national-orgs').html(html);
-      
-      // SHow list button.
-      var $cards = $(".national > li");
-      if ($cards.length > page_size) {
-        $('#show-more-trigger').removeClass('disabled');
+      if (orgs === null) {
+        orgs = render_batch;
       }
       else {
-        $('#show-more-trigger').addClass('disabled');
+        render_batch = orgs;
       }
-      // Hide cards.
-      $(".national > li").slice(page_size).addClass('hide');
+      
+      var to_render = orgs.slice(page_size * current_page, page_size * current_page + page_size);
+      console.log(to_render);
+      
+      var html = template({"orgs" : to_render});
+      $('#national-orgs .national').append(html);
+      
     };
     
     $('#show-more-trigger').click(function(e) {
@@ -82,15 +83,8 @@ if ($('#national-orgs').length) {
       if (!$self.hasClass('disabled')) {
         // Show more elements.
         $(".national > li.hide").slice(0, page_size).removeClass('hide');
-         
-        // Enable/Disable show list button based on cards.
-        if ($(".national > li.hide").length === 0) {
-          // Nothing else to show. Disable button.
-          $self.addClass('disabled');
-        }
-        else {
-          $self.removeClass('disabled');
-        }
+        current_page++;
+        render(null);
       }
       
     });
