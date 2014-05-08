@@ -175,9 +175,9 @@ a:active {
 
 %impact-area-badge {
   &:before {
-    display: block;
+    display: inline-block;
     text-align: center;
-    vertical-align: middle;
+    vertical-align: bottom;
     color: #FFF;
     @extend %global-text-shadow;
     border-radius: $global-rounded;
@@ -220,6 +220,11 @@ a:active {
   .hub & {
     .prime-title { @extend .visually-hidden; }
   }
+}
+
+.foot .inner {
+  text-align: center;
+  @include grid-column(12);
 }
 
 .hub, .single {

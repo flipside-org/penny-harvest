@@ -1,9 +1,26 @@
 ---
 permalink: json/national-orgs.json
 ---
-{% for org in site.categories.national_org %}{ 
+[
+{% for org in site.categories.national_org %}{
+    {% if org.description %}
+      {% capture org_content %}{{ org.description | truncate }}{% endcapture %}
+    {% elsif org.mission %}
+      {% capture org_content %}{{ org.mission | truncate }}{% endcapture %}
+    {% else %}
+      {% capture org_content %}<em>No description</em>{% endcapture %}
+    {% endif %}
   "title": "{{ org.title }}",
   "url": "{{ org.url }}",
-  "impact_area": "{{ org.impact_area }}"
+  "city": "{{ org.city }}",
+  "state": "{{ org.state }}",
+  "content" : "{{ org_content }}",
+  "impact_area": {
+    "name" : "{{ org.impact_area }}",
+    "id" : "{{ site.data.impact_areas[org.impact_area].id }}",
+    "class" : "{{ site.data.impact_areas[org.impact_area].class }}"
+  },
+  "keywords" : []
 }{% unless forloop.last %}, {% endunless %}
 {% endfor %}
+]
