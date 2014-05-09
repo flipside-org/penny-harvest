@@ -202,9 +202,14 @@ if ($('#national-orgs').length) {
 if ($('#map').length) {
   $.get('/json/local-orgs.geojson', function(geoJson){
     
-    var map = L.mapbox.map('map', 'flipside.hgeapagi', { zoomControl: false, maxZoom : 18 })
-        .setView([40.75, -73.9], 11);
+    var map = L.mapbox.map('map', 'flipside.hgeapagi', {
+      zoomControl: false,
+      minZoom : 3,
+      maxZoom : 18,
+      maxBounds: L.latLngBounds([-90, -180], [90, 180])
+    }).setView([40.75, -73.9], 11);
     
+    // Customise marker cluster icons.
     var markers = new L.MarkerClusterGroup({
       showCoverageOnHover: false,
       iconCreateFunction: function(cluster) {
@@ -216,6 +221,7 @@ if ($('#map').length) {
       }
     });
     
+    // Loop over features to create markers.
     $.each(geoJson.features, function(i, feature) {
       var props = feature.properties;
       
@@ -238,9 +244,88 @@ if ($('#map').length) {
       markers.addLayer(marker);
     });
     
-    // Add cluster layer to map.    
+    // Add cluster layer to map.
     map.addLayer(markers);
-  
+    
+    // Geocode object.
+    function Geocoder(key) {
+      this.key = key;
+      this.url = 'http://www.mapquestapi.com/geocoding/v1/address';
+      
+      this.query = function(location, callback) {
+        $.get(this.url, {
+          key : this.key,
+          location : location
+        }, function(res) {
+          if (res.results[0].locations.length > 0) {
+            callback(true, res.results[0].locations[0]);
+          }
+          else {
+            callback(false, []);
+          }
+        });
+      };
+    }
+    
+    var geocoder = new Geocoder('Fmjtd|luur290y2h%2Cr5%3Do5-90zl54');
+    
+    // Listener for form submission.
+    $('.geocoder form').submit(function(event) {
+      event.preventDefault();
+      
+      var queryString = $('.map-geocoder-input', this).val();
+      geocoder.query(queryString, function(success, location) {
+        if (success) {
+          var lat = location.latLng.lat;
+          var lng = location.latLng.lng;
+          var zoom = 1;
+          
+          switch (location.geocodeQuality) {
+            case 'COUNTRY':
+              zoom = 7;
+            break;
+            case 'CITY':
+              zoom = 14;
+            break;
+            case 'ADDRESS':
+              zoom = 17;
+            break;
+            case 'STREET':
+              zoom = 17;
+            break;
+          }
+          map.setView([lat, lng], zoom, { animate : true });
+        }
+      });
+    });
+    
+    // Geolocation.
+    if (!navigator.geolocation) {
+      $('.map-geocoder-locate').remove();
+    }
+    else {
+      // Click for locate button.
+      $('.map-geocoder-locate').click(function(event) {
+        event.preventDefault();
+        $(this).addClass('locating');
+        
+        map.locate();
+      });
+      
+      // Once we've got a position, zoom and center the map
+      // on it.
+      map.on('locationfound', function(e) {
+        $('.map-geocoder-locate').removeClass('locating');
+        map.fitBounds(e.bounds);
+      });
+      
+      // If the user chooses not to allow their location
+      // to be shared.
+      map.on('locationerror', function() {
+        $('.map-geocoder-locate').removeClass('locating');
+      });
+    }
+    
   // TODO: Come back to this.
   return;
   
