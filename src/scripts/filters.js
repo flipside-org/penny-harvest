@@ -227,7 +227,11 @@ if ($('#map').length) {
       
       // Create a divIcon for the marker.
       var marker_icon_classes = 'marker impact-area ' + props.impact_area.class;
-      var marker_icon = L.divIcon({ className : marker_icon_classes, iconSize: [] });
+      var marker_icon = L.divIcon({
+        className : marker_icon_classes,
+        iconSize: [],
+        popupAnchor : [0, -30]
+      });
       
       var marker = L.marker(feature.geometry.coordinates, {
         title : props.title,
@@ -235,9 +239,9 @@ if ($('#map').length) {
       });
       
       // Marker popup.
-      var popup = '<h1>' + props.title + '<\/h1>' +
-        '<h2>Impact area: ' + props.impact_area.name + '<\/h2>' +
-        '<a href="' + props.url + '">Read more<\/a>';
+      var popup = '<div class="a"><h1>the title</h1></div>' +
+        '<div class="b">come kind of description</div>' +
+        '<div class="c"><a href="#">Read more</a></div>';
       marker.bindPopup(popup);
       
       // Add to cluster.
