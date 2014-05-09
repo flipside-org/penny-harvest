@@ -227,7 +227,7 @@ if ($('#map').length) {
       
       // Create a divIcon for the marker.
       var marker_icon_classes = 'marker impact-area ' + props.impact_area.class;
-      var marker_icon = L.divIcon({ className : marker_icon_classes });
+      var marker_icon = L.divIcon({ className : marker_icon_classes, iconSize: [] });
       
       var marker = L.marker(feature.geometry.coordinates, {
         title : props.title,

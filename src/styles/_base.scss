@@ -181,6 +181,7 @@ a:active {
 
 %impact-area-badge {
   &:before {
+    @extend .antialiased;
     display: inline-block;
     text-align: center;
     vertical-align: bottom;

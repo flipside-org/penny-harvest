@@ -6,6 +6,83 @@
   z-index: 1;
 }
 
+@function encodeSVG($svg) {
+  $svg: str-replace($svg, '"', '%22');
+  $svg: str-replace($svg, ' ', '%20');
+  $svg: str-replace($svg, '<', '%3C'); 
+  $svg: str-replace($svg, '>', '%3E');
+  $svg: str-replace($svg, ',', '%2C');
+  $svg: str-replace($svg, '/', '%2F');
+  $svg: str-replace($svg, '=', '%3D');
+  $svg: str-replace($svg, '#', '%23');
+  $svg: str-replace($svg, "'", '');
+  $svg: str-replace($svg, 'image%2Fsvg+xml%2C', 'image/svg+xml,');
+  @return $svg;
+}
+
+@mixin marker_bg($color) {
+  background: url(encodeSVG('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40"><ellipse opacity=".3" fill="#464E54" enable-background="new" cx="16" cy="38" rx="8" ry="2"/><path fill="'+$color+'" d="M32 16c0-8.8-7.2-16-16-16s-16 7.2-16 16c0 7 4.5 13 10.9 15.1l5.1 6.9 5.1-6.9c6.4-2.1 10.9-8.1 10.9-15.1z"/></svg>')) center top no-repeat;
+}
+
+.marker {
+  width: 2rem;
+  height: 2.5rem;
+  color: #FFF;
+  text-align: center;
+  @extend .antialiased;
+  margin-left: -1rem;
+  margin-top: -2.5rem;
+  @include transition-property(opacity);
+  @include transition-duration(0.2s);
+  @include transition-timing-function(ease);
+  @include transition-delay(0);
+  cursor: pointer;
+  &:hover {
+    outline: none;
+    opacity: 0.7;
+  }
+  &.impact-area {
+    &:before {
+      display: inline-block;
+      vertical-align: bottom;
+      @extend %global-text-shadow;
+      font-size: 1rem;
+      width: 2rem;
+      line-height: 2;
+    }
+    &.human-rights {
+      @include marker_bg($human-rights-color);
+      &:before { @extend .icon-human-rights; }
+    }
+    &.environment {
+      @include marker_bg($environment-color);
+      &:before { @extend .icon-leaf; }
+    }
+    &.children {
+      @include marker_bg($children-color);
+      &:before { @extend .icon-children; }
+    }
+    &.health {
+      @include marker_bg($health-color);
+      &:before { @extend .icon-aid; }
+    }
+    &.elderly {
+      @include marker_bg($elderly-color);
+      &:before { @extend .icon-elderly; }
+    }
+    &.disaster-relief {
+      @include marker_bg($disaster-relief-color);
+      &:before { @extend .icon-warning; }
+    }
+  }
+  &.cluster {
+    @include marker_bg($primary-color);
+    font-size: 0.875rem;
+    font-weight: $body-font-bold;
+    line-height: 2rem;
+  }
+}
+
 .geocoder {
   @extend .clearfix;
   position: relative;

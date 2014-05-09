@@ -11,10 +11,10 @@ To set up the development environment for this website, you'll need to install t
 
 - Npm
 - compass & sass
+- Sassy Strings ( $ gem install sassy-strings )
 - Grunt ( $ npm install -g grunt-cli )
 - Bower ($ npm install -g bower)
 - jekyll ( $ gem install jekyll )
-
 
 After these basic requirements are met, run the following commands in the website's folder:
 ```
