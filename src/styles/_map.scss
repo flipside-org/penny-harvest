@@ -110,6 +110,9 @@
     
     &:before {
       @extend .icon-search-r;
+      width: 2.5rem;
+      display: block;
+      text-align: center;
     }
   }
   
