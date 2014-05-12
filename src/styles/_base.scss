@@ -33,6 +33,14 @@ a:active {
   top: 2px;
 }
 
+a.disabled, .bttn.disabled {
+  opacity: 0.4;
+  cursor: default;
+  &:hover, &:focus {
+    opacity: 0.4;
+  }
+}
+
 #site-head {
   background-color: $secondary-color;
   box-shadow: inset 0 -4px 0 0 shade($secondary-color, 15%), 0 4px 0 0 rgba($primary-color, 0.1);
