@@ -35,7 +35,7 @@ a:active {
 
 #site-head {
   background-color: $secondary-color;
-  box-shadow: inset 0 -4px 0 0 shade($secondary-color, 10%), 0 4px 0 0 rgba($primary-color, 0.1);
+  box-shadow: inset 0 -4px 0 0 shade($secondary-color, 15%), 0 4px 0 0 rgba($primary-color, 0.1);
   margin: 0;
   @extend .antialiased;
   @extend %global-text-shadow;
@@ -64,29 +64,67 @@ a:active {
 #prime-nav {
   
   .menu-wrapper {
-    top: 5.25rem;
+    top: 4rem;
     left: 0;
     z-index: 100;
     position: absolute;
     width: 100%;
     background-color: $secondary-color;
-    box-shadow: inset 0 -4px 0 0 shade($secondary-color, 10%), 0 4px 0 0 rgba($primary-color, 0.1);
-    padding: $column-gutter/2 0;
-
+    box-shadow: inset 0 4px 0 0 rgba($primary-color, 0.1), inset 0 -4px 0 0 shade($secondary-color, 15%), 0 4px 0 0 rgba($primary-color, 0.1);
+    padding: $column-gutter/2 0 $column-gutter 0;
+    opacity: 0;
+    visibility: hidden;
+    @include transition-property(opacity, top, visibility);
+    @include transition-duration(0.1s, 0.1s, 0.1s);
+    @include transition-timing-function(ease, ease, linear);
+    @include transition-delay(0, 0, 0);
+    &.visible {
+      opacity: 1;
+      visibility: visible;
+      top: 5.25rem;
+    }
   }
   .menu-title {
-    float: right;
+    position: absolute;
+    right: 1rem;
+    top: 1.625rem;
+    z-index: 1;
+    margin: 0;
     span {
       @extend .visually-hidden;
     }
+    a {
+      display: block;
+    }
+    a:before {
+      display: block;
+      width: 2rem;
+      height: 2rem;
+      @extend .icon-menu;
+      font-size: 2rem;
+      color: #FFF;
+      font-weight: normal;
+      vertical-align: bottom !important;
+    }
   }
   .menu-subtitle {
+    float: left;
     color: inherit;
     font-size: 1rem;
     font-weight: normal;
     margin: 0;
     line-height: 2rem;
     padding: 0 $column-gutter/2;
+    &:not(:first-child) {
+      border: 0 none;
+      clip: rect(0px, 0px, 0px, 0px);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
   }
   .menu {
     margin: 0;
@@ -96,6 +134,12 @@ a:active {
     }
     a {
       display: block;
+    }
+  }
+  .global-menu {
+    float: left;
+    clear: left;
+    a {
       font-weight: $body-font-bold;
       font-size: 1.25rem;
       line-height: 2rem;
@@ -107,35 +151,66 @@ a:active {
       border-radius: $global-radius;
     }
   }
-  .global-menu {
-    padding-bottom: 1.5rem;
-    margin-bottom: 1rem;
+  .meta-menu {
+    float: right;
     position: relative;
-    &:after {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-top: -1.5rem;
+    overflow: hidden;
+    a {
+      span {
+        @extend .visually-hidden;
+      }
+      &:before {
+        display: block;
+        width: 2rem;
+        height: 2rem;
+        font-size: 2rem;
+        line-height: 2rem;
+        vertical-align: bottom !important;
+        text-align: center;
+      }
+    }
+    li {
+      margin: 0.25rem 0;
+    }
+    .info a:before { @extend .icon-circle-info; }
+    .about a:before { @extend .icon-circle-question; }
+    &:before {
       position: absolute;
       left: 0;
-      bottom: 0;
+      top: 0;
       z-index: 1;
-      background: red;
-      width: 100%;
-      height: 1px;
-      box-shadow: 0 1px 0 0 yellow;
+      background: shade($secondary-color, 15%);
+      width: 1px;
+      height: 10rem;
+      box-shadow: 1px 0 0 0 tint($secondary-color, 30%);
       content: '';
     }
   }
-  .meta-menu {
 
-  }
   @media #{$small-up} {
-    .menu,
+    .menu-title {
+      right: 4rem;
+    }
+    .global-menu,
     .menu-subtitle {
       padding-left: 4rem;
       padding-right: 4rem;
+    }
+    .meta-menu {
+      padding-right: 4rem;
+      padding-left: 2rem;
     }
   }
   @media #{$medium-up} {
     @include grid-column(7);
     text-align: right;
+    
+    .menu-title {
+      display: none;
+    }
     
     .menu-wrapper {
       position: static;
@@ -144,6 +219,8 @@ a:active {
       background-color: transparent;
       box-shadow: none;
       width: auto;
+      opacity: 1;
+      visibility: visible;
     }
     
     ul {
@@ -160,9 +237,14 @@ a:active {
     }
     
     .meta-menu {
-      display: none;
+      margin: 0 0 0 1rem;
+      padding-left: 0.75rem;
+      li {
+        margin: 0 0 0 0.25rem;
+      }
     }
     .global-menu {
+      clear: none;
       padding-bottom: 0;
       margin-bottom: 0;
       &:after {
@@ -175,16 +257,6 @@ a:active {
     .menu-subtitle {
       float: left;
       padding: 0;
-      &:not(:first-child) {
-        border: 0 none;
-        clip: rect(0px, 0px, 0px, 0px);
-        height: 1px;
-        margin: -1px;
-        overflow: hidden;
-        padding: 0;
-        position: absolute;
-        width: 1px;
-      }
     }
   }
 }

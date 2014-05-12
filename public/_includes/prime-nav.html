@@ -8,31 +8,31 @@
       {% else %}
       <li>
       {% endif %}
-        <a href="/">Local</a>
+        <a href="/" title="View local organizations">Local</a>
       </li>
       {% if page.current_menu == 'national' or page.category == 'national_org' %}
       <li class="current">
       {% else %}
       <li>
       {% endif %}
-        <a href="/national/">National</a>
+        <a href="/national/" title="View national organizations">National</a>
       </li>
     </ul>
-    <h2 class="menu-subtitle">About:</h2>
+    <h2 class="menu-subtitle">More:</h2>
     <ul class="menu meta-menu">
       {% if page.current_menu == 'info' %}
       <li class="info current">
       {% else %}
       <li class="info">
       {% endif %}
-        <a href="#info"><span>How it works</span></a>
+        <a href="#info" title="How it works"><span>How it works</span></a>
       </li>
       {% if page.current_menu == 'about' %}
       <li class="about current">
       {% else %}
       <li class="about">
       {% endif %}
-        <a href="#about">The Project</a>
+        <a href="#about" title="About the Organization Finder"><span>About</span></a>
       </li>
     </ul>
   </div>
