@@ -25,7 +25,14 @@ permalink: json/local-orgs.geojson
           "id" : "{{ site.data.impact_areas[org.impact_area].id }}",
           "class" : "{{ site.data.impact_areas[org.impact_area].class }}"
         },
-        "keywords" : []
+        "keywords" : [
+          {% for keyword in org.keywords %}
+          {
+            "name" : "{{ keyword }}",
+            "id" : "{{ site.data.keywords[keyword].id }}"
+          }{% unless forloop.last %}, {% endunless %}
+          {% endfor %}
+        ]
       }
     }{% unless forloop.last %},{% endunless %}{% endfor %}
   ]
