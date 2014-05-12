@@ -210,8 +210,14 @@ a.disabled, .bttn.disabled {
       right: 4rem;
     }
     .menu-wrapper {
-      padding-left: 4rem;
-      padding-right: 4rem;
+      padding: $column-gutter $column-gutter*2;
+    }
+    .menu-subtitle {
+      float: left;
+    }
+    .global-menu {
+      clear: none;
+      margin: 0 0 0 0.5rem;
     }
   }
   @media #{$medium-up} {
@@ -236,18 +242,10 @@ a.disabled, .bttn.disabled {
       }
     }
     
-    .menu {
-      float: left;
-      margin: 0 0 0 0.5rem;
-    }
-    
-    .global-menu {
-      clear: none;
-    }
-    
-    .menu-subtitle {
+    .meta-menu {
       float: left;
     }
+    
   }
 }
 
