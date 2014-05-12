@@ -7,7 +7,7 @@ permalink: json/local-orgs.geojson
     { "type": "Feature",
       "geometry": {
         "type": "Point",
-        "coordinates": [{{ org.lat }}, {{ org.lng }}]
+        "coordinates": [{{ org.lng }}, {{ org.lat }}]
       },
       "properties": {
         {% if org.description %}

@@ -195,13 +195,63 @@ if ($('#national-orgs').length) {
 
 }
 
-
-
-
 // Filters for map.
 if ($('#map').length) {
   $.get('/json/local-orgs.geojson', function(geoJson){
     
+    //========================================================================//
+    //  Define some functions and objects that are needed.                    //
+    //========================================================================//
+    
+    // Function to filer the marker cluster.
+    // Leaflet doesn't have a filter option.
+    // Here we loop over the geoJsonLayer and add/remove the markers as needed.
+    function filterCluster(_filter) {
+      geoJsonLayer.eachLayer(function(l) {
+        if (_filter(l.feature)) {
+          if (!markers.hasLayer(l)) {
+            markers.addLayer(l);
+          }
+        }
+        else {
+          if (markers.hasLayer(l)) {
+            markers.removeLayer(l);
+          }
+        }
+      });
+    }
+    
+    // Geocode object.
+    var Geocoder = function(key) {
+      this.key = key;
+      this.url = 'http://www.mapquestapi.com/geocoding/v1/address';
+      
+      this.query = function(location, callback) {
+        $.get(this.url, {
+          key : this.key,
+          location : location
+        }, function(res) {
+          if (res.results[0].locations.length > 0) {
+            callback(true, res.results[0].locations[0]);
+          }
+          else {
+            callback(false, []);
+          }
+        });
+      };
+    };
+    
+    var geocoder = new Geocoder('Fmjtd|luur290y2h%2Cr5%3Do5-90zl54');
+
+
+    //========================================================================//
+    //  Map                                                                   //
+    //========================================================================//
+    
+    // Initialise map.
+    // Remove zoom controls and set min and max.
+    // Limit bounds to world
+    // Set view to New York
     var map = L.mapbox.map('map', 'flipside.hgeapagi', {
       zoomControl: false,
       minZoom : 3,
@@ -221,57 +271,39 @@ if ($('#map').length) {
       }
     });
     
-    // Loop over features to create markers.
-    $.each(geoJson.features, function(i, feature) {
-      var props = feature.properties;
-      
-      // Create a divIcon for the marker.
-      var marker_icon_classes = 'marker impact-area ' + props.impact_area.class;
-      var marker_icon = L.divIcon({
-        className : marker_icon_classes,
-        iconSize: [],
-        popupAnchor : [0, -30]
-      });
-      
-      var marker = L.marker(feature.geometry.coordinates, {
-        title : props.title,
-        icon : marker_icon
-      });
-      
-      // Marker popup.
-      var popup = '<article><header><h1 class="hd-xs">' + props.title + '</h1></header>' +
-        '<div class="content">' + props.content + '</div>' +
-        '<footer><a href="' + props.url + '" class="go-link">Learn more about us</a></footer></article>';
-      marker.bindPopup(popup);
-      
-      // Add to cluster.
-      markers.addLayer(marker);
+    // Create geoJson layer and customise marker icon and popup.
+    var geoJsonLayer = L.geoJson(geoJson, {
+      onEachFeature: function (feature, layer) {
+       var props = feature.properties;
+        
+        // Create a divIcon for the marker.
+        var marker_icon_classes = 'marker impact-area ' + props.impact_area.class;
+        var marker_icon = L.divIcon({
+          className : marker_icon_classes,
+          iconSize: [],
+          popupAnchor : [0, -30]
+        });
+        // Set the icon.
+        layer.setIcon(marker_icon);
+    
+        // Marker popup.
+        var popup = '<article><header><h1 class="hd-xs">' + props.title + '</h1></header>' +
+          '<div class="content">' + props.content + '</div>' +
+          '<footer><a href="' + props.url + '" class="go-link">Learn more about us</a></footer></article>';
+        layer.bindPopup(popup);
+      }
     });
+    
+    // Add the processed geoJson layer to the marker cluster.
+    markers.addLayer(geoJsonLayer);
     
     // Add cluster layer to map.
     map.addLayer(markers);
-    
-    // Geocode object.
-    function Geocoder(key) {
-      this.key = key;
-      this.url = 'http://www.mapquestapi.com/geocoding/v1/address';
-      
-      this.query = function(location, callback) {
-        $.get(this.url, {
-          key : this.key,
-          location : location
-        }, function(res) {
-          if (res.results[0].locations.length > 0) {
-            callback(true, res.results[0].locations[0]);
-          }
-          else {
-            callback(false, []);
-          }
-        });
-      };
-    }
-    
-    var geocoder = new Geocoder('Fmjtd|luur290y2h%2Cr5%3Do5-90zl54');
+
+
+    //========================================================================//
+    //  Listeners                                                             //
+    //========================================================================//
     
     // Listener for form submission.
     $('.geocoder form').submit(function(event) {
@@ -329,74 +361,77 @@ if ($('#map').length) {
         $('.map-geocoder-locate').removeClass('locating');
       });
     }
-    
-  // TODO: Come back to this.
-  return;
+
+
+    //========================================================================//
+    //  Filters                                                               //
+    //========================================================================//
   
-  // Initialise.
-  PH_filters.init({
-    // Callback for when a impact area is clicked.
-    cb_click_impact_area : function() {
-      
-      var selected_impact_areas = PH_filters.get_active('impact_areas');
-      map.featureLayer.setFilter(function(f) {
-        // When no impact area return all.
-        if (selected_impact_areas.length)
-          return $.inArray(f.properties.impact_area, selected_impact_areas) >= 0;
-        else
-          return true;
-      });
+    // Initialise.
+    PH_filters.init({
+      // Callback for when a impact area is clicked.
+      cb_click_impact_area : function() {
         
-    },
-    // Callback for when a keyword is clicked.
-    cb_click_keyword : function() {
-      
-      var selected_keywords = PH_filters.get_active('keywords');
-      map.featureLayer.setFilter(function(f) {
-        // When no impact area return all.
-        if (selected_keywords.length) {
-          // Keywords are exclusive, meaning that all of them must be present.
-          for (var i in selected_keywords) {
-            if ($.inArray(selected_keywords[i], f.properties.keywords) == -1) {
-              return false;
-            }
-          }
-        }
-        return true;
-      });
-    },
-    
-    // Callback after initialization.
-    cb_initialize : function() {
-      var selected_keywords = PH_filters.get_active('keywords');
-      var selected_impact_areas = PH_filters.get_active('impact_areas');
-      
-      // If nothing is active show all.
-      if (!selected_keywords.length && !selected_impact_areas.length) {
-        map.featureLayer.setFilter(function(f) { return true; });
-      }
-      // Priority to the impact areas. 
-      else if (selected_impact_areas.length) {
-        map.featureLayer.setFilter(function(f) {
-          return $.inArray(f.properties.impact_area, selected_impact_areas) >= 0;
+        var selected_impact_areas = PH_filters.get_active('impact_areas');
+        filterCluster(function(f) {
+          // When no impact area return all.
+          if (selected_impact_areas.length)
+            return $.inArray(f.properties.impact_area.id, selected_impact_areas) >= 0;
+          else
+            return true;
         });
-      }
-      // Keywords are last.
-      else if (selected_keywords.length) {
-        map.featureLayer.setFilter(function(f) {
-          // Keywords are exclusive, meaning that all of them must be present.
-          for (var i in selected_keywords) {
-            if ($.inArray(selected_keywords[i], f.properties.keywords) == -1) {
-              return false;
+          
+      },
+      // Callback for when a keyword is clicked.
+      cb_click_keyword : function() {
+        
+        var selected_keywords = PH_filters.get_active('keywords');
+        filterCluster(function(f) {
+          // When no impact area return all.
+          if (selected_keywords.length) {
+            // Keywords are exclusive, meaning that all of them must be present.
+            for (var i in selected_keywords) {
+              if ($.inArray(selected_keywords[i], f.properties.keywords.id) == -1) {
+                return false;
+              }
             }
           }
           return true;
         });
-      }
-    },
-  });
-  },'json');
+      },
+      
+      // Callback after initialisation.
+      cb_initialize : function() {
+        var selected_keywords = PH_filters.get_active('keywords');
+        var selected_impact_areas = PH_filters.get_active('impact_areas');
+        
+        // If nothing is active show all.
+        if (!selected_keywords.length && !selected_impact_areas.length) {
+          filterCluster(function(f) { return true; });
+        }
+        // Priority to the impact areas.
+        else if (selected_impact_areas.length) {
+          filterCluster(function(f) {
+            return $.inArray(f.properties.impact_area.id, selected_impact_areas) >= 0;
+          });
+        }
+        // Keywords are last.
+        else if (selected_keywords.length) {
+          filterCluster(function(f) {
+            // Keywords are exclusive, meaning that all of them must be present.
+            for (var i in selected_keywords) {
+              if ($.inArray(selected_keywords[i], f.properties.keywords.id) == -1) {
+                return false;
+              }
+            }
+            return true;
+          });
+        }
+      },
+    });
+  
+  },'json'); // END geoJson request
+  
+} // End #map existence check
 
-}
-
-});
+}); // End global jQuery wrapper
