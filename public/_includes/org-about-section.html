@@ -26,7 +26,9 @@
     </div>
     {% endif %}
     {% unless page.description or page.mission or page.keywords %}
-      <p class="empty">This organization doesn't have a description yet.</p>
+      <div class="contained-row">
+        <p class="empty">This organization doesn't have a description yet.</p>
+      </div>
     {% endunless %}
   </div>
 </section>
