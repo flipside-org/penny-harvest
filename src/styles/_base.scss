@@ -13,7 +13,8 @@
 }
 
 a:link,
-a:visited {
+a:visited,
+button {
   @include transform(translate3d(0, 0, 0));
   @include transition-property(opacity, top, left, right);
   @include transition-duration(0.2s, 0.1s, 0.2s, 0.2s);
@@ -23,12 +24,14 @@ a:visited {
 }
 
 a:hover,
-a:focus {
+a:focus,
+button:hover {
   outline: none;
   opacity: 0.7;
 }
 
-a:active {
+a:active,
+button:active {
   position: relative;
   top: 2px;
 }
