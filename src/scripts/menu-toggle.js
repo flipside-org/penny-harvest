@@ -4,6 +4,7 @@ $(document).ready(function() {
     event.preventDefault();
 
     $('.menu-wrapper').toggleClass('visible');
+    $('.action-dropdown').removeClass('revealed');
   });
 
   $(document).click(function() {
