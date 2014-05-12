@@ -287,7 +287,7 @@ if ($('#map').length) {
         layer.setIcon(marker_icon);
     
         // Marker popup.
-        var popup = '<article><header><h1 class="hd-xs">' + props.title + '</h1></header>' +
+        var popup = '<article><header><h1 class="prime-title"><a href="' + props.url + '">' + props.title + '</a></h1></header>' +
           '<div class="content">' + props.content + '</div>' +
           '<footer><a href="' + props.url + '" class="go-link">Learn more about us</a></footer></article>';
         layer.bindPopup(popup);

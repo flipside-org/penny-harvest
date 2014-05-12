@@ -252,9 +252,14 @@
     border-bottom: 1px solid tint($primary-color, 85%);
     padding: 1rem 2rem 0 1rem;
     
-    .hd-xs {
-      font-size: 1rem;
+    .prime-title {
+      @extend .hd-xs;
       margin-bottom: 1rem;
+      
+      a {
+        font-weight: inherit;
+        color: inherit;
+      }
     }
   }
   
@@ -273,6 +278,11 @@
     border-top: 1px solid tint($secondary-color, 80%);
     border-radius: 0 0 $global-radius $global-radius;
     color: $secondary-color;
+    
+    &:hover {
+      color: $secondary-color;
+    }
+    
     &:after {
       font-size: 1rem;
       @extend .icon-s-arr-right;
