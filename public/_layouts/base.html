@@ -25,10 +25,12 @@
   
     <link type="text/plain" rel="author" href="{{ site.domain }}/humans.txt" />
     <link rel="stylesheet" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700' />
-    <link rel="stylesheet" href="/assets/styles/main.css" />
     {% if page.include_map %}
     <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.css" />
+    <link href='http://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+    <link href='http://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
     {% endif %}
+    <link rel="stylesheet" href="/assets/styles/main.css" />
   </head>
   <body>
     
@@ -70,6 +72,7 @@
     <script src="/assets/scripts/foundation.min.js"></script>
     {% if page.include_map %}
     <script src="https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js"></script>
+    <script src='http://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
     {% endif %}
     <script src="/assets/scripts/website.min.js"></script>
     

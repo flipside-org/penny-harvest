@@ -6,6 +6,7 @@
   width: 100%;
   color: #FFF;
   background: rgba(shade($primary-color, 10%), 0.9);
+  @extend .antialiased;
   
   .filters-toggle {
     display: inline-block;

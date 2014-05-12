@@ -5,6 +5,10 @@
 
 /* Generic styles */
 
+html, body {
+  height: 100%;
+}
+
 .row {
   @media #{$small-up} {	
     padding-left: 3rem;
@@ -34,6 +38,8 @@ a:active {
 }
 
 #site-head {
+  position: relative;
+  z-index: 10;
   background-color: $secondary-color;
   box-shadow: inset 0 -4px 0 0 shade($secondary-color, 10%), 0 4px 0 0 rgba($primary-color, 0.1);
   margin: 0;
@@ -175,6 +181,7 @@ a:active {
 
 %impact-area-badge {
   &:before {
+    @extend .antialiased;
     display: inline-block;
     text-align: center;
     vertical-align: bottom;
@@ -227,8 +234,12 @@ a:active {
   @include grid-column(12);
 }
 
+.single, .national {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
 .hub, .single {
-  margin: 2rem 0;
 
   .heading {
     @include grid-column(12);

@@ -2,28 +2,51 @@
 layout: base
 title: Home
 current_menu: local
+include_map : true
 ---
-<div class="content">
-	<a href="map.html"><h1>Click me, I AM A MAP!!!</h1></a>
-	<!-- This loops through the paginated posts -->
-	<ul>
-	{% for post in paginator.posts %}
-	  <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-	{% endfor %}
-	</ul>
+<style type="text/css" media="screen">
+	.marker {
+	  background-color: red;
+	}
+</style>
+<section class="hub map local">
+  <header class="banner">
+    <h1 class="prime-title">Local Organizations</h1>
 
-	<!-- Pagination links -->
-	<div class="pagination">
-	  {% if paginator.previous_page %}
-	    <a href="/page{{ paginator.previous_page }}" class="previous">Previous</a>
-	  {% else %}
-	    <span class="previous">Previous</span>
-	  {% endif %}
-	  <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
-	  {% if paginator.next_page %}
-	    <a href="/page{{ paginator.next_page }}" class="next">Next</a>
-	  {% else %}
-	    <span class="next ">Next</span>
-	  {% endif %}
-	</div>
-</div>
+    <div class="filters">
+      <div class="inner row">
+        <a href="#" class="filters-toggle on">Filters</a>
+        <div class="impact-areas">
+          <h2 class="hd-xs">Impact areas</h2>
+          <ul>
+            {% for imp in site.data.impact_areas %}
+            <li><button class="filter {{ imp[1].class }}" data-filter-id="{{ imp[1].id }}" data-filter-type="impact_area">{{ imp[0] }}</button></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="keywords">
+          <h2 class="hd-xs">Issues/Keywords</h2>
+          <ul>
+            {% for key in site.data.keywords %}
+            <li><button class="filter" data-filter-id="{{ key[1].id }}" data-filter-type="keyword">{{ key[0] }}</button></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="geocoder">
+        <form action="" method="post" accept-charset="utf-8">
+          <input type="search" name="location" placeholder="Address or neighbourhood" class="map-geocoder-input"/>
+          <button type="submit" class="bttn bttn-l bttn-primary map-geocoder-search"><span class="visually-hidden">Search</span></button>
+        </form>
+        <a href="#" class="map-geocoder-locate"><span class="visually-hidden">Locate me</span></a>
+      </div>
+    </div>
+
+  </header>
+  <div class="content" id="local-orgs">
+    <div id='map'><!-- Mapbox map --></div>
+  </div>
+</section>
