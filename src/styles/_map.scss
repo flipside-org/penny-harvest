@@ -169,15 +169,34 @@
 
 
 .leaflet-popup-close-button {
+  background: none;
+  
   &:focus,
   &:hover {
     opacity: 1;
+    background: none;
   }
   
   &:active,
   &:visited {
     position: absolute;
     opacity: 1;
+    top: 0;
+  }
+  
+  &:before {
+    @extend .icon-s-cancel;
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1rem;
+    line-height: 2;
+    text-indent: initial;
+    color: $primary-color;
+    opacity: 0.5;
   }
 }
 
@@ -218,18 +237,40 @@
       border-bottom-right-radius: $global-radius;
     }
   }
+
+  header {
+    background-color: tint($primary-color, 95%);
+    border-bottom: 1px solid tint($primary-color, 85%);
+    padding: 1rem 2rem 0 1rem;
+    
+    .hd-xs {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+  }
   
-  .a, .b, .c {
+  .content {
+    font-size: 0.875rem;
     padding: 1rem;
   }
   
-  .a {
-    background-color: tint($primary-color, 95%);
-    border-bottom: 1px solid tint($primary-color, 85%);
+  .go-link {
+    display: block;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: $body-font-bold;
+    padding: 0.5rem 1rem;
+    background: tint($secondary-color, 90%);
+    border-top: 1px solid tint($secondary-color, 80%);
+    border-radius: 0 0 $global-radius $global-radius;
+    color: $secondary-color;
+    &:after {
+      font-size: 1rem;
+      @extend .icon-s-arr-right;
+      vertical-align: bottom;
+      opacity: 0.5;
+      margin-left: 0.125rem;
+    }
   }
   
-  .c {
-    background-color: tint($success-color, 90%);
-    border-top: 1px solid tint($success-color, 80%);
-  }
 }

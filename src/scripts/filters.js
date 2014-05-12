@@ -239,9 +239,9 @@ if ($('#map').length) {
       });
       
       // Marker popup.
-      var popup = '<div class="a"><h1>the title</h1></div>' +
-        '<div class="b">come kind of description</div>' +
-        '<div class="c"><a href="#">Read more</a></div>';
+      var popup = '<article><header><h1 class="hd-xs">' + props.title + '</h1></header>' +
+        '<div class="content">' + props.content + '</div>' +
+        '<footer><a href="' + props.url + '" class="go-link">Learn more about us</a></footer></article>';
       marker.bindPopup(popup);
       
       // Add to cluster.
