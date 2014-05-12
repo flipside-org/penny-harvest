@@ -4,11 +4,6 @@ title: Home
 current_menu: local
 include_map : true
 ---
-<style type="text/css" media="screen">
-	.marker {
-	  background-color: red;
-	}
-</style>
 <section class="hub map local">
   <header class="banner">
     <h1 class="prime-title">Local Organizations</h1>
@@ -50,3 +45,9 @@ include_map : true
     <div id='map'><!-- Mapbox map --></div>
   </div>
 </section>
+
+<div class="modal-wrapper revealed">
+	<div class="modal">
+	  {% include modal-about.html %}
+	</div>
+</div>
