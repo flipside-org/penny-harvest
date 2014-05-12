@@ -49,7 +49,7 @@ if ($filters.length) {
   }
 }
 
-// Filters for map.
+// Filters for national page.
 if ($('#national-orgs').length) {
   $.get('/json/national-orgs.json', function(national_orgs){
     
