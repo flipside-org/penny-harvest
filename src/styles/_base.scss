@@ -79,7 +79,6 @@ a.disabled, .bttn.disabled {
 }
 
 #prime-nav {
-  
   .menu-wrapper {
     top: 4rem;
     left: 0;
@@ -88,7 +87,7 @@ a.disabled, .bttn.disabled {
     width: 100%;
     background-color: $secondary-color;
     box-shadow: inset 0 -4px 0 0 shade($secondary-color, 15%), 0 4px 0 0 rgba($primary-color, 0.1);
-    padding: $column-gutter 0;
+    padding: $column-gutter/2 $column-gutter/2 $column-gutter $column-gutter/2;
     opacity: 0;
     visibility: hidden;
     @include transition-property(opacity, top, visibility);
@@ -136,29 +135,21 @@ a.disabled, .bttn.disabled {
     }
   }
   .menu-subtitle {
-    float: left;
     color: inherit;
     font-size: 1rem;
     font-weight: normal;
     margin: 0;
     line-height: 2rem;
-    padding: 0 $column-gutter/2;
     &:not(:first-child) {
-      border: 0 none;
-      clip: rect(0px, 0px, 0px, 0px);
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-      padding: 0;
-      position: absolute;
-      width: 1px;
+      @extend .visually-hidden;
     }
   }
   .menu {
     margin: 0;
-    padding: 0 $column-gutter/2;
+    padding: 0;
     li {
       list-style: none;
+      float: left;
     }
     a {
       display: block;
@@ -171,7 +162,7 @@ a.disabled, .bttn.disabled {
       font-weight: $body-font-bold;
       font-size: 1.25rem;
       line-height: 2rem;
-      padding: 0 1rem;
+      padding: 0 0.5rem;
     }
     .current a {
       background-color: shade($secondary-color, 10%);
@@ -182,10 +173,9 @@ a.disabled, .bttn.disabled {
   .meta-menu {
     float: right;
     position: relative;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    margin-top: -1.5rem;
     overflow: hidden;
+    padding-left: 1rem;
+    margin-left: 1rem;
     a {
       span {
         @extend .visually-hidden;
@@ -199,9 +189,6 @@ a.disabled, .bttn.disabled {
         vertical-align: bottom !important;
         text-align: center;
       }
-    }
-    li {
-      margin: 0.25rem 0;
     }
     .info a:before { @extend .icon-circle-info; }
     .about a:before { @extend .icon-circle-question; }
@@ -222,14 +209,9 @@ a.disabled, .bttn.disabled {
     .menu-title {
       right: 4rem;
     }
-    .global-menu,
-    .menu-subtitle {
+    .menu-wrapper {
       padding-left: 4rem;
       padding-right: 4rem;
-    }
-    .meta-menu {
-      padding-right: 4rem;
-      padding-left: 2rem;
     }
   }
   @media #{$medium-up} {
@@ -254,40 +236,17 @@ a.disabled, .bttn.disabled {
       }
     }
     
-    ul {
-      display: inline-block;
-    }
-    li {
-      float: left;
-    }
-    
     .menu {
       float: left;
-      padding: 0;
       margin: 0 0 0 0.5rem;
     }
     
-    .meta-menu {
-      margin: 0 0 0 1rem;
-      padding-left: 0.75rem;
-      li {
-        margin: 0 0 0 0.25rem;
-      }
-    }
     .global-menu {
       clear: none;
-      padding-bottom: 0;
-      margin-bottom: 0;
-      &:after {
-        display: none;
-      }
-      a {
-        padding: 0 0.5rem;
-      }
     }
+    
     .menu-subtitle {
       float: left;
-      padding: 0;
     }
   }
 }
