@@ -17,7 +17,8 @@ html, body {
 }
 
 a:link,
-a:visited {
+a:visited,
+button {
   @include transform(translate3d(0, 0, 0));
   @include transition-property(opacity, top, left, right);
   @include transition-duration(0.2s, 0.1s, 0.2s, 0.2s);
@@ -27,21 +28,31 @@ a:visited {
 }
 
 a:hover,
-a:focus {
+a:focus,
+button:hover {
   outline: none;
   opacity: 0.7;
 }
 
-a:active {
+a:active,
+button:active {
   position: relative;
   top: 2px;
+}
+
+a.disabled, .bttn.disabled {
+  opacity: 0.4;
+  cursor: default;
+  &:hover, &:focus {
+    opacity: 0.4;
+  }
 }
 
 #site-head {
   position: relative;
   z-index: 10;
   background-color: $secondary-color;
-  box-shadow: inset 0 -4px 0 0 shade($secondary-color, 10%), 0 4px 0 0 rgba($primary-color, 0.1);
+  box-shadow: inset 0 -4px 0 0 shade($secondary-color, 15%), 0 4px 0 0 rgba($primary-color, 0.1);
   margin: 0;
   @extend .antialiased;
   @extend %global-text-shadow;
@@ -54,9 +65,9 @@ a:active {
     padding-bottom: 1.25rem;
   }
   .heading {
-    @include grid-column(10);
-    @media #{$small-up} {
-      @include grid-column(4);
+    @include grid-column(12);
+    @media #{$medium-up} {
+      @include grid-column(5);
     }
     a {
       float: left;
@@ -68,15 +79,60 @@ a:active {
 }
 
 #prime-nav {
-  @include grid-column(2);
+  
   .menu-wrapper {
-    float: right;
-    padding: 0.375rem 0;
+    top: 4rem;
+    left: 0;
+    z-index: 100;
+    position: absolute;
+    width: 100%;
+    background-color: $secondary-color;
+    box-shadow: inset 0 -4px 0 0 shade($secondary-color, 15%), 0 4px 0 0 rgba($primary-color, 0.1);
+    padding: $column-gutter 0;
+    opacity: 0;
+    visibility: hidden;
+    @include transition-property(opacity, top, visibility);
+    @include transition-duration(0.1s, 0.1s, 0.1s);
+    @include transition-timing-function(ease, ease, linear);
+    @include transition-delay(0, 0, 0);
+    &.visible {
+      opacity: 1;
+      visibility: visible;
+      top: 5rem;
+    }
+    &:before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      background: shade($secondary-color, 15%);
+      width: 100%;
+      height: 1px;
+      box-shadow: 0 1px 0 0 tint($secondary-color, 30%);
+      content: '';
+    }
   }
   .menu-title {
-    float: right;
+    position: absolute;
+    right: 1rem;
+    top: 1.625rem;
+    z-index: 1;
+    margin: 0;
     span {
       @extend .visually-hidden;
+    }
+    a {
+      display: block;
+    }
+    a:before {
+      display: block;
+      width: 2rem;
+      height: 2rem;
+      @extend .icon-menu;
+      font-size: 2rem;
+      color: #FFF;
+      font-weight: normal;
+      vertical-align: bottom !important;
     }
   }
   .menu-subtitle {
@@ -86,42 +142,152 @@ a:active {
     font-weight: normal;
     margin: 0;
     line-height: 2rem;
+    padding: 0 $column-gutter/2;
     &:not(:first-child) {
-      @extend .visually-hidden;
+      border: 0 none;
+      clip: rect(0px, 0px, 0px, 0px);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
     }
   }
   .menu {
-    float: left;
-    margin: 0 0 0 0.5rem;
+    margin: 0;
+    padding: 0 $column-gutter/2;
     li {
       list-style: none;
     }
-  }
-  .global-menu li {
     a {
       display: block;
+    }
+  }
+  .global-menu {
+    float: left;
+    clear: left;
+    a {
       font-weight: $body-font-bold;
       font-size: 1.25rem;
       line-height: 2rem;
-      padding: 0 0.5rem;
+      padding: 0 1rem;
     }
-    &.current a {
+    .current a {
       background-color: shade($secondary-color, 10%);
       box-shadow: inset 0 1px 0 0 shade($secondary-color, 30%), inset 0 -1px 0 0 tint($secondary-color, 30%);
       border-radius: $global-radius;
     }
   }
   .meta-menu {
-    display: none;
+    float: right;
+    position: relative;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    margin-top: -1.5rem;
+    overflow: hidden;
+    a {
+      span {
+        @extend .visually-hidden;
+      }
+      &:before {
+        display: block;
+        width: 2rem;
+        height: 2rem;
+        font-size: 2rem;
+        line-height: 2rem;
+        vertical-align: bottom !important;
+        text-align: center;
+      }
+    }
+    li {
+      margin: 0.25rem 0;
+    }
+    .info a:before { @extend .icon-circle-info; }
+    .about a:before { @extend .icon-circle-question; }
+    &:before {
+      position: absolute;
+      left: 0;
+      top: 0;
+      z-index: 1;
+      background: shade($secondary-color, 15%);
+      width: 1px;
+      height: 10rem;
+      box-shadow: 1px 0 0 0 tint($secondary-color, 30%);
+      content: '';
+    }
   }
+
   @media #{$small-up} {
-    @include grid-column(8);
+    .menu-title {
+      right: 4rem;
+    }
+    .global-menu,
+    .menu-subtitle {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+    .meta-menu {
+      padding-right: 4rem;
+      padding-left: 2rem;
+    }
+  }
+  @media #{$medium-up} {
+    @include grid-column(7);
     text-align: right;
+    
+    .menu-title {
+      display: none;
+    }
+    
+    .menu-wrapper {
+      position: static;
+      float: right;
+      padding: 0.375rem 0;
+      background-color: transparent;
+      box-shadow: none;
+      width: auto;
+      opacity: 1;
+      visibility: visible;
+      &:before {
+        display: none;
+      }
+    }
+    
     ul {
       display: inline-block;
     }
     li {
       float: left;
+    }
+    
+    .menu {
+      float: left;
+      padding: 0;
+      margin: 0 0 0 0.5rem;
+    }
+    
+    .meta-menu {
+      margin: 0 0 0 1rem;
+      padding-left: 0.75rem;
+      li {
+        margin: 0 0 0 0.25rem;
+      }
+    }
+    .global-menu {
+      clear: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+      &:after {
+        display: none;
+      }
+      a {
+        padding: 0 0.5rem;
+      }
+    }
+    .menu-subtitle {
+      float: left;
+      padding: 0;
     }
   }
 }

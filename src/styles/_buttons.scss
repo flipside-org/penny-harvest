@@ -1,3 +1,10 @@
+button {
+  &:hover,
+  &:focus {
+    outline: none;
+  }
+}
+
 /* Base button style */
 .bttn {
   display: inline-block;
@@ -20,6 +27,10 @@
   }
   &:active {
     opacity: 1;
+  }
+  &:hover,
+  &:focus {
+    outline: none;
   }
   &:before, &:after {
     font-weight: normal;

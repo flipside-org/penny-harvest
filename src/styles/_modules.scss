@@ -44,6 +44,9 @@
       border-bottom: 0;
     }
   }
+  &.stats {
+    display: none;
+  }
   
   h2 {
     @extend .hd-xs;
