@@ -70,18 +70,19 @@
     line-height: 2;
     
     &:after {
-      color: $primary-color;
+      color: #FFF;
       opacity: 0.3;
       font-size: 1rem;
-      margin-left: 0.725rem;
+      margin-left: 0.5rem;
       vertical-align: bottom !important;
+      @extend .icon-s-add;
     }
-    
     &.on {
       background: #FFF;
       color: $primary-color;
-      
       &:after {
+        color: $primary-color;
+        opacity: 0.3;
         @extend .icon-s-cancel;
       }
     }
@@ -111,10 +112,11 @@
     }
     
     .filter {
-      padding: 0.375rem 1rem 0.375rem 0.375rem;
+      padding: 0.375rem 0.725rem 0.375rem 0.375rem;
       @extend %impact-area-badge;
       
       &:before {
+        float: left;
         font-size: 1rem;
         width: 2rem;
         line-height: 2;
