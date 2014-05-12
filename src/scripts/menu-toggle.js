@@ -1,5 +1,5 @@
 $(document).ready(function() {
-  $('.toggle').click(function(event) {
+  $('.menu-title .toggle').click(function(event) {
     event.stopPropagation();
     event.preventDefault();
 
