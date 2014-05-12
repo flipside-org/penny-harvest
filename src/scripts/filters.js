@@ -147,7 +147,16 @@ if ($('#national-orgs').length) {
           var filtered = $.grep(national_orgs, function(v) {
             // Keywords are exclusive, meaning that all of them must be present.
             for (var i in selected_keywords) {
-              if ($.inArray(selected_keywords[i].id, v.keywords) == -1) {
+              var found = false;
+              for (var j in v.keywords) {
+                if (selected_keywords[i] == v.keywords[j].id) {
+                  found = true;
+                  break;
+                }
+              }
+              // The keyword was not found. Since they are exclusive
+              // return false.
+              if (!found) {
                 return false;
               }
             }
@@ -181,7 +190,16 @@ if ($('#national-orgs').length) {
           var filtered = $.grep(national_orgs, function(v) {
             // Keywords are exclusive, meaning that all of them must be present.
             for (var i in selected_keywords) {
-              if ($.inArray(selected_keywords[i].id, v.keywords) == -1) {
+              var found = false;
+              for (var j in v.keywords) {
+                if (selected_keywords[i] == v.keywords[j].id) {
+                  found = true;
+                  break;
+                }
+              }
+              // The keyword was not found. Since they are exclusive
+              // return false.
+              if (!found) {
                 return false;
               }
             }
@@ -391,7 +409,16 @@ if ($('#map').length) {
           if (selected_keywords.length) {
             // Keywords are exclusive, meaning that all of them must be present.
             for (var i in selected_keywords) {
-              if ($.inArray(selected_keywords[i], f.properties.keywords.id) == -1) {
+              var found = false;
+              for (var j in f.properties.keywords) {
+                if (selected_keywords[i] == f.properties.keywords[j].id) {
+                  found = true;
+                  break;
+                }
+              }
+              // The keyword was not found. Since they are exclusive
+              // return false.
+              if (!found) {
                 return false;
               }
             }
@@ -419,8 +446,18 @@ if ($('#map').length) {
         else if (selected_keywords.length) {
           filterCluster(function(f) {
             // Keywords are exclusive, meaning that all of them must be present.
+            // Keywords are exclusive, meaning that all of them must be present.
             for (var i in selected_keywords) {
-              if ($.inArray(selected_keywords[i], f.properties.keywords.id) == -1) {
+              var found = false;
+              for (var j in f.properties.keywords) {
+                if (selected_keywords[i] == f.properties.keywords[j].id) {
+                  found = true;
+                  break;
+                }
+              }
+              // The keyword was not found. Since they are exclusive
+              // return false.
+              if (!found) {
                 return false;
               }
             }
