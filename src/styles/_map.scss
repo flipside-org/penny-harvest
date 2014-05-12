@@ -107,6 +107,7 @@
     height: 2.5rem;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    padding: 0;
     
     &:before {
       @extend .icon-search-r;
@@ -121,9 +122,9 @@
     float: left;
     width: 14.75rem;
     height: 2.5rem;
-    line-height: 2.5rem;
+    line-height: 1.25rem;
     margin: 0;
-    padding: 0 2.5rem 0 1rem;
+    padding: 0.625rem 3.25rem 0.625rem 0.75rem;
     border: 1px solid tint($primary-color, 50%);
     border-right: none;
     border-radius: $global-radius 0 0 $global-radius;
@@ -132,6 +133,12 @@
     
     @media #{$small-up} {
       width: 19.25rem;
+    }
+    
+    &:focus {
+      outline: 0;
+      border-color: $secondary-color;
+      @include transition(border, 0.2s, ease);
     }
   }
   
@@ -228,13 +235,15 @@
     padding: 0;
     width: 300px;
     
-    &>*:first-child {
-      border-top-left-radius: $global-radius;
-      border-top-right-radius: $global-radius;
-    }
-    &>*:last-child {
-      border-bottom-left-radius: $global-radius;
-      border-bottom-right-radius: $global-radius;
+    article {      
+      &>*:first-child {
+        border-top-left-radius: $global-radius;
+        border-top-right-radius: $global-radius;
+      }
+      &>*:last-child {
+        border-bottom-left-radius: $global-radius;
+        border-bottom-right-radius: $global-radius;
+      }
     }
   }
 
