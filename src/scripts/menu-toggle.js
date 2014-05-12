@@ -4,7 +4,9 @@ $(document).ready(function() {
     event.preventDefault();
 
     $('.menu-wrapper').toggleClass('visible');
+    // Hide other open dropdowns.
     $('.action-dropdown').removeClass('revealed');
+    $('a[data-dropdown="action-bttn"]').removeClass('current');
   });
 
   $(document).click(function() {
