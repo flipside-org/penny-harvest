@@ -9,6 +9,12 @@
       <p>{{ page.description | markdownify }}</p>
     </div>
     {% endif %}
+    {% if page.mission %}
+    <div class="contained-row">
+      <h2>Mission</h2>
+      <p>{{ page.mission | markdownify }}</p>
+    </div>
+    {% endif %}
     {% if page.keywords %}
     <div class="contained-row">
       <h2>We help</h2>
@@ -19,5 +25,10 @@
       </ul>
     </div>
     {% endif %}
+    {% unless page.description or page.mission or page.keywords %}
+      <div class="contained-row">
+        <p class="empty">This organization doesn't have a description yet.</p>
+      </div>
+    {% endunless %}
   </div>
 </section>
