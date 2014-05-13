@@ -50,7 +50,7 @@
     <dt>Address</dt>
     <dd class="address">{{ page.address | markdownify }}</dd>
     <dd class="map">
-      <div id="map-container" data-lat="{{page.lat}}" data-lng="{{page.lng}}"><!-- map --></div>
+      <div id="map-container" data-lat="{{page.lat}}" data-lng="{{page.lng}}" data-impact-area="{{ site.data.impact_areas[page.impact_area].class }}"><!-- map --></div>
     </dd>
   {% endcapture %}
 {% endif %}
