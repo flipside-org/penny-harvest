@@ -266,6 +266,7 @@
   right: 0;
   z-index: 9999;
   min-width: 300px;
+  overflow-y: auto;
   
   /* The ghost, nudged to maintain perfect centering */
   &:before {
@@ -282,10 +283,10 @@
 .modal {
   width: 30%;
   min-width: 300px;
-  max-height: 80%;
   text-align: left;
   display: inline-block;
   vertical-align: middle;
+  margin: 3rem 0;
   
   background-color: white;
   padding: rem-calc(0 32);
@@ -316,7 +317,7 @@
     opacity: 1;
     visibility: visible;
     
-    .confirm-box {
+    .modal {
       @include transform(translate3d(0, 0, 0));
       @include transition-property(opacity, margin, visibility);
       @include transition-duration(0.1s, 0.1s, 0.1s);
@@ -324,7 +325,7 @@
       @include transition-delay(0.2s, 0.2s, 0.2s);
       
       opacity: 1;
-      margin-top: 0;
+      margin-top: 3rem;
       visibility: visible;
     }
   }
