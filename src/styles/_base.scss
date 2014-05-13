@@ -543,8 +543,3 @@ a.disabled, .bttn.disabled {
     }
   }
 }
-
-#site-foot {
-  display: none;
-  @include grid-column(12);
-}
