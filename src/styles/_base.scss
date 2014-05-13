@@ -173,7 +173,6 @@ a.disabled, .bttn.disabled {
   .meta-menu {
     float: right;
     position: relative;
-    overflow: hidden;
     padding-left: 1rem;
     margin-left: 1rem;
     a {
@@ -199,7 +198,7 @@ a.disabled, .bttn.disabled {
       z-index: 1;
       background: shade($secondary-color, 15%);
       width: 1px;
-      height: 10rem;
+      height: 100%;
       box-shadow: 1px 0 0 0 tint($secondary-color, 30%);
       content: '';
     }
