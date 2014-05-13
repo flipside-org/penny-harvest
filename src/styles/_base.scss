@@ -176,17 +176,16 @@ a.disabled, .bttn.disabled {
     padding-left: 1rem;
     margin-left: 1rem;
     a {
+      width: 2rem;
+      height: 2rem;
+      line-height: 1;
+      text-align: center;
+      font-size: 2rem;
       span {
         @extend .visually-hidden;
       }
       &:before {
-        display: block;
-        width: 2rem;
-        height: 2rem;
-        font-size: 2rem;
-        line-height: 2rem;
         vertical-align: bottom !important;
-        text-align: center;
       }
     }
     .info a:before { @extend .icon-circle-info; }
