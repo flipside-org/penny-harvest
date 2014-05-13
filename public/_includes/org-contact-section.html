@@ -14,6 +14,12 @@
     <dd class="bio">{{ page.contact_person_intro | markdownify }}</dd>
   {% endcapture %}
 {% endif %}
+{% if page.email %}
+  {% capture contact_section %}{{ contact_section }}
+    <dt>Email</dt>
+    <dd class="email"><a href="mailto:{{ page.email }}" title="Email the contact person">{{ page.email }}</a></dd>
+  {% endcapture %}
+{% endif %}
 {% if page.website %}
   {% capture contact_section %}{{ contact_section }}
     <dt>Website</dt>
@@ -23,7 +29,20 @@
 {% if page.phone %}
   {% capture contact_section %}{{ contact_section }}
     <dt>Phone</dt>
-    <dd class="phone"><a href="tel:{{ page.phone }}" title="Phone">{{ page.phone }}</a></dd>
+    {% if page.ext %}
+      <dd class="phone">
+        <a href="tel:{{ page.phone }}pp{{ page.ext }}" title="Phone">{{ page.phone }}</a>
+        <small class="role">Ext. {{ page.ext }}</small>
+      </dd>
+    {% else %}
+      <dd class="phone"><a href="tel:{{ page.phone }}" title="Phone">{{ page.phone }}</a></dd>
+    {% endif %}
+  {% endcapture %}
+{% endif %}
+{% if page.fax %}
+  {% capture contact_section %}{{ contact_section }}
+    <dt>Fax</dt>
+    <dd class="fax"><a href="fax:{{ page.fax }}" title="Fax">{{ page.fax }}</a></dd>
   {% endcapture %}
 {% endif %}
 {% if page.address %}
