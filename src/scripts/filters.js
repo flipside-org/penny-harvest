@@ -54,7 +54,7 @@ if ($('#national-orgs').length) {
   $.get('/json/national-orgs.json', function(national_orgs){
     
     // Render function for handlebars template. 
-    function renderer(orgs) {
+    var Renderer = function() {
       
       this.page_size = 20;
       this.current_page = 0;
@@ -87,10 +87,10 @@ if ($('#national-orgs').length) {
         
         // Check if next rendering would yield results.
         // If not, disable the button.
-        var start = this.page_size * (this.current_page + 1);
-        var end = start + this.page_size;
-        var to_render = orgs.slice(start, end);
-        if (to_render.length == 0) {
+        start = this.page_size * (this.current_page + 1);
+        end = start + this.page_size;
+        to_render = orgs.slice(start, end);
+        if (to_render.length === 0) {
           this.load_more_button.addClass('disabled');
         }
         
@@ -108,7 +108,7 @@ if ($('#national-orgs').length) {
       };
     };
     
-    var renderer = new renderer();
+    var renderer = new Renderer();
     
     $('#show-more-trigger').click(function(e) {
       e.preventDefault();
@@ -174,20 +174,23 @@ if ($('#national-orgs').length) {
         var selected_keywords = PH_filters.get_active('keywords');
         var selected_impact_areas = PH_filters.get_active('impact_areas');
         
+        // Store the filteres elements to display.
+        var filtered;
+        
         // If nothing is active show all.
         if (!selected_keywords.length && !selected_impact_areas.length) {
           renderer.render(national_orgs);
         }
         // Priority to the impact areas. 
         else if (selected_impact_areas.length) {
-          var filtered = $.grep(national_orgs, function(v) {
+          filtered = $.grep(national_orgs, function(v) {
             return $.inArray(v.impact_area.id, selected_impact_areas) >= 0;
           });
           renderer.render(filtered);
         }
         // Keywords are last.
         else if (selected_keywords.length) {
-          var filtered = $.grep(national_orgs, function(v) {
+          filtered = $.grep(national_orgs, function(v) {
             // Keywords are exclusive, meaning that all of them must be present.
             for (var i in selected_keywords) {
               var found = false;
@@ -434,7 +437,7 @@ if ($('#map').length) {
         
         // If nothing is active show all.
         if (!selected_keywords.length && !selected_impact_areas.length) {
-          filterCluster(function(f) { return true; });
+          filterCluster(function() { return true; });
         }
         // Priority to the impact areas.
         else if (selected_impact_areas.length) {
