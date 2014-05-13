@@ -59,6 +59,7 @@
       @extend .contained-row;
       &.person:before { @extend .icon-user; }
       &.phone:before { @extend .icon-phone; }
+      &.fax:before { @extend .icon-fax; }
       &.email:before { @extend .icon-email; }
       &.bio:before { @extend .icon-description; }
       &.address {
