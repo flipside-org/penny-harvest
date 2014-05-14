@@ -2,7 +2,7 @@
 permalink: json/national-orgs.json
 ---
 [
-{% for org in site.categories.national_org %}{
+{% for org in site.categories.national %}{
     {% if org.description %}
       {% capture org_content %}{{ org.description | truncate }}{% endcapture %}
     {% elsif org.mission %}
@@ -11,7 +11,7 @@ permalink: json/national-orgs.json
       {% capture org_content %}<em>No description</em>{% endcapture %}
     {% endif %}
   "title": "{{ org.title }}",
-  "url": "{{ org.url }}",
+  "url": "{{ site.domain }}{{ org.url }}",
   "city": "{{ org.city }}",
   "state": "{{ org.state }}",
   "content" : "{{ org_content }}",

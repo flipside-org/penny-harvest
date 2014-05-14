@@ -3,19 +3,19 @@
   <div class="menu-wrapper">
     <h2 class="menu-subtitle">Explore:</h2>
     <ul class="menu global-menu">
-      {% if page.current_menu == 'local' or page.category == 'local_org' %}
+      {% if page.current_menu == 'local' or page.category == 'local' %}
       <li class="current">
       {% else %}
       <li>
       {% endif %}
-        <a href="/" title="View local organizations">Local</a>
+        <a href="{{ site.domain }}/" title="View local organizations">Local</a>
       </li>
-      {% if page.current_menu == 'national' or page.category == 'national_org' %}
+      {% if page.current_menu == 'national' or page.category == 'national' %}
       <li class="current">
       {% else %}
       <li>
       {% endif %}
-        <a href="/national/" title="View national organizations">National</a>
+        <a href="{{ site.domain }}/national/" title="View national organizations">National</a>
       </li>
     </ul>
     <h2 class="menu-subtitle">More:</h2>

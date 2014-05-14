@@ -3,7 +3,7 @@ permalink: json/local-orgs.geojson
 ---
 { "type": "FeatureCollection",
   "features": [
-    {% for org in site.categories.local_org %}
+    {% for org in site.categories.local %}
     { "type": "Feature",
       "geometry": {
         "type": "Point",
@@ -18,7 +18,7 @@ permalink: json/local-orgs.geojson
           {% capture org_content %}<em>No description</em>{% endcapture %}
         {% endif %}
         "title": "{{ org.title }}",
-        "url": "{{ org.url }}",
+        "url": "{{ site.domain }}{{ org.url }}",
         "content" : "{{ org_content }}",
         "impact_area": {
           "name" : "{{ org.impact_area }}",
