@@ -503,3 +503,33 @@ a.disabled, .bttn.disabled {
   display: none;
   @include grid-column(12);
 }
+
+/* IE<9 */
+
+.lt-ie9 {
+  body {
+    background: none repeat scroll 0 0 $secondary-color;
+  }
+
+  #site-canvas {
+    display: none;
+  }
+
+  #nocando {
+    margin: 200px auto;
+    padding: 0 20px;
+    width: 440px;
+    color: white;
+
+    h1 {
+      color: #FFF;
+      line-height: 1.1;
+      margin-bottom: 40px;
+    }
+
+    a {
+      color: #FFF;
+      text-decoration: underline;
+    }
+  }
+}
