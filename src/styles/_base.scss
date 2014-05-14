@@ -173,21 +173,19 @@ a.disabled, .bttn.disabled {
   .meta-menu {
     float: right;
     position: relative;
-    overflow: hidden;
     padding-left: 1rem;
     margin-left: 1rem;
     a {
+      width: 2rem;
+      height: 2rem;
+      line-height: 1;
+      text-align: center;
+      font-size: 2rem;
       span {
         @extend .visually-hidden;
       }
       &:before {
-        display: block;
-        width: 2rem;
-        height: 2rem;
-        font-size: 2rem;
-        line-height: 2rem;
         vertical-align: bottom !important;
-        text-align: center;
       }
     }
     .info a:before { @extend .icon-circle-info; }
@@ -199,7 +197,7 @@ a.disabled, .bttn.disabled {
       z-index: 1;
       background: shade($secondary-color, 15%);
       width: 1px;
-      height: 10rem;
+      height: 100%;
       box-shadow: 1px 0 0 0 tint($secondary-color, 30%);
       content: '';
     }
@@ -497,6 +495,36 @@ a.disabled, .bttn.disabled {
     }
     .column {
       @include grid-column(6);
+    }
+  }
+}
+
+/* IE<9 */
+
+.lt-ie9 {
+  body {
+    background: none repeat scroll 0 0 $secondary-color;
+  }
+
+  #site-canvas {
+    display: none;
+  }
+
+  #nocando {
+    margin: 200px auto;
+    padding: 0 20px;
+    width: 440px;
+    color: white;
+
+    h1 {
+      color: #FFF;
+      line-height: 1.1;
+      margin-bottom: 40px;
+    }
+
+    a {
+      color: #FFF;
+      text-decoration: underline;
     }
   }
 }
