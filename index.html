@@ -1,42 +1,47 @@
+---
+layout: base
+title: Home
+current_menu: local
+include_map : true
+---
+<section class="hub map local">
+  <header class="banner">
+    <h1 class="prime-title">Local Organizations</h1>
 
-<!DOCTYPE html>
-<!--[if lt IE 7]>		<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>			<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>			<html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->	<html class="no-js"> <!--<![endif]-->
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>Penny Harvest NY: Organization Finder</title>
-    <meta name="description" content="Penny Harvest NY: Organization Finder" />
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
-
-    <link rel="stylesheet" href="temp.css" />
-
-  </head>
-
-  <body>
-
-    <!-- site-canvas -->
-    <div id="site-canvas" class="visually-hidden">
-
-      <!-- site-head -->
-      <header id="site-head" role="banner">
-        <h1>Penny Harvest NY: Organization Finder</h1>
-      </header>
-      <!--/ site-head -->
-
-      <!-- site-body -->
-      <main id="site-body" role="main">
-        
-        <p>Coming soon.</p>
-
-      </main>
-      <!--/ site-body -->
-
+    <div class="filters">
+      <div class="inner row">
+        <a href="#" class="filters-toggle on">Filters</a>
+        <div class="impact-areas">
+          <h2 class="hd-xs">Impact areas</h2>
+          <ul>
+            {% for imp in site.data.impact_areas %}
+            <li><button class="filter {{ imp[1].class }}" data-filter-id="{{ imp[1].id }}" data-filter-type="impact_area">{{ imp[0] }}</button></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="keywords">
+          <h2 class="hd-xs">Issues/Keywords</h2>
+          <ul>
+            {% for key in site.data.keywords %}
+            <li><button class="filter" data-filter-id="{{ key[1].id }}" data-filter-type="keyword">{{ key[0] }}</button></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
     </div>
-    <!--/ site-canvas -->
+    
+    <div class="row">
+      <div class="geocoder">
+        <form action="" method="post" accept-charset="utf-8">
+          <input type="search" name="location" placeholder="Address or neighbourhood" class="map-geocoder-input"/>
+          <button type="submit" class="bttn bttn-l bttn-primary map-geocoder-search"><span class="visually-hidden">Search</span></button>
+        </form>
+        <a href="#" class="map-geocoder-locate"><span class="visually-hidden">Locate me</span></a>
+      </div>
+    </div>
 
-  </body>
-
-</html>
+  </header>
+  <div class="content" id="local-orgs">
+    <div id='map'><!-- Mapbox map --></div>
+  </div>
+</section>

@@ -1,14 +1,14 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     // https://github.com/gruntjs/grunt-contrib-clean
-    clean : ['public/assets/styles/*', '!public/assets/**/.gitkeep', 'public/assets/scripts/*', '_site/*'],
+    clean : ['assets/styles/*', '!assets/**/.gitkeep', 'assets/scripts/*', '_site/*'],
     
     // https://github.com/gruntjs/grunt-contrib-compass
     compass : {
       // Default options.
       options : {
           sassDir : 'src/styles',
-          cssDir : 'public/assets/styles',
+          cssDir : 'assets/styles',
           raw : 'add_import_path "src/bower_components/foundation/scss"; require "sassy-strings";'
       },
       
@@ -48,12 +48,12 @@ module.exports = function(grunt) {
     uglify: {
       prod: {
         files: {
-          'public/assets/scripts/website.min.js': ['src/scripts/*.js'],
-          'public/assets/scripts/media.min.js': [
+          'assets/scripts/website.min.js': ['src/scripts/*.js'],
+          'assets/scripts/media.min.js': [
             'src/bower_components/modernizr/modernizr.js',
           ],
           
-          'public/assets/scripts/foundation.min.js': [
+          'assets/scripts/foundation.min.js': [
             'src/bower_components/foundation/js/vendor/jquery.js',
             
             'src/bower_components/foundation/js/foundation/foundation.js',
@@ -82,7 +82,7 @@ module.exports = function(grunt) {
         tasks: ['build']
       },
       jekyll : {
-        files: ['public/**/*.html', 'public/**/*.json', 'public/**/*.geojson', 'public/**/*.yml', '!_site/**/*', 'public/**/**/*.md'],
+        files: ['**/*.html', '**/*.json', '**/*.geojson', '**/*.yml', '**/**/*.md', '!_site/**/*', '!_site/*', '!src/*', '!node_modules/*', '!placeholder/*'],
         tasks: ['jekyll:generate']
       }
     },
@@ -92,14 +92,14 @@ module.exports = function(grunt) {
       generate : {
         options : {
           config: '_config.yml',
-          src: 'public',
+          src: '',
           dest: './_site',
         }
       },
       server : {
         options : {
           config: '_config.yml',
-          src: 'public',
+          src: '',
           dest: './_site',
           serve: true
         }
