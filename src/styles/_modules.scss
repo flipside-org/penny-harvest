@@ -1,27 +1,3 @@
-.cards {
-  list-style: none;
-  
-  .card-wrapper {
-    @include grid-column(12);
-    
-    @media #{$medium-up} {
-      @include grid-column(6);
-      &:nth-child(2n+1) {
-        clear: left;
-      }
-    }
-    @media #{$large-up} {
-      @include grid-column(4);
-      &:nth-child(2n+1) {
-        clear: none;
-      }
-      &:nth-child(3n+1) {
-        clear: left;
-      }
-    }
-  }
-}
-
 .contained {
   background-color: #FFF;
   box-shadow: 0 2px 0 0 rgba($primary-color, 0.1);
@@ -48,7 +24,7 @@
     display: none;
   }
   
-  h2 {
+  h2, h3 {
     @extend .hd-xs;
     margin-top: 0;
   }
@@ -64,7 +40,7 @@
     }
   }
   
-  &.block {
+  &.block, &.modal {
     .prime-title {
       @extend .hd-m;
       margin: 0;
@@ -218,7 +194,7 @@
   }
   
   @media #{$large-up} {
-    &.block {
+    &.block, &.modal {
       .contained-head {
         padding: 1.5rem 4rem 1.5rem 1.5rem;
       }
@@ -251,4 +227,176 @@
       width: 100%;
       height: 100%;
     }
+}
+
+
+
+/* This parent can be any width and height */
+/* http://css-tricks.com/centering-in-the-unknown/ */
+.modal-wrapper {
+  text-align: center;
+  background: none repeat scroll 0 0 rgba($primary-color, 0.9);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  overflow-y: auto;
+  padding: 0 $column-gutter/2;
+  
+  /* The ghost, nudged to maintain perfect centering */
+  &:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+    width: 1px;
+    margin-right: -6px; /* Adjusts for spacing */
+  }
+}
+
+/* The element to be centered, can also be of any width and height */ 
+.modal {
+  width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 3rem 0;
+  text-align: left;
+  border: 0;
+  @media #{$small-up} {
+    max-width: 80%;
+  }
+  @media #{$medium-up} {
+    max-width: 44rem;
+  }
+}
+
+/* For the animation */
+.modal-wrapper {
+  opacity: 0;
+  visibility: hidden;
+
+  .modal {
+    opacity: 0;
+    margin-top: rem-calc(-48);
+    visibility: hidden;
+  }
+  
+  &.revealed {
+    @include transform(translate3d(0, 0, 0));
+    @include transition-property(opacity, visibility);
+    @include transition-duration(0.1s, 0.1s);
+    @include transition-timing-function(ease, linear);
+    @include transition-delay(0, 0);
+    
+    opacity: 1;
+    visibility: visible;
+    
+    .modal {
+      @include transform(translate3d(0, 0, 0));
+      @include transition-property(opacity, margin, visibility);
+      @include transition-duration(0.1s, 0.1s, 0.1s);
+      @include transition-timing-function(ease, ease, linear);
+      @include transition-delay(0.2s, 0.2s, 0.2s);
+      
+      opacity: 1;
+      margin-top: 3rem;
+      visibility: visible;
+    }
+  }
+}
+
+#info {
+  overflow: hidden;
+  position: relative;
+  address {
+    font-style: normal;
+    margin-bottom: 2rem;
+    small {
+      display: block;
+      font-size: inherit;
+      color: tint($primary-color, 40%);
+    }
+    a span {
+      @extend .visually-hidden;
+    }
+  }
+  .developer a {
+    display: block;
+    max-width: 160px;
+    margin-left: 0.25rem;
+  }
+  .foot {
+    overflow: hidden;  
+  }
+  
+  .dismiss {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1;
+    display: block;
+    height: 2rem;
+    width: 2rem;
+    line-height: 2;
+    font-size: 1rem;
+    text-align: center;
+    color: tint($primary-color, 60%);
+    span {
+      @extend .visually-hidden;
+    }
+    &:before {
+      @extend .icon-s-cancel;
+      vertical-align: bottom !important;
+    }
+  }
+  
+  .ribbon {
+    background-color: $secondary-color;
+    overflow: hidden;
+    white-space: nowrap;
+    position: absolute;
+    right: -3rem;
+    bottom: 2rem;
+    margin: 0;
+    @include transform(rotate(-45deg));
+    box-shadow: 0 4px 0 0 rgba($primary-color, 0.1);
+    a {
+      width: 12rem;
+      color: #FFF;
+      display: block;
+      padding: 0.25rem 1rem;
+      text-align: center;
+      @extend %global-text-shadow;
+    }
+  }
+  
+  @media #{$small-up} {
+    address {
+      margin-bottom: 1rem;
+    }
+    .author {
+      float: left;
+      padding-right: $column-gutter;
+      margin-right: $column-gutter;
+      border-right: 1px solid tint($primary-color, 85%);
+      width: 42%;
+    }
+    .developer {
+      float: left;
+    }
+  }
+  
+  @media #{$medium-up} {
+    .author {
+      width: 32%;
+    }
+  }
+  
+  @media #{$large-up} {
+    .dismiss {
+      top: 1.5rem;
+    }
+  }
 }

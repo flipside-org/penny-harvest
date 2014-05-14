@@ -59,11 +59,9 @@
         {{ content }}
       </main>
       
-      <footer id="site-foot" role="contentinfo">
-        <div class="row">
-          <p class="built-by">
-            Flipside - 2014
-          </p>
+      <footer class="modal-wrapper" id="site-foot" role="contentinfo">
+        <div class="contained modal" id="info">
+          {% include modal-about.html %}
         </div>
       </footer>
     </div>

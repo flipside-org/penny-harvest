@@ -499,11 +499,6 @@ a.disabled, .bttn.disabled {
   }
 }
 
-#site-foot {
-  display: none;
-  @include grid-column(12);
-}
-
 /* IE<9 */
 
 .lt-ie9 {
