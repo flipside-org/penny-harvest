@@ -66,8 +66,8 @@
       </footer>
     </div>
     
-    <script src="/assets/scripts/media.min.js"></script>
-    <script src="/assets/scripts/foundation.min.js"></script>
+    <script src="{{ site.domain }}//assets/scripts/media.min.js"></script>
+    <script src="{{ site.domain }}//assets/scripts/foundation.min.js"></script>
     {% if page.include_map %}
     <script src="https://api.tiles.mapbox.com/mapbox.js/v1.6.2/mapbox.js"></script>
     <script src='http://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
@@ -75,7 +75,7 @@
     {% if page.include_handlebars %}
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.3.0/handlebars.min.js"></script>
     {% endif %}
-    <script src="/assets/scripts/website.min.js"></script>
+    <script src="{{ site.domain }}//assets/scripts/website.min.js"></script>
     
   </body>
 </html>
