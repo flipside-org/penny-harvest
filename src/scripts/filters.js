@@ -51,7 +51,7 @@ if ($filters.length) {
 
 // Filters for national page.
 if ($('#national-orgs').length) {
-  $.get('/json/national-orgs.json', function(national_orgs){
+  $.get(PH.settings.domain + '/json/national-orgs.json', function(national_orgs){
     
     // Render function for handlebars template. 
     var Renderer = function() {
@@ -218,7 +218,7 @@ if ($('#national-orgs').length) {
 
 // Filters for map.
 if ($('#map').length) {
-  $.get('/json/local-orgs.geojson', function(geoJson){
+  $.get(PH.settings.domain + '/json/local-orgs.geojson', function(geoJson){
     
     //========================================================================//
     //  Define some functions and objects that are needed.                    //
