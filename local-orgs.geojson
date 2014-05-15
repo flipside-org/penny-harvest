@@ -11,9 +11,9 @@ permalink: json/local-orgs.geojson
       },
       "properties": {
         {% if org.description %}
-          {% capture org_content %}{{ org.description | truncate | newline_to_br | strip_newlines }}{% endcapture %}
+          {% capture org_content %}{{ org.description | strip_html | strip_newlines | escape | truncate }}{% endcapture %}
         {% elsif org.mission %}
-          {% capture org_content %}{{ org.mission | truncate | newline_to_br | strip_newlines }}{% endcapture %}
+          {% capture org_content %}{{ org.mission | strip_html | strip_newlines | escape | truncate }}{% endcapture %}
         {% else %}
           {% capture org_content %}<em>No description</em>{% endcapture %}
         {% endif %}
