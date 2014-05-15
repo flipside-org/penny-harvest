@@ -1,0 +1,73 @@
+---
+layout: base
+permalink: national/index.html
+current_menu: national
+title: National organizations
+include_handlebars: true
+---
+{% raw %}
+<script id="national-hub-template" type="text/x-handlebars-template">
+  
+
+  {{#each orgs}}
+  <li class="card-wrapper">
+    <article class="contained card">
+      <header class="contained-head">
+        <h1 class="prime-title"><a href="{{ url }}" title="Read more about organization">{{ title }}</a></h1>
+        <dl class="meta">
+          <dt>Location:<dt>
+          <dd class="location">{{ city }}, {{ state }}</dd>
+          <dt>Impact area:<dt>
+          <dd class="impact-area {{ impact_area.class }}" title="{{ impact_area.name }}"><span>{{ impact_area.name }}</span></dd>
+        </dl>
+      </header>
+      <div class="contained-body">
+        <p>{{{ content }}}</p>
+      </div>
+      <footer class="contained-foot">
+        <a href="{{ url }}" title="Read more about organization" class="go-link">Learn more about us</a>
+      </footer>
+    </article>
+  </li>
+  {{/each}}
+
+
+</script>
+{% endraw %}
+
+<section class="hub national">
+  <header class="banner">
+    <h1 class="prime-title">National Organizations</h1>
+    
+    <div class="filters">
+      <div class="inner row">
+        <a href="#" class="filters-toggle on">Filters</a>
+        <div class="impact-areas">
+          <h2 class="hd-xs">Impact areas</h2>
+          <ul>
+            {% for imp in site.data.impact_areas %}
+            <li><button class="filter {{ imp[1].class }}" data-filter-id="{{ imp[1].id }}" data-filter-type="impact_area">{{ imp[0] }}</button></li>
+            {% endfor %}
+          </ul>
+        </div>
+        <div class="keywords">
+          <h2 class="hd-xs">Issues/Keywords</h2>
+          <ul>
+            {% for key in site.data.keywords %}
+            <li><button class="filter" data-filter-id="{{ key[1].id }}" data-filter-type="keyword">{{ key[0] }}</button></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    
+  </header>
+  <div class="content" id="national-orgs">
+    <ul class="national cards row"><!-- National organization included with javascript --></ul>
+  </div>
+  <footer class="row foot">
+    <div class="inner">
+      <button class="bttn bttn-l bttn-primary" id="show-more-trigger"><span>Show more</span></button>
+    </div>
+  </footer>
+</section>

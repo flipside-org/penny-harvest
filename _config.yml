@@ -1,7 +1,6 @@
 safe:           false
-domain:	        http://flipside.org
+domain:	        http://flipside-org.github.io/penny-harvest
 permalink:			none
-paginate: 			20
 name:           Penny Harvest Organization Finder
 description:    The New York edition of the Penny Harvest Organization Finder
-exclude:    		['node_modules', 'src', 'Gruntfile.js', 'package.json', 'Readme.md', 'bower.json']
+exclude:    		['node_modules', 'src', 'Gruntfile.js', 'package.json', 'README.md', 'bower.json', 'placeholder', 'sample-content.sh']

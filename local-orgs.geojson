@@ -1,0 +1,39 @@
+---
+permalink: json/local-orgs.geojson
+---
+{ "type": "FeatureCollection",
+  "features": [
+    {% for org in site.categories.local %}
+    { "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [{{ org.lng }}, {{ org.lat }}]
+      },
+      "properties": {
+        {% if org.description %}
+          {% capture org_content %}{{ org.description | truncate | newline_to_br | strip_newlines }}{% endcapture %}
+        {% elsif org.mission %}
+          {% capture org_content %}{{ org.mission | truncate | newline_to_br | strip_newlines }}{% endcapture %}
+        {% else %}
+          {% capture org_content %}<em>No description</em>{% endcapture %}
+        {% endif %}
+        "title": "{{ org.title }}",
+        "url": "{{ site.domain }}{{ org.url }}",
+        "content" : "{{ org_content }}",
+        "impact_area": {
+          "name" : "{{ org.impact_area }}",
+          "id" : "{{ site.data.impact_areas[org.impact_area].id }}",
+          "class" : "{{ site.data.impact_areas[org.impact_area].class }}"
+        },
+        "keywords" : [
+          {% for keyword in org.keywords %}
+          {
+            "name" : "{{ keyword }}",
+            "id" : "{{ site.data.keywords[keyword].id }}"
+          }{% unless forloop.last %}, {% endunless %}
+          {% endfor %}
+        ]
+      }
+    }{% unless forloop.last %},{% endunless %}{% endfor %}
+  ]
+}

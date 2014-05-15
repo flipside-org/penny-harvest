@@ -1,0 +1,32 @@
+<nav id="prime-nav" role="navigation">
+  <h1 class="menu-title"><a href="#nav-links" class="toggle"><span>Menu</span></a></h1>
+  <div class="menu-wrapper">
+    <h2 class="menu-subtitle">Explore:</h2>
+    <ul class="menu global-menu">
+      {% if page.current_menu == 'local' or page.category == 'local' %}
+      <li class="current">
+      {% else %}
+      <li>
+      {% endif %}
+        <a href="{{ site.domain }}/" title="View local organizations">Local</a>
+      </li>
+      {% if page.current_menu == 'national' or page.category == 'national' %}
+      <li class="current">
+      {% else %}
+      <li>
+      {% endif %}
+        <a href="{{ site.domain }}/national/" title="View national organizations">National</a>
+      </li>
+    </ul>
+    <h2 class="menu-subtitle">More:</h2>
+    <ul class="menu meta-menu">
+      {% if page.current_menu == 'info' %}
+      <li class="info current">
+      {% else %}
+      <li class="info">
+      {% endif %}
+        <a href="#info" title="About the Organization Finder" data-modal-id="site-foot"><span>About</span></a>
+      </li>
+    </ul>
+  </div>
+</nav>
