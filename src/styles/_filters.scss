@@ -135,4 +135,9 @@
       padding: 0 0.725rem;
     }
   }
+  
+  .limit-height {
+    max-height: 300px;
+    overflow-y: auto;
+  }
 }
