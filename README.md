@@ -4,7 +4,7 @@
 > __Current status:__  
 This prototype is a work in progress and has not been officially launched yet.
 
-The Organization Finder allows children that participate in the [Penny Harvest](http://www.commoncents.org/go/penny-harvest) to find organizations in their neighbourhood. The first prototype focuses on the New York area and is built using [Jekyll](http://jekyllrb.com/), [Foundation](http://foundation.zurb.com/) and [Leaflet](http://leafletjs.com/).
+The Organization Finder allows children that participate in the [Penny Harvest](http://www.commoncents.org/go/penny-harvest) to find organizations in their neighborhood. The first prototype focuses on the New York area and is built using [Jekyll](http://jekyllrb.com/), [Foundation](http://foundation.zurb.com/) and [Leaflet](http://leafletjs.com/).
 
 ![Screenshot PH harvest](https://cloud.githubusercontent.com/assets/751330/2945381/6b0dd53a-d9e0-11e3-91cc-075290c2b4df.png)
 
