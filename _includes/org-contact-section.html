@@ -23,7 +23,7 @@
 {% if page.website %}
   {% capture contact_section %}{{ contact_section }}
     <dt>Website</dt>
-    <dd class="site"><a href="http://{{ page.website }}" title="Visit website">{{ page.website }}</a></dd>
+    <dd class="site"><a href="http://{{ page.website }}" target="_blank" title="Visit website">{{ page.website }}</a></dd>
   {% endcapture %}
 {% endif %}
 {% if page.phone %}
@@ -31,18 +31,18 @@
     <dt>Phone</dt>
     {% if page.ext %}
       <dd class="phone">
-        <a href="tel:{{ page.phone }}pp{{ page.ext }}" title="Phone">{{ page.phone }}</a>
+        <a href="tel:{{ page.phone }}pp{{ page.ext }}" target="_blank" title="Phone">{{ page.phone }}</a>
         <small class="role">Ext. {{ page.ext }}</small>
       </dd>
     {% else %}
-      <dd class="phone"><a href="tel:{{ page.phone }}" title="Phone">{{ page.phone }}</a></dd>
+      <dd class="phone"><a href="tel:{{ page.phone }}" target="_blank" title="Phone">{{ page.phone }}</a></dd>
     {% endif %}
   {% endcapture %}
 {% endif %}
 {% if page.fax %}
   {% capture contact_section %}{{ contact_section }}
     <dt>Fax</dt>
-    <dd class="fax"><a href="fax:{{ page.fax }}" title="Fax">{{ page.fax }}</a></dd>
+    <dd class="fax"><a href="fax:{{ page.fax }}" target="_blank" title="Fax">{{ page.fax }}</a></dd>
   {% endcapture %}
 {% endif %}
 {% if page.address %}
