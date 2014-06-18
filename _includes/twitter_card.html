@@ -1,10 +1,9 @@
 <meta name="twitter:card" content="summary">
-<meta name="twitter:site" content="@{{ site.data.flipside.twitter }}">
-<!--  <meta name="twitter:creator" content="@{{ site.data.team[page.user].twitter }}"> -->
-<meta name="twitter:title" content="{{ page.title }} - Flipside">
-<meta property="twitter:description" content="{{ site.data.flipside.description }}" >
-{% if page.image %}
-  <meta property="twitter:image" content="{{ site.domain }}/assets/images/{{ page.image }}" />
+<meta name="twitter:site" content="@{{ site.twitter }}">
+<meta name="twitter:title" content="{{ page.title }} - Penny Harvest Organization Finder">
+{% if page.description %}
+  <meta property="twitter:description" content="{{ page.description | strip_html | truncate: 200 }}" >
 {% else %}
-  <meta property="twitter:image" content="{{ site.domain }}/assets/images/meta/og-image.png" />  
+  <meta property="twitter:description" content="{{ site.description }}" >
 {% endif %}
+<meta property="twitter:image" content="{{ site.domain }}/images/meta/og-image.png" />
