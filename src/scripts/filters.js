@@ -1,4 +1,21 @@
+
+function limit_filter_height() {
+  if ($(window).width() < 993) {
+    $('.filters .wrapper').addClass('limit-height');
+  }
+  else {
+    $('.filters .wrapper').removeClass('limit-height');
+  }
+}
+
+$(window).resize(function() {
+  // Limit the filter height on mobile devices.
+  limit_filter_height();
+});
+
 $(function() {
+// Limit the filter height on mobile devices.
+limit_filter_height();
 
 // Setup the filter panel and its open/close animation.
 // It also includes cookies to remember the last state.

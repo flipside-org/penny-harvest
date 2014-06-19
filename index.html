@@ -11,21 +11,23 @@ include_map: true
     <div class="filters">
       <div class="inner row">
         <a href="#" class="filters-toggle on">Filters</a>
-        <div class="impact-areas">
-          <h2 class="hd-xs">Impact areas</h2>
-          <ul>
-            {% for imp in site.data.impact_areas %}
-            <li><button class="filter {{ imp[1].class }}" data-filter-id="{{ imp[1].id }}" data-filter-type="impact_area">{{ imp[0] }}</button></li>
-            {% endfor %}
-          </ul>
-        </div>
-        <div class="keywords">
-          <h2 class="hd-xs">Issues/Keywords</h2>
-          <ul>
-            {% for key in site.data.keywords %}
-            <li><button class="filter" data-filter-id="{{ key[1].id }}" data-filter-type="keyword">{{ key[0] }}</button></li>
-            {% endfor %}
-          </ul>
+        <div class="wrapper">
+          <div class="impact-areas">
+            <h2 class="hd-xs">Impact areas</h2>
+            <ul>
+              {% for imp in site.data.impact_areas %}
+              <li><button class="filter {{ imp[1].class }}" data-filter-id="{{ imp[1].id }}" data-filter-type="impact_area">{{ imp[0] }}</button></li>
+              {% endfor %}
+            </ul>
+          </div>
+          <div class="keywords">
+            <h2 class="hd-xs">Issues/Keywords</h2>
+            <ul>
+              {% for key in site.data.keywords %}
+              <li><button class="filter" data-filter-id="{{ key[1].id }}" data-filter-type="keyword">{{ key[0] }}</button></li>
+              {% endfor %}
+            </ul>
+          </div>
         </div>
       </div>
     </div>
