@@ -310,7 +310,7 @@
 #info {
   overflow: hidden;
   position: relative;
-  address {
+  .credits {
     font-style: normal;
     margin-bottom: 2rem;
     small {
@@ -318,14 +318,14 @@
       font-size: inherit;
       color: tint($primary-color, 40%);
     }
-    a span {
-      @extend .visually-hidden;
+    a {
+      display: block;
+      max-width: 160px;
+      margin: 0 0 1rem 0.25rem;
+      span {
+        @extend .visually-hidden;
+      }
     }
-  }
-  .developer a {
-    display: block;
-    max-width: 160px;
-    margin-left: 0.25rem;
   }
   .foot {
     overflow: hidden;  
@@ -373,7 +373,7 @@
   }
   
   @media #{$small-up} {
-    address {
+    .credits {
       margin-bottom: 1rem;
     }
     .author {
